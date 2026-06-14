@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Catálogo de destilados premium. Whisky, gin, cognac, rum, cachaça artesanal e vodka selecionados com expertise.">
+  <title>Destilados — Vinho Prime</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+  <link rel="stylesheet" href="css/catalogo.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- ============================================================
+     MODAL VERIFICAÇÃO DE IDADE
+     ============================================================ -->
+<div id="age-modal" role="dialog" aria-modal="true" aria-labelledby="age-title">
+  <div class="age-modal-card">
+    <div class="age-modal-icon">🥃</div>
+    <h2 class="age-modal-title" id="age-title">Você tem 18 anos ou mais?</h2>
+    <p class="age-modal-desc">Este site comercializa bebidas alcoólicas. O acesso é permitido apenas para maiores de idade.</p>
+    <div class="age-modal-btns">
+      <button class="age-yes" onclick="confirmAge()">Sim, tenho 18+</button>
+      <button class="age-no" onclick="denyAge()">Não, sou menor</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     TOP BANNER
+     ============================================================ -->
+<div id="top-banner">
+  <div class="banner-messages">
+    <div class="banner-msg active">🚚 Frete grátis acima de R$ 299 em todo o Brasil</div>
+    <div class="banner-msg">🥃 Destilados premium com curadoria especializada</div>
+    <div class="banner-msg">💳 Parcele em até 12x sem juros no cartão</div>
+  </div>
+</div>
+
+<!-- ============================================================
+     HEADER
+     ============================================================ -->
+<header id="header">
+  <div class="container header-inner">
+
+    <a href="index.html" class="header-logo" aria-label="Vinho Prime — Página inicial">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C8 2 5 5.5 5 9c0 3 1.5 5.5 4 7v4h6v-4c2.5-1.5 4-4 4-7 0-3.5-3-7-7-7zm0 2c2.8 0 5 2.7 5 5 0 2.2-1.1 4.1-3 5.3V18h-4v-3.7C8.1 13.1 7 11.2 7 9c0-2.3 2.2-5 5-5z"/></svg>
+      </div>
+      <div class="logo-text-wrap">
+        <span class="logo-name">Vinho Prime</span>
+        <span class="logo-tagline">Curadoria & Destilados</span>
+      </div>
+    </a>
+
+    <nav class="header-nav" aria-label="Navegação principal">
+      <ul class="nav-list">
+        <li class="nav-item">
+          <a href="vinhos.html" class="nav-link">
+            Vinhos
+            <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+          </a>
+          <div class="nav-dropdown">
+            <a href="vinhos.html?subtipo=tinto"><span class="dot"></span>Tintos</a>
+            <a href="vinhos.html?subtipo=branco"><span class="dot"></span>Brancos</a>
+            <a href="vinhos.html?subtipo=rosé"><span class="dot"></span>Rosés</a>
+            <a href="vinhos.html?subtipo=espumante"><span class="dot"></span>Espumantes</a>
+            <a href="vinhos.html?subtipo=natural"><span class="dot"></span>Naturais</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a href="destilados.html" class="nav-link" style="color:var(--bordeaux);font-weight:600">
+            Destilados
+            <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+          </a>
+          <div class="nav-dropdown">
+            <a href="destilados.html?subtipo=whisky"><span class="dot"></span>Whisky</a>
+            <a href="destilados.html?subtipo=gin"><span class="dot"></span>Gin</a>
+            <a href="destilados.html?subtipo=cognac"><span class="dot"></span>Cognac</a>
+            <a href="destilados.html?subtipo=rum"><span class="dot"></span>Rum</a>
+            <a href="destilados.html?subtipo=cachaça"><span class="dot"></span>Cachaça Artesanal</a>
+          </div>
+        </li>
+        <li class="nav-item"><a href="index.html#sommelier" class="nav-link nav-link--highlight">Seleção do Sommelier</a></li>
+        <li class="nav-item"><a href="index.html#ofertas" class="nav-link nav-link--offers">Ofertas 🔥</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">Box & Kits</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">Clube</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">Blog</a></li>
+      </ul>
+    </nav>
+
+    <a href="#" class="btn-vip">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+      Grupo VIP
+    </a>
+
+    <div class="header-actions">
+      <button class="action-btn" aria-label="Buscar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>
+      </button>
+      <button class="action-btn" aria-label="Lista de desejos">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </button>
+      <button class="action-btn" aria-label="Minha conta">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </button>
+      <button class="action-btn" aria-label="Carrinho" onclick="toggleCart()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="cart-badge" id="cart-count" style="display:none">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ============================================================
+     MINI CARRINHO
+     ============================================================ -->
+<div id="cart-overlay" onclick="toggleCart()"></div>
+<aside id="cart-drawer" aria-label="Carrinho">
+  <div class="cart-drawer-header">
+    <h2 class="cart-drawer-title">Carrinho</h2>
+    <button class="cart-close-btn" onclick="toggleCart()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <div class="free-ship-bar">
+    <p class="free-ship-text" id="ship-text">Faltam <strong>R$ 299,00</strong> para frete grátis!</p>
+    <div class="progress-bar"><div class="progress-fill" id="ship-bar" style="width:0%"></div></div>
+  </div>
+  <div class="cart-items" id="cart-items">
+    <div class="cart-empty">
+      <div class="cart-empty-icon">🛒</div>
+      <p class="cart-empty-text">Seu carrinho está vazio.<br>Adicione alguns produtos!</p>
+    </div>
+  </div>
+  <div class="cart-footer" id="cart-footer" style="display:none">
+    <div class="cart-subtotal">
+      <span class="cart-subtotal-label">Subtotal</span>
+      <span class="cart-subtotal-value" id="cart-total">R$ 0,00</span>
+    </div>
+    <p class="cart-pix-price" id="cart-pix">💰 R$ 0,00 no PIX</p>
+    <div class="cart-ctas">
+      <a href="#" class="btn btn-gold" style="justify-content:center">Finalizar Compra</a>
+      <a href="#" class="btn btn-outline-gold btn-sm" style="justify-content:center">Ver Carrinho</a>
+    </div>
+  </div>
+</aside>
+
+<!-- ============================================================
+     BREADCRUMB
+     ============================================================ -->
+<nav class="breadcrumb" aria-label="Caminho">
+  <div class="container breadcrumb-inner" id="cat-breadcrumb">
+    <a href="index.html">Home</a>
+    <span class="breadcrumb-sep">›</span>
+    <span class="breadcrumb-current">Destilados</span>
+  </div>
+</nav>
+
+<!-- ============================================================
+     HERO DO CATÁLOGO
+     ============================================================ -->
+<section class="catalogo-hero">
+  <div class="container catalogo-hero-inner">
+    <div class="catalogo-hero-label">Seleção Premium</div>
+    <h1 class="catalogo-hero-title" id="cat-titulo">Destilados</h1>
+    <p class="catalogo-hero-sub" id="cat-subtitulo">Whisky, gin, cognac, rum e cachaça artesanal selecionados com expertise</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     CONTEÚDO PRINCIPAL
+     ============================================================ -->
+<main>
+  <div class="container">
+    <div class="catalogo-layout">
+
+      <!-- ---- Overlay Mobile ---- -->
+      <div class="filtros-overlay" id="filtros-overlay" onclick="Catalogo.fecharFiltrosMobile()"></div>
+
+      <!-- ---- Sidebar de Filtros ---- -->
+      <aside class="filtros-sidebar" id="filtros-sidebar" aria-label="Filtros">
+        <div class="filtros-card">
+          <div class="filtros-header">
+            <span class="filtros-titulo">Filtros</span>
+            <span class="filtros-limpar" onclick="Catalogo.limparFiltros()">Limpar tudo</span>
+          </div>
+          <div id="filtros-corpo">
+            <!-- Populado pelo catalogo.js -->
+            <div style="padding:1rem;display:flex;flex-direction:column;gap:.75rem">
+              <div class="sk-card" style="height:32px;border-radius:6px"></div>
+              <div class="sk-card" style="height:32px;border-radius:6px"></div>
+              <div class="sk-card" style="height:32px;border-radius:6px"></div>
+              <div class="sk-card" style="height:32px;border-radius:6px"></div>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- ---- Resultados ---- -->
+      <div class="resultados-area">
+
+        <!-- Toolbar -->
+        <div class="resultados-toolbar">
+          <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap">
+            <button
+              class="btn-filtros-mobile"
+              onclick="Catalogo.abrirFiltrosMobile()"
+              aria-label="Abrir filtros"
+            >
+              ⚙️ Filtros
+              <span class="filtros-badge-mobile" id="badge-filtros-mobile">0</span>
+            </button>
+            <p class="resultados-count" id="resultados-count">Carregando…</p>
+          </div>
+          <div class="ordenacao-wrap">
+            <label class="ordenacao-label" for="ordenacao">Ordenar por:</label>
+            <select class="ordenacao-select" id="ordenacao" onchange="Catalogo.mudarOrdem(this.value)">
+              <option value="relevancia">Relevância</option>
+              <option value="preco-asc">Menor preço</option>
+              <option value="preco-desc">Maior preço</option>
+              <option value="mais-vendidos">Mais vendidos</option>
+              <option value="novidades">Novidades</option>
+              <option value="avaliacao">Melhor avaliação</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Chips de filtros ativos -->
+        <div class="chips-ativos" id="chips-ativos"></div>
+
+        <!-- Grade de Produtos -->
+        <div class="produtos-grid" id="produtos-grid">
+          <div class="sk-card"></div>
+          <div class="sk-card"></div>
+          <div class="sk-card"></div>
+          <div class="sk-card"></div>
+          <div class="sk-card"></div>
+          <div class="sk-card"></div>
+        </div>
+
+        <!-- Paginação -->
+        <div class="paginacao" id="paginacao"></div>
+
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- ============================================================
+     FOOTER (simplificado)
+     ============================================================ -->
+<footer id="footer" style="margin-top:4rem">
+  <div class="container">
+    <div class="footer-grid" style="grid-template-columns:1fr 1fr 1fr">
+      <div class="footer-brand" style="grid-column:1/-1">
+        <div class="header-logo" style="margin-bottom:.75rem">
+          <div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2C8 2 5 5.5 5 9c0 3 1.5 5.5 4 7v4h6v-4c2.5-1.5 4-4 4-7 0-3.5-3-7-7-7zm0 2c2.8 0 5 2.7 5 5 0 2.2-1.1 4.1-3 5.3V18h-4v-3.7C8.1 13.1 7 11.2 7 9c0-2.3 2.2-5 5-5z" fill="var(--gold)"/></svg></div>
+          <div class="logo-text-wrap"><span class="logo-name">Vinho Prime</span></div>
+        </div>
+      </div>
+      <div>
+        <h3 class="footer-col-title">Vinhos</h3>
+        <ul class="footer-links">
+          <li><a href="vinhos.html?subtipo=tinto">Tintos</a></li>
+          <li><a href="vinhos.html?subtipo=branco">Brancos</a></li>
+          <li><a href="vinhos.html?subtipo=rosé">Rosés</a></li>
+          <li><a href="vinhos.html?subtipo=espumante">Espumantes</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="footer-col-title">Destilados</h3>
+        <ul class="footer-links">
+          <li><a href="destilados.html?subtipo=whisky">Whisky</a></li>
+          <li><a href="destilados.html?subtipo=gin">Gin</a></li>
+          <li><a href="destilados.html?subtipo=cognac">Cognac</a></li>
+          <li><a href="destilados.html?subtipo=rum">Rum</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="footer-col-title">Atendimento</h3>
+        <ul class="footer-links">
+          <li><a href="#">Contato</a></li>
+          <li><a href="#">Rastrear Pedido</a></li>
+          <li><a href="#">Política de Privacidade</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal-warning">
+        <div class="warning-icon">🔞</div>
+        <div class="warning-text">Venda e consumo de bebidas alcoólicas proibidos para menores de 18 anos.<span>Beba com moderação.</span></div>
+      </div>
+      <p class="footer-copy">© 2026 Vinho Prime. CNPJ: 00.000.000/0001-00</p>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp Flutuante -->
+<div id="whatsapp-float">
+  <span class="whatsapp-tooltip">Fale com a gente!</span>
+  <a href="#" class="whatsapp-bubble" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z" fill="white"/><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.06L2 22l5.1-1.34C8.5 21.53 10.21 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z" fill="none" stroke="white" stroke-width="1.5"/></svg>
+  </a>
+</div>
+
+<script src="js/app.js"></script>
+<script>
+/* Garante tipo=destilado na URL antes do catalogo.js inicializar */
+(function() {
+  const p = new URLSearchParams(window.location.search);
+  if (!p.has('tipo')) {
+    p.set('tipo', 'destilado');
+    history.replaceState(null, '', '?' + p.toString());
+  }
+})();
+</script>
+<script src="js/catalogo.js"></script>
+<script>
+/* ---- Verificação de maioridade ---- */
+const ageModal = document.getElementById('age-modal');
+if (!localStorage.getItem('vp_age_ok')) ageModal.classList.add('active');
+function confirmAge() { localStorage.setItem('vp_age_ok','1'); ageModal.classList.remove('active'); }
+function denyAge() { document.body.innerHTML='<div style="display:flex;align-items:center;justify-content:center;height:100vh;background:#3D0C0C;color:#F8F4EE;font-family:Georgia,serif;text-align:center"><div><p style="font-size:2rem">🔞</p><h1>Acesso restrito</h1><p>Apenas maiores de 18 anos.</p></div></div>'; }
+
+/* ---- Banner rotativo ---- */
+const msgs = document.querySelectorAll('.banner-msg');
+let bi = 0;
+setInterval(() => { msgs[bi].classList.remove('active'); bi = (bi+1)%msgs.length; msgs[bi].classList.add('active'); }, 3500);
+
+/* ---- Header sticky ---- */
+const header = document.getElementById('header');
+window.addEventListener('scroll', () => header.classList.toggle('scrolled', scrollY > 20), {passive:true});
+
+/* ---- Carrinho ---- */
+function toggleCart() {
+  const overlay = document.getElementById('cart-overlay');
+  const drawer  = document.getElementById('cart-drawer');
+  const open = drawer.classList.toggle('open');
+  overlay.classList.toggle('open', open);
+  document.body.style.overflow = open ? 'hidden' : '';
+  if (open) atualizarDrawer();
+}
+
+function atualizarDrawer() {
+  const itens = JSON.parse(localStorage.getItem('vp_carrinho') || '[]');
+  const itemsEl  = document.getElementById('cart-items');
+  const footerEl = document.getElementById('cart-footer');
+  const badgeEl  = document.getElementById('cart-count');
+
+  const total = itens.reduce((acc, i) => acc + i.preco * i.quantidade, 0);
+  const totalItens = itens.reduce((acc, i) => acc + i.quantidade, 0);
+
+  badgeEl.textContent = totalItens;
+  badgeEl.style.display = totalItens > 0 ? 'flex' : 'none';
+
+  if (itens.length === 0) {
+    itemsEl.innerHTML = '<div class="cart-empty"><div class="cart-empty-icon">🛒</div><p class="cart-empty-text">Seu carrinho está vazio.</p></div>';
+    footerEl.style.display = 'none';
+    return;
+  }
+
+  const faltaFrete = Math.max(0, 299 - total);
+  document.getElementById('ship-text').innerHTML = faltaFrete > 0
+    ? `Faltam <strong>${faltaFrete.toLocaleString('pt-BR',{style:'currency',currency:'BRL'})}</strong> para frete grátis!`
+    : '✅ <strong>Frete grátis</strong> desbloqueado!';
+  document.getElementById('ship-bar').style.width = `${Math.min(100, (total/299)*100)}%`;
+
+  itemsEl.innerHTML = itens.map(i => `
+    <div style="display:flex;gap:.875rem;padding:.875rem 0;border-bottom:1px solid rgba(92,81,70,.1)">
+      <div style="width:60px;height:72px;background:linear-gradient(160deg,#1A2B3D,#0D1B2A);border-radius:8px;flex-shrink:0"></div>
+      <div style="flex:1;min-width:0">
+        <p style="font-family:var(--font-display);font-size:.875rem;font-weight:600;margin-bottom:.25rem;line-height:1.3">${i.nome}</p>
+        <p style="font-size:.75rem;color:var(--text-sec)">${i.pais || ''}</p>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:.5rem">
+          <span style="font-family:var(--font-display);font-weight:700;color:var(--bordeaux)">${(i.preco*i.quantidade).toLocaleString('pt-BR',{style:'currency',currency:'BRL'})}</span>
+          <span style="font-size:.8125rem;color:var(--text-sec)">× ${i.quantidade}</span>
+        </div>
+      </div>
+    </div>`).join('');
+
+  document.getElementById('cart-total').textContent = total.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+  document.getElementById('cart-pix').textContent = `💰 ${(total*.95).toLocaleString('pt-BR',{style:'currency',currency:'BRL'})} no PIX`;
+  footerEl.style.display = 'block';
+}
+
+/* Filtro por subtipo via URL */
+window.addEventListener('DOMContentLoaded', () => {
+  const params = new URLSearchParams(window.location.search);
+  const subtipo = params.get('subtipo');
+  if (subtipo) {
+    setTimeout(() => {
+      const cb = document.querySelector(`#filtros-corpo input[value="${subtipo}"]`);
+      if (cb) { cb.checked = true; Catalogo.filtrarSubtipo(cb); }
+    }, 300);
+  }
+});
+</script>
+
+</body>
+</html>
