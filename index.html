@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Vinho Prime — Curadoria especializada de vinhos e destilados premium. Seleção do sommelier, clube de assinatura e entrega em todo o Brasil.">
+  <title>Vinho Prime — Curadoria de Vinhos & Destilados</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- ============================================================
+     AGE VERIFICATION MODAL
+     ============================================================ -->
+<div id="age-modal" class="active" role="dialog" aria-modal="true" aria-labelledby="age-title">
+  <div class="age-modal-card">
+    <div class="age-modal-icon">🍷</div>
+    <h2 class="age-modal-title" id="age-title">Você tem 18 anos ou mais?</h2>
+    <p class="age-modal-desc">Este site comercializa bebidas alcoólicas. O acesso é permitido apenas para maiores de idade, conforme legislação brasileira.</p>
+    <div class="age-modal-btns">
+      <button class="age-yes" onclick="confirmAge()">Sim, tenho 18+</button>
+      <button class="age-no" onclick="denyAge()">Não, sou menor</button>
+    </div>
+    <p class="age-legal">Ao entrar, você declara ser maior de 18 anos e concorda com nossos <a href="/termos-de-uso" style="color:var(--bordeaux)">Termos de Uso</a>.</p>
+  </div>
+</div>
+
+<!-- ============================================================
+     COOKIE BANNER
+     ============================================================ -->
+<div id="cookie-banner" role="region" aria-label="Aviso de cookies">
+  <div class="cookie-inner">
+    <p class="cookie-text">Utilizamos cookies para melhorar sua experiência, personalizar conteúdo e analisar nosso tráfego. Ao continuar, você concorda com nossa <a href="/politica-de-privacidade">Política de Privacidade</a> (LGPD).</p>
+    <div class="cookie-btns">
+      <button class="cookie-accept" onclick="acceptCookies()">Aceitar</button>
+      <button class="cookie-decline" onclick="declineCookies()">Recusar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     TOP BANNER
+     ============================================================ -->
+<div id="top-banner" role="marquee" aria-live="polite">
+  <div class="banner-messages">
+    <div class="banner-msg active">🚚 Frete grátis acima de R$ 299 em todo o Brasil</div>
+    <div class="banner-msg">🍷 Clube Prime com 15% de desconto todo mês</div>
+    <div class="banner-msg">💳 Parcele em até 12x sem juros no cartão</div>
+    <div class="banner-msg">📦 Embalagem especial anti-impacto para suas garrafas</div>
+  </div>
+</div>
+
+<!-- ============================================================
+     HEADER
+     ============================================================ -->
+<header id="header">
+  <div class="container header-inner">
+
+    <!-- Logo -->
+    <a href="/" class="header-logo" aria-label="Vinho Prime — Página inicial">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C8 2 5 5.5 5 9c0 3 1.5 5.5 4 7v4h6v-4c2.5-1.5 4-4 4-7 0-3.5-3-7-7-7zm0 2c2.8 0 5 2.7 5 5 0 2.2-1.1 4.1-3 5.3V18h-4v-3.7C8.1 13.1 7 11.2 7 9c0-2.3 2.2-5 5-5z"/></svg>
+      </div>
+      <div class="logo-text-wrap">
+        <span class="logo-name">Vinho Prime</span>
+        <span class="logo-tagline">Curadoria & Destilados</span>
+      </div>
+    </a>
+
+    <!-- Navigation -->
+    <nav class="header-nav" aria-label="Navegação principal">
+      <ul class="nav-list">
+
+        <li class="nav-item">
+          <a href="/vinhos" class="nav-link">
+            Vinhos
+            <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+          </a>
+          <div class="nav-dropdown">
+            <a href="/vinhos/tintos"><span class="dot"></span>Tintos</a>
+            <a href="/vinhos/brancos"><span class="dot"></span>Brancos</a>
+            <a href="/vinhos/roses"><span class="dot"></span>Rosés</a>
+            <a href="/vinhos/espumantes"><span class="dot"></span>Espumantes</a>
+            <a href="/vinhos/naturais"><span class="dot"></span>Naturais</a>
+            <a href="/miniaturas"><span class="dot"></span>Miniaturas</a>
+          </div>
+        </li>
+
+        <li class="nav-item">
+          <a href="/destilados" class="nav-link">
+            Destilados
+            <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+          </a>
+          <div class="nav-dropdown">
+            <a href="/destilados/whisky"><span class="dot"></span>Whisky</a>
+            <a href="/destilados/gin"><span class="dot"></span>Gin</a>
+            <a href="/destilados/cognac"><span class="dot"></span>Cognac</a>
+            <a href="/destilados/rum"><span class="dot"></span>Rum</a>
+            <a href="/destilados/cachaca"><span class="dot"></span>Cachaça Artesanal</a>
+            <a href="/destilados/vodka"><span class="dot"></span>Vodka</a>
+          </div>
+        </li>
+
+        <li class="nav-item">
+          <a href="/selecao-do-sommelier" class="nav-link nav-link--highlight">Seleção do Sommelier</a>
+        </li>
+
+        <li class="nav-item">
+          <a href="/ofertas" class="nav-link nav-link--offers">Ofertas 🔥</a>
+        </li>
+
+        <li class="nav-item">
+          <a href="/box" class="nav-link">Box & Kits</a>
+        </li>
+
+        <li class="nav-item">
+          <a href="/clube" class="nav-link">Clube</a>
+        </li>
+
+        <li class="nav-item">
+          <a href="/blog" class="nav-link">Blog</a>
+        </li>
+
+      </ul>
+    </nav>
+
+    <!-- VIP Button -->
+    <a href="/grupo-vip" class="btn-vip" aria-label="Entrar no Grupo VIP WhatsApp">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.978-1.305A9.94 9.94 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+      Grupo VIP
+    </a>
+
+    <!-- Actions -->
+    <div class="header-actions">
+      <button class="action-btn" aria-label="Buscar produtos">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>
+      </button>
+      <button class="action-btn" aria-label="Lista de desejos">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </button>
+      <button class="action-btn" aria-label="Minha conta">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </button>
+      <button class="action-btn" id="cart-btn" aria-label="Carrinho de compras" onclick="toggleCart()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="cart-badge" id="cart-count">2</span>
+      </button>
+      <button class="menu-toggle" id="menu-toggle" onclick="toggleMobileNav()" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+  </div>
+</header>
+
+<!-- ============================================================
+     MOBILE NAV
+     ============================================================ -->
+<div id="mobile-nav" onclick="closeMobileNavOutside(event)">
+  <div class="mobile-nav-panel">
+    <div class="mobile-nav-header">
+      <div class="header-logo">
+        <div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2C8 2 5 5.5 5 9c0 3 1.5 5.5 4 7v4h6v-4c2.5-1.5 4-4 4-7 0-3.5-3-7-7-7zm0 2c2.8 0 5 2.7 5 5 0 2.2-1.1 4.1-3 5.3V18h-4v-3.7C8.1 13.1 7 11.2 7 9c0-2.3 2.2-5 5-5z" fill="var(--gold)"/></svg></div>
+        <span class="logo-name" style="color:var(--bordeaux)">Vinho Prime</span>
+      </div>
+      <button onclick="closeMobileNav()" aria-label="Fechar menu" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:var(--transition)" onmouseover="this.style.background='var(--cream)'" onmouseout="this.style.background=''">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <nav class="mobile-nav-links">
+      <a href="/vinhos" class="mobile-nav-link">Vinhos</a>
+      <div class="mobile-nav-sub">
+        <a href="/vinhos/tintos">Tintos</a>
+        <a href="/vinhos/brancos">Brancos</a>
+        <a href="/vinhos/roses">Rosés</a>
+        <a href="/vinhos/espumantes">Espumantes</a>
+        <a href="/vinhos/naturais">Naturais</a>
+      </div>
+      <a href="/destilados" class="mobile-nav-link">Destilados</a>
+      <div class="mobile-nav-sub">
+        <a href="/destilados/whisky">Whisky</a>
+        <a href="/destilados/gin">Gin</a>
+        <a href="/destilados/cognac">Cognac</a>
+        <a href="/destilados/rum">Rum</a>
+        <a href="/destilados/cachaca">Cachaça Artesanal</a>
+      </div>
+      <a href="/selecao-do-sommelier" class="mobile-nav-link mobile-nav-link--highlight">Seleção do Sommelier</a>
+      <a href="/ofertas" class="mobile-nav-link mobile-nav-link--offer">Ofertas 🔥</a>
+      <a href="/box" class="mobile-nav-link">Box & Kits</a>
+      <a href="/clube" class="mobile-nav-link">Clube de Assinatura</a>
+      <a href="/quiz" class="mobile-nav-link">Quiz de Harmonização</a>
+      <a href="/blog" class="mobile-nav-link">Blog</a>
+      <a href="/sobre" class="mobile-nav-link">Sobre</a>
+      <a href="/b2b" class="mobile-nav-link">Para Empresas</a>
+      <a href="/contato" class="mobile-nav-link">Contato</a>
+    </nav>
+    <a href="/grupo-vip" class="mobile-nav-vip">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z" fill="currentColor"/></svg>
+      Entrar no Grupo VIP
+    </a>
+  </div>
+</div>
+
+<!-- ============================================================
+     MINI CART DRAWER
+     ============================================================ -->
+<div id="cart-overlay" onclick="toggleCart()"></div>
+<aside id="cart-drawer" aria-label="Carrinho de compras">
+  <div class="cart-drawer-header">
+    <h2 class="cart-drawer-title">Carrinho (2)</h2>
+    <button class="cart-close-btn" onclick="toggleCart()" aria-label="Fechar carrinho">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <div class="free-ship-bar">
+    <p class="free-ship-text">Faltam <strong>R$ 119,00</strong> para frete grátis!</p>
+    <div class="progress-bar"><div class="progress-fill" style="width:60%"></div></div>
+  </div>
+  <div class="cart-items">
+    <!-- Sample item -->
+    <div style="display:flex;gap:1rem;padding:1rem 0;border-bottom:1px solid rgba(92,81,70,.1)">
+      <div style="width:64px;height:80px;background:linear-gradient(160deg,#5C1515,#3D0C0C);border-radius:8px;flex-shrink:0"></div>
+      <div style="flex:1">
+        <p style="font-size:.8125rem;color:var(--text-light);margin-bottom:.25rem">Argentina · Malbec</p>
+        <p style="font-family:var(--font-display);font-size:.9375rem;font-weight:600;margin-bottom:.5rem">Achaval Ferrer Malbec 2021</p>
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div style="display:flex;align-items:center;gap:.5rem;border:1px solid rgba(92,81,70,.2);border-radius:6px;overflow:hidden">
+            <button style="width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-size:1rem;color:var(--text-sec)" onclick="this.nextElementSibling.textContent=Math.max(1,+this.nextElementSibling.textContent-1)">−</button>
+            <span style="font-size:.875rem;font-weight:600;min-width:20px;text-align:center">1</span>
+            <button style="width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-size:1rem;color:var(--text-sec)" onclick="this.previousElementSibling.textContent=+this.previousElementSibling.textContent+1">+</button>
+          </div>
+          <p style="font-family:var(--font-display);font-weight:700;color:var(--bordeaux)">R$ 89,90</p>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;gap:1rem;padding:1rem 0">
+      <div style="width:64px;height:80px;background:linear-gradient(160deg,#2A1A0A,#1A0A00);border-radius:8px;flex-shrink:0"></div>
+      <div style="flex:1">
+        <p style="font-size:.8125rem;color:var(--text-light);margin-bottom:.25rem">Escócia · Single Malt</p>
+        <p style="font-family:var(--font-display);font-size:.9375rem;font-weight:600;margin-bottom:.5rem">Glenfiddich 12 Anos</p>
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div style="display:flex;align-items:center;gap:.5rem;border:1px solid rgba(92,81,70,.2);border-radius:6px;overflow:hidden">
+            <button style="width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-size:1rem;color:var(--text-sec)">−</button>
+            <span style="font-size:.875rem;font-weight:600;min-width:20px;text-align:center">1</span>
+            <button style="width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-size:1rem;color:var(--text-sec)">+</button>
+          </div>
+          <p style="font-family:var(--font-display);font-weight:700;color:var(--bordeaux)">R$ 209,90</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cart-footer">
+    <div class="cart-subtotal">
+      <span class="cart-subtotal-label">Subtotal</span>
+      <span class="cart-subtotal-value">R$ 299,80</span>
+    </div>
+    <p class="cart-pix-price">💰 R$ 284,81 no PIX (5% OFF)</p>
+    <div class="cart-ctas">
+      <a href="/checkout" class="btn btn-gold" style="justify-content:center">Finalizar Compra</a>
+      <a href="/carrinho" class="btn btn-outline-gold btn-sm" style="justify-content:center">Ver Carrinho</a>
+    </div>
+    <a href="/vinhos" class="cart-continue">← Continuar comprando</a>
+    <div class="payment-accepted">
+      <span class="payment-accepted-label">Aceito:</span>
+      <span class="payment-icon payment-icon--pix">PIX</span>
+      <span class="payment-icon payment-icon--visa">VISA</span>
+      <span class="payment-icon payment-icon--mc"><span class="mc-circles"><span class="mc-circle-r"></span><span class="mc-circle-r"></span></span></span>
+      <span class="payment-icon">Boleto</span>
+    </div>
+  </div>
+</aside>
+
+<!-- ============================================================
+     MAIN
+     ============================================================ -->
+<main>
+
+  <!-- HERO -->
+  <section id="hero" aria-label="Destaque principal">
+    <div class="container hero-inner">
+      <div class="hero-content">
+        <div class="hero-label">Curadoria Especializada</div>
+        <h1 class="hero-title">
+          Curadoria de vinhos e destilados<br>
+          <em>para quem entende de sabor</em>
+        </h1>
+        <p class="hero-sub">Rótulos selecionados pelo nosso sommelier. Do vinhedo à sua taça, com elegância e precisão.</p>
+        <div class="hero-ctas">
+          <a href="/vinhos" class="btn btn-gold">Explorar Catálogo</a>
+          <a href="/clube" class="btn btn-outline-cream">Conhecer o Clube</a>
+        </div>
+      </div>
+      <div class="hero-decor" aria-hidden="true">
+        <div class="hero-gold-dots">
+          <span class="gold-dot"></span><span class="gold-dot"></span>
+          <span class="gold-dot"></span><span class="gold-dot"></span>
+          <span class="gold-dot"></span>
+        </div>
+        <div class="hero-circle">
+          <div class="hero-glass">
+            <div class="glass-bowl"></div>
+            <div class="glass-stem"></div>
+            <div class="glass-base"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENEFITS BAR -->
+  <section id="benefits" aria-label="Benefícios">
+    <div class="container">
+      <div class="benefits-grid">
+        <div class="benefit-item reveal">
+          <div class="benefit-icon">🚚</div>
+          <div class="benefit-text"><strong>Frete Grátis</strong><span>Acima de R$ 299</span></div>
+        </div>
+        <div class="benefit-item reveal reveal-delay-1">
+          <div class="benefit-icon">💳</div>
+          <div class="benefit-text"><strong>Parcele em 12x</strong><span>Sem juros no cartão</span></div>
+        </div>
+        <div class="benefit-item reveal reveal-delay-2">
+          <div class="benefit-icon">🍷</div>
+          <div class="benefit-text"><strong>Curadoria Expert</strong><span>Seleção do sommelier</span></div>
+        </div>
+        <div class="benefit-item reveal reveal-delay-3">
+          <div class="benefit-icon">📦</div>
+          <div class="benefit-text"><strong>Embalagem Segura</strong><span>Proteção garantida</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SELEÇÃO DO SOMMELIER -->
+  <section id="sommelier" aria-labelledby="sommelier-title">
+    <div class="container">
+      <div class="sommelier-header">
+        <div>
+          <span class="badge-sommelier">⭐ Esta Semana</span>
+          <h2 class="section-title section-title--light" id="sommelier-title">Escolhas do Sommelier</h2>
+        </div>
+        <a href="/selecao-do-sommelier" class="sommelier-see-all">Ver toda a seleção →</a>
+      </div>
+      <div class="grid-4">
+        <!-- Card 1 -->
+        <article class="product-card product-card--dark reveal">
+          <div class="card-img-wrap">
+            <span class="card-badge badge--sommelier">⭐ Sommelier</span>
+            <button class="card-wishlist" aria-label="Adicionar à lista de desejos">
+              <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
+          </div>
+          <div class="card-body">
+            <p class="card-origin card-origin--light">Argentina · Mendoza</p>
+            <h3 class="card-name card-name--light">Achaval Ferrer Malbec 2021</h3>
+            <div class="card-stars">
+              <div class="stars">
+                <svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg>
+                <svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg>
+                <svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg>
+                <svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg>
+                <svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg>
+              </div>
+              <span class="card-review-count" style="color:rgba(248,244,238,.4)">(127)</span>
+            </div>
+            <div class="card-pricing">
+              <p class="price-original" style="color:rgba(248,244,238,.35)">R$ 120,00</p>
+              <p class="price-current price-current--light">R$ 89,90</p>
+              <p class="price-pix">💰 R$ 85,41 no PIX</p>
+            </div>
+            <button class="card-add-btn card-add-btn--gold">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Adicionar
+            </button>
+          </div>
+        </article>
+        <!-- Card 2 -->
+        <article class="product-card product-card--dark reveal reveal-delay-1">
+          <div class="card-img-wrap" style="background:linear-gradient(160deg,#1A1000,#2A1800)">
+            <span class="card-badge badge--sommelier">⭐ Sommelier</span>
+            <button class="card-wishlist" aria-label="Adicionar à lista de desejos"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+          </div>
+          <div class="card-body">
+            <p class="card-origin card-origin--light">Escócia · Speyside</p>
+            <h3 class="card-name card-name--light">Glenfiddich 15 Anos</h3>
+            <div class="card-stars"><div class="stars"><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg><svg class="star star-empty" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg></div><span class="card-review-count" style="color:rgba(248,244,238,.4)">(84)</span></div>
+            <div class="card-pricing"><p class="price-current price-current--light">R$ 349,90</p><p class="price-pix">💰 R$ 332,41 no PIX</p></div>
+            <button class="card-add-btn card-add-btn--gold"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Adicionar</button>
+          </div>
+        </article>
+        <!-- Card 3 -->
+        <article class="product-card product-card--dark reveal reveal-delay-2">
+          <div class="card-img-wrap" style="background:linear-gradient(160deg,#0A1A10,#0D2A14)">
+            <span class="card-badge badge--new">Novo</span>
+            <span class="card-badge badge--sommelier" style="top:auto;bottom:.75rem">⭐ Sommelier</span>
+            <button class="card-wishlist" aria-label="Adicionar à lista de desejos"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+          </div>
+          <div class="card-body">
+            <p class="card-origin card-origin--light">Brasil · Serra Gaúcha</p>
+            <h3 class="card-name card-name--light">Casa Valduga Gran Reserva 2022</h3>
+            <div class="card-stars"><div class="stars"><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg></div><span class="card-review-count" style="color:rgba(248,244,238,.4)">(43)</span></div>
+            <div class="card-pricing"><p class="price-current price-current--light">R$ 129,90</p><p class="price-pix">💰 R$ 123,41 no PIX</p></div>
+            <button class="card-add-btn card-add-btn--gold"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Adicionar</button>
+          </div>
+        </article>
+        <!-- Card 4 -->
+        <article class="product-card product-card--dark reveal reveal-delay-3">
+          <div class="card-img-wrap" style="background:linear-gradient(160deg,#3D0C0C,#5C1515,#4A0E0E)">
+            <span class="card-badge badge--offer">-20%</span>
+            <span class="card-badge badge--sommelier" style="top:auto;bottom:.75rem">⭐ Sommelier</span>
+            <button class="card-wishlist" aria-label="Adicionar à lista de desejos"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+          </div>
+          <div class="card-body">
+            <p class="card-origin card-origin--light">França · Bordeaux</p>
+            <h3 class="card-name card-name--light">Château Pichon Baron 2018</h3>
+            <div class="card-stars"><div class="stars"><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg></div><span class="card-review-count" style="color:rgba(248,244,238,.4)">(201)</span></div>
+            <div class="card-pricing"><p class="price-original" style="color:rgba(248,244,238,.35)">R$ 899,00</p><p class="price-current price-current--light">R$ 719,90</p><p class="price-pix">💰 R$ 683,91 no PIX</p></div>
+            <button class="card-add-btn card-add-btn--gold"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Adicionar</button>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIS VENDIDOS -->
+  <section id="best-sellers" class="section" aria-labelledby="bestsellers-title">
+    <div class="container">
+      <div class="section-header reveal">
+        <div>
+          <p class="section-label">Favoritos dos Clientes</p>
+          <h2 class="section-title" id="bestsellers-title">Mais Vendidos</h2>
+        </div>
+        <a href="/vinhos" class="see-all-link">Ver todos →</a>
+      </div>
+      <div class="grid-4">
+        <article class="product-card reveal">
+          <div class="card-img-wrap"><span class="card-badge badge--hot">🥇 Mais vendido</span><button class="card-wishlist" aria-label="Lista de desejos"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button></div>
+          <div class="card-body"><p class="card-origin">Chile · Valle do Maipo</p><h3 class="card-name">Concha y Toro Casillero Del Diablo Reserva</h3><div class="card-stars"><div class="stars"><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg><svg class="star star-empty" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg></div><span class="card-review-count">(312)</span></div><div class="card-pricing"><p class="price-original">R$ 65,00</p><p class="price-current">R$ 49,90</p><p class="price-pix">💰 R$ 47,41 no PIX</p></div><button class="card-add-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Adicionar</button></div>
+        </article>
+        <article class="product-card reveal reveal-delay-1">
+          <div class="card-img-wrap" style="background:linear-gradient(160deg,#4A0E0E,#6B1A1A)"><span class="card-badge badge--new">Novo</span><button class="card-wishlist" aria-label="Lista de desejos"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button></div>
+          <div class="card-body"><p class="card-origin">Portugal · Douro</p><h3 class="card-name">Quinta do Crasto Reserva Old Vines 2020</h3><div class="card-stars"><div class="stars"><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg></div><span class="card-review-count">(56)</span></div><div class="card-pricing"><p class="price-current">R$ 189,90</p><p class="price-pix">💰 R$ 180,41 no PIX</p></div><button class="card-add-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Adicionar</button></div>
+        </article>
+        <article class="product-card reveal reveal-delay-2">
+          <div class="card-img-wrap" style="background:linear-gradient(160deg,#1A0A0A,#3A1010)"><span class="card-badge badge--offer">-15%</span><button class="card-wishlist" aria-label="Lista de desejos"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button></div>
+          <div class="card-body"><p class="card-origin">Itália · Toscana</p><h3 class="card-name">Sassicaia Bolgheri 2019</h3><div class="card-stars"><div class="stars"><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg></div><span class="card-review-count">(88)</span></div><div class="card-pricing"><p class="price-original">R$ 1.200,00</p><p class="price-current">R$ 1.019,90</p><p class="price-pix">💰 R$ 968,91 no PIX</p></div><button class="card-add-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Adicionar</button></div>
+        </article>
+        <article class="product-card reveal reveal-delay-3">
+          <div class="card-img-wrap" style="background:linear-gradient(160deg,#2A0808,#501515)"><button class="card-wishlist" aria-label="Lista de desejos"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button></div>
+          <div class="card-body"><p class="card-origin">Espanha · Rioja</p><h3 class="card-name">Marqués de Riscal Reserva 2019</h3><div class="card-stars"><div class="stars"><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg><svg class="star star-empty" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg></div><span class="card-review-count">(174)</span></div><div class="card-pricing"><p class="price-original">R$ 160,00</p><p class="price-current">R$ 129,90</p><p class="price-pix">💰 R$ 123,41 no PIX</p></div><button class="card-add-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Adicionar</button></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUIZ TEASER -->
+  <section id="quiz-teaser" aria-labelledby="quiz-title">
+    <div class="container quiz-inner">
+      <div class="reveal">
+        <p class="section-label">Ferramenta Exclusiva</p>
+        <h2 class="section-title section-title--light" id="quiz-title">Qual vinho combina com o seu jantar?</h2>
+        <p style="font-family:var(--font-accent);font-size:1.125rem;color:rgba(248,244,238,.7);margin:1rem 0 2rem;line-height:1.7;font-style:italic">Responda 3 perguntas simples e receba a recomendação perfeita do nosso sommelier.</p>
+        <a href="/quiz" class="btn btn-gold">Fazer o Quiz →</a>
+      </div>
+      <div class="quiz-steps reveal reveal-delay-2">
+        <div class="quiz-step">
+          <div class="step-num">1</div>
+          <div class="step-text"><strong>O que você vai comer?</strong>Carnes, massas, frutos do mar, queijos…</div>
+        </div>
+        <div class="quiz-step">
+          <div class="step-num">2</div>
+          <div class="step-text"><strong>Qual o seu perfil de sabor?</strong>Encorpado, leve, seco, frutado…</div>
+        </div>
+        <div class="quiz-step">
+          <div class="step-num">3</div>
+          <div class="step-text"><strong>Qual é o seu orçamento?</strong>Até R$ 80 · R$ 80–150 · R$ 150+ · Sem limite</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THEMATIC BANNERS -->
+  <section id="thematic-banners" aria-label="Destaques temáticos">
+    <div class="container">
+      <div class="banners-grid">
+        <a href="/vinhos?colecao=inverno" class="banner-card reveal">
+          <div class="banner-card-bg"></div>
+          <div class="banner-decor" aria-hidden="true">❄️</div>
+          <div class="banner-card-content">
+            <p class="banner-card-label">Coleção Especial</p>
+            <h3 class="banner-card-title">Vinhos de Inverno</h3>
+            <span class="banner-card-cta">Explorar coleção →</span>
+          </div>
+        </a>
+        <a href="/box?colecao=corporativo" class="banner-card reveal reveal-delay-1">
+          <div class="banner-card-bg"></div>
+          <div class="banner-decor" aria-hidden="true">🎁</div>
+          <div class="banner-card-content">
+            <p class="banner-card-label">Para Empresas</p>
+            <h3 class="banner-card-title">Kit Presente Corporativo</h3>
+            <span class="banner-card-cta">Ver kits →</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- OFERTAS DA SEMANA -->
+  <section id="ofertas" class="section" aria-labelledby="ofertas-title">
+    <div class="container">
+      <div class="offers-header reveal">
+        <div>
+          <p class="section-label">Tempo limitado</p>
+          <h2 class="section-title" id="ofertas-title">Ofertas da Semana</h2>
+        </div>
+        <div class="countdown" aria-label="Tempo restante" role="timer">
+          <span class="countdown-label">Termina em:</span>
+          <div class="countdown-unit"><span class="countdown-num" id="cd-days">02</span><span class="countdown-label-unit">dias</span></div>
+          <span class="countdown-sep">:</span>
+          <div class="countdown-unit"><span class="countdown-num" id="cd-hours">14</span><span class="countdown-label-unit">horas</span></div>
+          <span class="countdown-sep">:</span>
+          <div class="countdown-unit"><span class="countdown-num" id="cd-min">37</span><span class="countdown-label-unit">min</span></div>
+          <span class="countdown-sep">:</span>
+          <div class="countdown-unit"><span class="countdown-num" id="cd-sec">00</span><span class="countdown-label-unit">seg</span></div>
+        </div>
+      </div>
+      <div class="grid-4">
+        <article class="product-card reveal">
+          <div class="card-img-wrap" style="background:linear-gradient(160deg,#600F0F,#3D0C0C)"><span class="card-badge badge--offer">-30%</span><button class="card-wishlist" aria-label="Lista de desejos"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button></div>
+          <div class="card-body"><p class="card-origin">Argentina · Mendoza</p><h3 class="card-name">Zuccardi Valle de Uco 2021</h3><div class="card-stars"><div class="stars"><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg></div><span class="card-review-count">(93)</span></div><div class="card-pricing"><p class="price-original">R$ 249,90</p><p class="price-current">R$ 174,90</p><p class="price-pix">💰 R$ 166,16 no PIX</p></div><button class="card-add-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Adicionar</button></div>
+        </article>
+        <article class="product-card reveal reveal-delay-1">
+          <div class="card-img-wrap" style="background:linear-gradient(160deg,#1A1200,#2E1F00)"><span class="card-badge badge--offer">-25%</span><button class="card-wishlist" aria-label="Lista de desejos"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button></div>
+          <div class="card-body"><p class="card-origin">Irlanda · Blended</p><h3 class="card-name">Jameson Triple Distilled</h3><div class="card-stars"><div class="stars"><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg><svg class="star star-empty" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg></div><span class="card-review-count">(248)</span></div><div class="card-pricing"><p class="price-original">R$ 149,90</p><p class="price-current">R$ 112,90</p><p class="price-pix">💰 R$ 107,26 no PIX</p></div><button class="card-add-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Adicionar</button></div>
+        </article>
+        <article class="product-card reveal reveal-delay-2">
+          <div class="card-img-wrap" style="background:linear-gradient(160deg,#3D0C0C,#6B1A1A)"><span class="card-badge badge--offer">-18%</span><button class="card-wishlist" aria-label="Lista de desejos"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button></div>
+          <div class="card-body"><p class="card-origin">Chile · Colchagua</p><h3 class="card-name">Montes Alpha Cabernet Sauvignon 2022</h3><div class="card-stars"><div class="stars"><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg></div><span class="card-review-count">(167)</span></div><div class="card-pricing"><p class="price-original">R$ 109,90</p><p class="price-current">R$ 89,90</p><p class="price-pix">💰 R$ 85,41 no PIX</p></div><button class="card-add-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Adicionar</button></div>
+        </article>
+        <article class="product-card reveal reveal-delay-3">
+          <div class="card-img-wrap" style="background:linear-gradient(160deg,#0D1A10,#152B18)"><span class="card-badge badge--offer">-22%</span><button class="card-wishlist" aria-label="Lista de desejos"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button></div>
+          <div class="card-body"><p class="card-origin">Brasil · Vale do São Francisco</p><h3 class="card-name">Miolo Lote 43 Tannat Cabernet</h3><div class="card-stars"><div class="stars"><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg><svg class="star star-empty" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg></div><span class="card-review-count">(71)</span></div><div class="card-pricing"><p class="price-original">R$ 79,90</p><p class="price-current">R$ 62,90</p><p class="price-pix">💰 R$ 59,76 no PIX</p></div><button class="card-add-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Adicionar</button></div>
+        </article>
+      </div>
+      <div style="text-align:center;margin-top:2.5rem">
+        <a href="/ofertas" class="btn btn-outline-gold">Ver Todas as Ofertas →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- GRUPO VIP -->
+  <section id="grupo-vip" aria-labelledby="vip-title">
+    <div class="container">
+      <div class="vip-inner reveal">
+        <div class="vip-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+        </div>
+        <div class="vip-content">
+          <p class="section-label">Exclusivo para membros</p>
+          <h2 class="section-title" id="vip-title">Entre para o Grupo VIP e receba ofertas exclusivas</h2>
+          <div class="vip-benefits">
+            <p class="vip-benefit">Acesso antecipado a promoções e liquidações</p>
+            <p class="vip-benefit">Dicas semanais do sommelier via WhatsApp</p>
+            <p class="vip-benefit">Cupom exclusivo de boas-vindas ao entrar no grupo</p>
+            <p class="vip-benefit">Avisos de rótulos raros antes de ir ao site</p>
+          </div>
+        </div>
+        <a href="/grupo-vip" class="btn btn-green">Entrar no Grupo VIP →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLUBE DE ASSINATURA -->
+  <section id="clube" class="section" aria-labelledby="clube-title">
+    <div class="container">
+      <div class="clube-intro reveal">
+        <p class="section-label">Assinatura Mensal</p>
+        <h2 class="section-title" id="clube-title">Receba rótulos selecionados todo mês</h2>
+        <p style="font-family:var(--font-accent);font-size:1.125rem;color:var(--text-sec);margin-top:.75rem;font-style:italic">Curadoria exclusiva do sommelier, direto na sua porta.</p>
+      </div>
+      <div class="plans-grid">
+        <div class="plan-card reveal">
+          <h3 class="plan-name">Explorador</h3>
+          <p class="plan-desc">2 garrafas por mês, perfeito para começar</p>
+          <div class="plan-price">
+            <span class="plan-price-num">R$ 189</span><span class="plan-price-period">,90/mês</span>
+          </div>
+          <ul class="plan-features">
+            <li class="plan-feature"><span class="plan-feature-icon">✓</span>2 garrafas selecionadas</li>
+            <li class="plan-feature"><span class="plan-feature-icon">✓</span>Ficha técnica impressa</li>
+            <li class="plan-feature"><span class="plan-feature-icon">✓</span>Cancele quando quiser</li>
+            <li class="plan-feature"><span class="plan-feature-icon">✓</span>Frete + R$ 19,90</li>
+          </ul>
+          <a href="/clube?plano=explorador" class="btn btn-outline-gold plan-cta" style="justify-content:center">Assinar agora</a>
+        </div>
+        <div class="plan-card plan-card--featured reveal reveal-delay-1">
+          <div class="plan-badge">Mais Popular</div>
+          <h3 class="plan-name plan-name--light">Sommelier</h3>
+          <p class="plan-desc plan-desc--light">4 garrafas · a escolha do expert</p>
+          <div class="plan-price">
+            <span class="plan-price-num plan-price-num--light">R$ 349</span><span class="plan-price-period plan-price-period--light">,90/mês</span>
+          </div>
+          <ul class="plan-features">
+            <li class="plan-feature plan-feature--light"><span class="plan-feature-icon">✓</span>4 garrafas selecionadas</li>
+            <li class="plan-feature plan-feature--light"><span class="plan-feature-icon">✓</span>Ficha técnica + harmonização</li>
+            <li class="plan-feature plan-feature--light"><span class="plan-feature-icon">✓</span>Frete grátis</li>
+            <li class="plan-feature plan-feature--light"><span class="plan-feature-icon">✓</span>15% OFF em compras avulsas</li>
+            <li class="plan-feature plan-feature--light"><span class="plan-feature-icon">✓</span>Cancele quando quiser</li>
+          </ul>
+          <a href="/clube?plano=sommelier" class="btn btn-gold plan-cta" style="justify-content:center">Assinar agora</a>
+        </div>
+        <div class="plan-card reveal reveal-delay-2">
+          <h3 class="plan-name">Colecionador</h3>
+          <p class="plan-desc">6 garrafas · experiência completa</p>
+          <div class="plan-price">
+            <span class="plan-price-num">R$ 599</span><span class="plan-price-period">,90/mês</span>
+          </div>
+          <ul class="plan-features">
+            <li class="plan-feature"><span class="plan-feature-icon">✓</span>6 garrafas premium</li>
+            <li class="plan-feature"><span class="plan-feature-icon">✓</span>Brinde exclusivo mensal</li>
+            <li class="plan-feature"><span class="plan-feature-icon">✓</span>Frete grátis</li>
+            <li class="plan-feature"><span class="plan-feature-icon">✓</span>20% OFF em compras avulsas</li>
+            <li class="plan-feature"><span class="plan-feature-icon">✓</span>Acesso VIP antecipado</li>
+          </ul>
+          <a href="/clube?plano=colecionador" class="btn btn-outline-gold plan-cta" style="justify-content:center">Assinar agora</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOG -->
+  <section id="blog" class="section" aria-labelledby="blog-title">
+    <div class="container">
+      <div class="section-header reveal">
+        <div>
+          <p class="section-label">Conteúdo & Cultura</p>
+          <h2 class="section-title" id="blog-title">Do nosso blog</h2>
+        </div>
+        <a href="/blog" class="see-all-link">Ver todos os posts →</a>
+      </div>
+      <div class="blog-grid">
+        <article class="blog-card reveal">
+          <div class="blog-card-img"><div class="blog-img-placeholder">🍷</div></div>
+          <div class="blog-card-body">
+            <div class="blog-meta"><span class="blog-category">Harmonização</span><span class="blog-date">10 Jun 2026</span><span class="blog-read-time">⏱ 5 min</span></div>
+            <h3 class="blog-card-title">Os melhores vinhos para acompanhar um churrasco brasileiro</h3>
+            <p class="blog-card-excerpt">Descubra quais rótulos combinam perfeitamente com picanha, costela e linguiça, e eleve sua próxima churrascada.</p>
+            <a href="/blog/vinhos-para-churrasco" class="blog-read-more">Ler mais →</a>
+          </div>
+        </article>
+        <article class="blog-card reveal reveal-delay-1">
+          <div class="blog-card-img" style="background:linear-gradient(135deg,#F0EAE0,#E8D5A3)"><div class="blog-img-placeholder">🥃</div></div>
+          <div class="blog-card-body">
+            <div class="blog-meta"><span class="blog-category">Guia de Rótulos</span><span class="blog-date">5 Jun 2026</span><span class="blog-read-time">⏱ 8 min</span></div>
+            <h3 class="blog-card-title">Guia completo: como escolher um bom whisky para presente</h3>
+            <p class="blog-card-excerpt">Single malt, blended, bourbon… entenda as diferenças e acerte na escolha para qualquer orçamento.</p>
+            <a href="/blog/guia-whisky-presente" class="blog-read-more">Ler mais →</a>
+          </div>
+        </article>
+        <article class="blog-card reveal reveal-delay-2">
+          <div class="blog-card-img" style="background:linear-gradient(135deg,#E8F0E8,#D5E8D5)"><div class="blog-img-placeholder">🌿</div></div>
+          <div class="blog-card-body">
+            <div class="blog-meta"><span class="blog-category">Destilados</span><span class="blog-date">1 Jun 2026</span><span class="blog-read-time">⏱ 6 min</span></div>
+            <h3 class="blog-card-title">Cachaça artesanal: o destilado brasileiro que conquistou o mundo</h3>
+            <p class="blog-card-excerpt">Da roça para a taça, conheça os produtores que estão elevando a cachaça ao nível dos grandes destilados mundiais.</p>
+            <a href="/blog/cachaca-artesanal" class="blog-read-more">Ler mais →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials" aria-labelledby="testimonials-title">
+    <div class="container">
+      <div class="testimonials-header reveal">
+        <p class="section-label">Quem já provou</p>
+        <h2 class="section-title" id="testimonials-title">O que nossos clientes dizem</h2>
+      </div>
+      <div class="testimonials-carousel">
+        <div class="testimonials-track" id="testimonials-track">
+          <div class="testimonial-card reveal">
+            <div class="testimonial-stars"><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg></div>
+            <p class="testimonial-text">"Assino o clube há 6 meses e nunca me decepcionei. Cada caixa é uma descoberta. O sommelier tem um olhar incrível para rótulos custo-benefício."</p>
+            <div class="testimonial-author"><div class="author-avatar">RM</div><div><p class="author-name">Ricardo M.</p><p class="author-location">São Paulo, SP</p></div></div>
+          </div>
+          <div class="testimonial-card reveal reveal-delay-1">
+            <div class="testimonial-stars"><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg></div>
+            <p class="testimonial-text">"Comprei um kit corporativo para o nosso evento de fim de ano. A embalagem estava impecável e o atendimento foi excelente. Com certeza vou repetir!"</p>
+            <div class="testimonial-author"><div class="author-avatar">AF</div><div><p class="author-name">Ana Ferreira</p><p class="author-location">Rio de Janeiro, RJ</p></div></div>
+          </div>
+          <div class="testimonial-card reveal reveal-delay-2">
+            <div class="testimonial-stars"><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg><svg class="star" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg><svg class="star star-empty" viewBox="0 0 12 12"><path d="M6 1l1.4 2.8 3.1.4-2.2 2.2.5 3.1L6 8.1l-2.8 1.4.5-3.1L1.5 4.2l3.1-.4z"/></svg></div>
+            <p class="testimonial-text">"Fiz o quiz de harmonização antes do jantar e a sugestão foi perfeita. Um Malbec argentino com a picanha — combinação inesquecível. Site muito intuitivo."</p>
+            <div class="testimonial-author"><div class="author-avatar">CS</div><div><p class="author-name">Carlos S.</p><p class="author-location">Belo Horizonte, MG</p></div></div>
+          </div>
+        </div>
+        <div class="testimonials-dots" role="tablist" aria-label="Depoimentos">
+          <button class="dot-btn active" role="tab" aria-selected="true" onclick="goToTestimonial(0)"></button>
+          <button class="dot-btn" role="tab" aria-selected="false" onclick="goToTestimonial(1)"></button>
+          <button class="dot-btn" role="tab" aria-selected="false" onclick="goToTestimonial(2)"></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer id="footer" aria-label="Rodapé">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="header-logo" style="margin-bottom:.75rem">
+          <div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2C8 2 5 5.5 5 9c0 3 1.5 5.5 4 7v4h6v-4c2.5-1.5 4-4 4-7 0-3.5-3-7-7-7zm0 2c2.8 0 5 2.7 5 5 0 2.2-1.1 4.1-3 5.3V18h-4v-3.7C8.1 13.1 7 11.2 7 9c0-2.3 2.2-5 5-5z" fill="var(--gold)"/></svg></div>
+          <div class="logo-text-wrap"><span class="logo-name">Vinho Prime</span><span class="logo-tagline" style="color:rgba(248,244,238,.4)">Curadoria & Destilados</span></div>
+        </div>
+        <p class="footer-slogan">"Do vinhedo à sua taça, com elegância e precisão."</p>
+        <div class="footer-social">
+          <a href="https://instagram.com" class="social-btn" aria-label="Instagram" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="https://wa.me" class="social-btn" aria-label="WhatsApp" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.06L2 22l5.1-1.34C8.5 21.53 10.21 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+          </a>
+        </div>
+        <p style="font-size:.6875rem;color:rgba(248,244,238,.3);margin-top:1rem">Receba novidades e ofertas exclusivas:</p>
+        <div class="newsletter-form" style="margin-top:.5rem">
+          <input type="email" class="newsletter-input" placeholder="seu@email.com" aria-label="E-mail para newsletter">
+          <button class="newsletter-btn">Quero!</button>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="footer-col-title">Vinhos</h3>
+        <ul class="footer-links">
+          <li><a href="/vinhos/tintos">Tintos</a></li>
+          <li><a href="/vinhos/brancos">Brancos</a></li>
+          <li><a href="/vinhos/roses">Rosés</a></li>
+          <li><a href="/vinhos/espumantes">Espumantes</a></li>
+          <li><a href="/vinhos/naturais">Naturais</a></li>
+          <li><a href="/miniaturas">Miniaturas</a></li>
+          <li><a href="/selecao-do-sommelier">Seleção do Sommelier</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="footer-col-title">Destilados</h3>
+        <ul class="footer-links">
+          <li><a href="/destilados/whisky">Whisky</a></li>
+          <li><a href="/destilados/gin">Gin</a></li>
+          <li><a href="/destilados/cognac">Cognac</a></li>
+          <li><a href="/destilados/rum">Rum</a></li>
+          <li><a href="/destilados/cachaca">Cachaça Artesanal</a></li>
+          <li><a href="/destilados/vodka">Vodka</a></li>
+          <li><a href="/box">Box & Kits</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="footer-col-title">A Empresa</h3>
+        <ul class="footer-links">
+          <li><a href="/sobre">Quem Somos</a></li>
+          <li><a href="/clube">Clube de Assinatura</a></li>
+          <li><a href="/grupo-vip">Grupo VIP</a></li>
+          <li><a href="/quiz">Quiz de Harmonização</a></li>
+          <li><a href="/b2b">Para Empresas</a></li>
+          <li><a href="/blog">Blog</a></li>
+          <li><a href="/ofertas">Ofertas</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="footer-col-title">Atendimento</h3>
+        <ul class="footer-links">
+          <li><a href="/contato">Fale Conosco</a></li>
+          <li><a href="/rastreio">Rastrear Pedido</a></li>
+          <li><a href="/minha-conta">Minha Conta</a></li>
+          <li><a href="/minha-conta/pedidos">Meus Pedidos</a></li>
+          <li><a href="/politica-de-privacidade">Política de Privacidade</a></li>
+          <li><a href="/termos-de-uso">Termos de Uso</a></li>
+          <li><a href="/trocas-e-devolucoes">Trocas e Devoluções</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-legal-warning">
+        <div class="warning-icon" aria-hidden="true">🔞</div>
+        <div class="warning-text">
+          Venda e consumo de bebidas alcoólicas proibidos para menores de 18 anos.
+          <span>Lei nº 8.069/90 — Estatuto da Criança e do Adolescente. Beba com moderação.</span>
+        </div>
+      </div>
+
+      <p class="footer-copy">© 2026 Vinho Prime Distribuidora de Bebidas LTDA. CNPJ: 00.000.000/0001-00</p>
+
+      <div class="payment-icons" aria-label="Formas de pagamento">
+        <span class="payment-icon payment-icon--pix">PIX</span>
+        <span class="payment-icon payment-icon--visa">VISA</span>
+        <span class="payment-icon payment-icon--mc"><span class="mc-circles"><span class="mc-circle-r"></span><span class="mc-circle-r"></span></span></span>
+        <span class="payment-icon">Boleto</span>
+        <span class="payment-icon">Elo</span>
+        <span class="payment-icon">Amex</span>
+      </div>
+
+      <div class="footer-legal-links">
+        <a href="/politica-de-privacidade">Privacidade</a>
+        <a href="/termos-de-uso">Termos</a>
+        <a href="/trocas-e-devolucoes">Devoluções</a>
+        <a href="/sitemap.xml">Sitemap</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- FLOATING WHATSAPP -->
+<div id="whatsapp-float">
+  <span class="whatsapp-tooltip">Fale com a gente!</span>
+  <a href="https://wa.me" class="whatsapp-bubble" aria-label="Contato via WhatsApp" rel="noopener noreferrer">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.06L2 22l5.1-1.34C8.5 21.53 10.21 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+  </a>
+</div>
+
+<!-- ============================================================
+     SCRIPTS
+     ============================================================ -->
+<script>
+/* ---- Age Verification ---- */
+function confirmAge() {
+  localStorage.setItem('vp_age_ok', '1');
+  document.getElementById('age-modal').classList.remove('active');
+  setTimeout(() => {
+    if (!localStorage.getItem('vp_cookies_ok')) {
+      document.getElementById('cookie-banner').classList.add('active');
+    }
+  }, 800);
+}
+function denyAge() {
+  document.body.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100vh;background:#3D0C0C;color:#F8F4EE;font-family:Georgia,serif;text-align:center;padding:2rem"><div><p style="font-size:2rem;margin-bottom:1rem">🔞</p><h1 style="font-size:1.5rem;margin-bottom:.5rem">Acesso restrito</h1><p>Este site é destinado apenas a maiores de 18 anos.</p></div></div>';
+}
+if (localStorage.getItem('vp_age_ok')) {
+  document.getElementById('age-modal').classList.remove('active');
+  if (!localStorage.getItem('vp_cookies_ok')) {
+    setTimeout(() => document.getElementById('cookie-banner').classList.add('active'), 1200);
+  }
+}
+
+/* ---- Cookies ---- */
+function acceptCookies() {
+  localStorage.setItem('vp_cookies_ok', '1');
+  document.getElementById('cookie-banner').classList.remove('active');
+}
+function declineCookies() {
+  document.getElementById('cookie-banner').classList.remove('active');
+}
+
+/* ---- Top Banner rotation ---- */
+(function() {
+  const msgs = document.querySelectorAll('.banner-msg');
+  let i = 0;
+  setInterval(() => {
+    msgs[i].classList.remove('active');
+    i = (i + 1) % msgs.length;
+    msgs[i].classList.add('active');
+  }, 3500);
+})();
+
+/* ---- Sticky header ---- */
+const header = document.getElementById('header');
+window.addEventListener('scroll', () => {
+  header.classList.toggle('scrolled', window.scrollY > 20);
+}, { passive: true });
+
+/* ---- Mobile Nav ---- */
+function toggleMobileNav() {
+  const nav = document.getElementById('mobile-nav');
+  const toggle = document.getElementById('menu-toggle');
+  const isOpen = nav.classList.toggle('open');
+  toggle.setAttribute('aria-expanded', isOpen);
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+}
+function closeMobileNav() {
+  document.getElementById('mobile-nav').classList.remove('open');
+  document.getElementById('menu-toggle').setAttribute('aria-expanded', 'false');
+  document.body.style.overflow = '';
+}
+function closeMobileNavOutside(e) {
+  if (e.target === document.getElementById('mobile-nav')) closeMobileNav();
+}
+
+/* ---- Cart Drawer ---- */
+function toggleCart() {
+  const overlay = document.getElementById('cart-overlay');
+  const drawer = document.getElementById('cart-drawer');
+  const isOpen = drawer.classList.toggle('open');
+  overlay.classList.toggle('open', isOpen);
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+}
+
+/* ---- Countdown Timer ---- */
+(function() {
+  const end = new Date();
+  end.setDate(end.getDate() + 2);
+  end.setHours(23, 59, 59, 0);
+  function tick() {
+    const now = new Date();
+    const diff = Math.max(0, end - now);
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    const fmt = n => String(n).padStart(2, '0');
+    document.getElementById('cd-days').textContent  = fmt(d);
+    document.getElementById('cd-hours').textContent = fmt(h);
+    document.getElementById('cd-min').textContent   = fmt(m);
+    document.getElementById('cd-sec').textContent   = fmt(s);
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
+
+/* ---- Scroll Reveal ---- */
+(function() {
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  els.forEach(el => io.observe(el));
+})();
+
+/* ---- Testimonials ---- */
+function goToTestimonial(idx) {
+  document.querySelectorAll('.dot-btn').forEach((d, i) => {
+    d.classList.toggle('active', i === idx);
+    d.setAttribute('aria-selected', i === idx);
+  });
+}
+</script>
+
+</body>
+</html>
