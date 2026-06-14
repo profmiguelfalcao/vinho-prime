@@ -386,7 +386,7 @@ const Catalogo = (() => {
         <div class="card-body">
           <p class="card-origin">${p.pais} · ${p.regiao || p.subtipo}</p>
           <h3 class="card-name">
-            <a href="/produto/${p.slug}" style="color:inherit">${p.nome}${p.safra ? ` ${p.safra}` : ''}</a>
+            <a href="produto.html?slug=${p.slug}" style="color:inherit">${p.nome}${p.safra ? ` ${p.safra}` : ''}</a>
           </h3>
           ${p.uvas && p.uvas.length ? `<p style="font-size:.6875rem;color:var(--text-light);margin-bottom:.375rem">${p.uvas.join(' · ')}</p>` : ''}
           <div class="card-stars">

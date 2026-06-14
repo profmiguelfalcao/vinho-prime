@@ -1,0 +1,459 @@
+/* ============================================================
+   Vinho Prime — Página de Produto
+   ============================================================ */
+
+/* ---- Layout Principal ---- */
+.produto-layout {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 3rem;
+  align-items: start;
+  padding-block: 2.5rem;
+}
+
+/* ---- Galeria ---- */
+.produto-galeria {
+  position: sticky;
+  top: calc(var(--header-h) + 1.5rem);
+}
+
+.produto-imagem-principal {
+  width: 100%;
+  aspect-ratio: 3/4;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: linear-gradient(160deg, #5C1515 0%, #3D0C0C 60%, #1a0808 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.produto-imagem-principal img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.produto-imagem-placeholder {
+  text-align: center;
+  color: rgba(248,244,238,.3);
+}
+.produto-imagem-placeholder svg {
+  width: 80px;
+  height: 80px;
+  margin-bottom: .75rem;
+  opacity: .35;
+}
+.produto-imagem-placeholder p {
+  font-family: var(--font-accent);
+  font-size: .875rem;
+  font-style: italic;
+}
+
+.produto-badges-galeria {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: .375rem;
+}
+
+.produto-thumbs {
+  display: flex;
+  gap: .625rem;
+}
+.produto-thumb {
+  width: 72px;
+  height: 88px;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(160deg, #5C1515, #3D0C0C);
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border-color var(--transition);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.produto-thumb.ativo { border-color: var(--bordeaux); }
+.produto-thumb:hover { border-color: rgba(61,12,12,.4); }
+
+/* ---- Info do Produto ---- */
+.produto-info { min-width: 0; }
+
+.produto-origem {
+  font-size: .8125rem;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  font-weight: 500;
+  margin-bottom: .625rem;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+.produto-origem-sep { opacity: .4; }
+
+.produto-nome {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.2;
+  margin-bottom: .375rem;
+}
+
+.produto-safra-uvas {
+  font-family: var(--font-accent);
+  font-size: .9375rem;
+  color: var(--text-sec);
+  font-style: italic;
+  margin-bottom: 1rem;
+}
+
+.produto-avaliacao {
+  display: flex;
+  align-items: center;
+  gap: .625rem;
+  margin-bottom: 1.25rem;
+}
+.produto-avaliacao .stars { font-size: 1rem; }
+.produto-avaliacao-num {
+  font-size: .875rem;
+  font-weight: 600;
+  color: var(--text);
+}
+.produto-avaliacao-count {
+  font-size: .8125rem;
+  color: var(--text-light);
+}
+
+/* Pontuações da crítica */
+.produto-scores {
+  display: flex;
+  gap: .75rem;
+  margin-bottom: 1.375rem;
+  flex-wrap: wrap;
+}
+.score-pill {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--cream);
+  border-radius: var(--radius-sm);
+  padding: .5rem .875rem;
+  border: 1px solid rgba(92,81,70,.12);
+}
+.score-num {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--bordeaux);
+  line-height: 1;
+}
+.score-fonte {
+  font-size: .625rem;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  margin-top: .2rem;
+  white-space: nowrap;
+}
+
+/* Bloco de preço */
+.produto-preco-bloco {
+  background: var(--cream);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  margin-bottom: 1.375rem;
+  border: 1px solid rgba(92,81,70,.1);
+}
+.produto-preco-de {
+  font-size: .8125rem;
+  color: var(--text-light);
+  text-decoration: line-through;
+  margin-bottom: .125rem;
+}
+.produto-preco-por {
+  display: flex;
+  align-items: baseline;
+  gap: .5rem;
+  margin-bottom: .375rem;
+}
+.produto-preco-valor {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--bordeaux);
+  line-height: 1;
+}
+.produto-preco-parcelas {
+  font-size: .875rem;
+  color: var(--text-sec);
+}
+.produto-preco-pix {
+  display: inline-flex;
+  align-items: center;
+  gap: .375rem;
+  font-size: .8125rem;
+  font-weight: 600;
+  color: var(--success);
+  background: rgba(74,124,89,.08);
+  padding: .3rem .625rem;
+  border-radius: 100px;
+}
+
+/* Seletor de quantidade + CTA */
+.produto-cta-wrap {
+  display: flex;
+  gap: .75rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.quantidade-selector {
+  display: flex;
+  align-items: center;
+  border: 1.5px solid rgba(92,81,70,.2);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.qtd-btn {
+  width: 40px;
+  height: 48px;
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  color: var(--text-sec);
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.qtd-btn:hover { background: var(--cream); color: var(--bordeaux); }
+.qtd-valor {
+  width: 44px;
+  height: 48px;
+  text-align: center;
+  border: none;
+  border-left: 1.5px solid rgba(92,81,70,.15);
+  border-right: 1.5px solid rgba(92,81,70,.15);
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+  background: var(--white);
+  outline: none;
+}
+.btn-adicionar {
+  flex: 1;
+  height: 48px;
+  background: var(--bordeaux);
+  color: var(--white);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: .9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+}
+.btn-adicionar:hover { background: #5a1010; transform: translateY(-1px); box-shadow: var(--shadow-md); }
+.btn-adicionar:active { transform: none; }
+.btn-adicionar:disabled { opacity: .5; cursor: not-allowed; transform: none; box-shadow: none; }
+
+.btn-wishlist {
+  width: 48px;
+  height: 48px;
+  border: 1.5px solid rgba(92,81,70,.2);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  color: var(--text-sec);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition);
+  flex-shrink: 0;
+}
+.btn-wishlist:hover { border-color: var(--bordeaux); color: var(--bordeaux); }
+.btn-wishlist.ativo { background: var(--bordeaux); border-color: var(--bordeaux); color: var(--white); }
+
+.produto-frete-aviso {
+  font-size: .8125rem;
+  color: var(--success);
+  display: flex;
+  align-items: center;
+  gap: .375rem;
+  margin-bottom: 1.375rem;
+}
+
+/* Especificações técnicas */
+.produto-specs {
+  border: 1px solid rgba(92,81,70,.1);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+.produto-specs-titulo {
+  font-size: .75rem;
+  font-weight: 700;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  padding: .75rem 1rem;
+  background: var(--cream);
+  border-bottom: 1px solid rgba(92,81,70,.1);
+}
+.spec-linha {
+  display: flex;
+  align-items: center;
+  padding: .6rem 1rem;
+  border-bottom: 1px solid rgba(92,81,70,.07);
+  font-size: .8125rem;
+}
+.spec-linha:last-child { border-bottom: none; }
+.spec-chave {
+  color: var(--text-light);
+  width: 44%;
+  flex-shrink: 0;
+}
+.spec-valor {
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* ---- Abas de Conteúdo ---- */
+.produto-abas {
+  margin-top: 3rem;
+  border-top: 1px solid rgba(92,81,70,.1);
+}
+
+.abas-nav {
+  display: flex;
+  border-bottom: 1px solid rgba(92,81,70,.1);
+  gap: 0;
+}
+.aba-btn {
+  padding: 1rem 1.5rem;
+  font-size: .875rem;
+  font-weight: 600;
+  color: var(--text-sec);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  cursor: pointer;
+  transition: all var(--transition);
+  white-space: nowrap;
+}
+.aba-btn:hover { color: var(--bordeaux); }
+.aba-btn.ativo { color: var(--bordeaux); border-bottom-color: var(--bordeaux); }
+
+.aba-painel {
+  display: none;
+  padding: 2rem 0;
+}
+.aba-painel.ativo { display: block; }
+
+.aba-descricao {
+  font-size: .9375rem;
+  color: var(--text-sec);
+  line-height: 1.8;
+  max-width: 700px;
+}
+
+.harmonizacao-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .625rem;
+  padding-top: .25rem;
+}
+.harmonizacao-item {
+  display: inline-flex;
+  align-items: center;
+  gap: .375rem;
+  padding: .5rem 1rem;
+  background: var(--cream);
+  border: 1px solid rgba(92,81,70,.12);
+  border-radius: 100px;
+  font-size: .875rem;
+  color: var(--text);
+}
+
+.notas-degustacao {
+  font-family: var(--font-accent);
+  font-size: 1.0625rem;
+  font-style: italic;
+  color: var(--text-sec);
+  line-height: 1.8;
+  border-left: 3px solid var(--gold);
+  padding-left: 1.25rem;
+  max-width: 640px;
+}
+
+.pontuacoes-grid {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.pontuacao-card {
+  background: var(--cream);
+  border: 1px solid rgba(92,81,70,.12);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1.5rem;
+  text-align: center;
+  min-width: 140px;
+}
+.pontuacao-num {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--bordeaux);
+  line-height: 1;
+  display: block;
+}
+.pontuacao-fonte {
+  font-size: .75rem;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  margin-top: .375rem;
+}
+
+/* ---- Produtos Relacionados ---- */
+.relacionados {
+  padding-block: 3rem;
+  border-top: 1px solid rgba(92,81,70,.1);
+}
+.relacionados-titulo {
+  font-family: var(--font-display);
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 1.5rem;
+}
+
+/* ---- Responsivo ---- */
+@media (max-width: 1024px) {
+  .produto-layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .produto-galeria { position: static; }
+  .produto-imagem-principal { aspect-ratio: 4/3; max-height: 400px; }
+}
+
+@media (max-width: 640px) {
+  .produto-layout { padding-block: 1.5rem; }
+  .produto-preco-valor { font-size: 1.625rem; }
+  .produto-cta-wrap { flex-wrap: wrap; }
+  .btn-adicionar { width: 100%; }
+  .abas-nav { overflow-x: auto; }
+  .pontuacoes-grid { gap: .625rem; }
+}

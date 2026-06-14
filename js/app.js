@@ -170,7 +170,7 @@ const VinhoPrime = (() => {
         <div class="card-body">
           <p class="card-origin ${escuro ? 'card-origin--light' : ''}">${produto.pais} · ${produto.regiao}</p>
           <h3 class="card-name ${escuro ? 'card-name--light' : ''}">
-            <a href="/produto/${produto.slug}" style="color:inherit">${produto.nome}${produto.safra ? ` ${produto.safra}` : ''}</a>
+            <a href="produto.html?slug=${produto.slug}" style="color:inherit">${produto.nome}${produto.safra ? ` ${produto.safra}` : ''}</a>
           </h3>
           <div class="card-stars">
             ${renderizarEstrelas(produto.avaliacao)}
