@@ -40,8 +40,7 @@ const Catalogo = (() => {
     document.title = `${cfg.titulo} — Vinho Prime`;
 
     try {
-      const res = await fetch('dados/produtos.json');
-      const dados = await res.json();
+      const dados = await DB.getProdutos();
       todosProdutos = dados.produtos.filter(p => p.ativo && p.tipo === estado.tipo);
     } catch {
       todosProdutos = [];

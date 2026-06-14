@@ -35,8 +35,7 @@ const Produto = (function () {
     if (!slug) { paginaErro('Produto não encontrado.'); return; }
 
     try {
-      const resp = await fetch('dados/produtos.json');
-      const dados = await resp.json();
+      const dados = await DB.getProdutos();
       todosProdutos = dados.produtos.filter(p => p.ativo);
       produto = todosProdutos.find(p => p.slug === slug);
       if (!produto) { paginaErro('Produto não encontrado.'); return; }

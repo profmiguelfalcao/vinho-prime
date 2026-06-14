@@ -11,6 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/busca.css">
 </head>
 <body>
 
@@ -98,7 +99,7 @@
     </a>
 
     <div class="header-actions">
-      <button class="action-btn" aria-label="Buscar">
+      <button class="action-btn" aria-label="Buscar" onclick="Busca.abrir()">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>
       </button>
       <button class="action-btn" aria-label="Lista de desejos">
@@ -299,6 +300,21 @@
   </div>
 </footer>
 
+
+<!-- ============================================================
+     BUSCA GLOBAL
+     ============================================================ -->
+<div id="busca-overlay" onclick="if(event.target===this)Busca.fechar()">
+  <div class="busca-modal" role="dialog" aria-modal="true" aria-label="Buscar produtos">
+    <div class="busca-input-wrap">
+      <svg class="busca-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" width="20" height="20" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" id="busca-input" placeholder="Buscar vinhos, destilados, produtores..." autocomplete="off" oninput="Busca.aoDigitar(this.value)">
+      <button class="busca-fechar-btn" onclick="Busca.fechar()">ESC</button>
+    </div>
+    <div class="busca-resultados" id="busca-resultados"></div>
+  </div>
+</div>
+
 <!-- WhatsApp Flutuante -->
 <div id="whatsapp-float">
   <span class="whatsapp-tooltip">Fale com a gente!</span>
@@ -307,7 +323,9 @@
   </a>
 </div>
 
+<script src="js/db.js"></script>
 <script src="js/app.js"></script>
+<script src="js/busca.js"></script>
 <script src="js/catalogo.js"></script>
 <script>
 /* ---- Verificação de maioridade ---- */

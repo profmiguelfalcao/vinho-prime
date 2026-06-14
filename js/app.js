@@ -205,13 +205,11 @@ const VinhoPrime = (() => {
 
   async function carregarProdutos() {
     try {
-      const res = await fetch('dados/produtos.json');
-      if (!res.ok) throw new Error(`Erro ao carregar produtos: ${res.status}`);
-      const dados = await res.json();
+      const dados = await DB.getProdutos();
       _produtos = dados.produtos.filter(p => p.ativo);
       return _produtos;
     } catch (err) {
-      console.error('[Vinho Prime] Falha ao carregar produtos.json:', err);
+      console.error('[Vinho Prime] Falha ao carregar produtos:', err);
       return [];
     }
   }

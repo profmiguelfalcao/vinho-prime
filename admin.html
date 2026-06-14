@@ -531,6 +531,8 @@
     .import-area:hover { border-color: var(--bordeaux); background: rgba(61,12,12,.03); }
     .import-area p { font-size: .9375rem; color: var(--text-s); margin-top: .5rem; }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/db.js"></script>
 </head>
 <body>
 
@@ -962,6 +964,23 @@ function logout() {
    Inicialização
    ============================================================ */
 async function inicializar() {
+  if (typeof DB !== 'undefined' && DB.isSupabaseAtivo()) {
+    mostrarToast('Conectando ao Supabase…', 'sucesso');
+    try {
+      const { produtos: lista } = await DB.getProdutos();
+      produtos = lista;
+      salvarLocal();
+    } catch (e) {
+      mostrarToast('Erro Supabase — usando dados locais.', 'erro');
+      await _inicializarLocal();
+    }
+  } else {
+    await _inicializarLocal();
+  }
+  atualizarTudo();
+}
+
+async function _inicializarLocal() {
   const local = localStorage.getItem(STORAGE_KEY);
   if (local) {
     produtos = JSON.parse(local);
@@ -976,7 +995,6 @@ async function inicializar() {
       mostrarToast('Nenhum produto encontrado. Comece adicionando produtos.', 'erro');
     }
   }
-  atualizarTudo();
 }
 
 function salvarLocal() {
@@ -1292,17 +1310,27 @@ function salvarProduto() {
     }
   };
 
+  let produtoFinal;
   if (editandoId) {
     const idx = produtos.findIndex(p => p.id === editandoId);
-    produtos[idx] = { ...produtos[idx], ...dados, slug: gerarSlug(dados.nome, dados.safra) };
-    mostrarToast('Produto atualizado com sucesso!', 'sucesso');
+    produtoFinal = { ...produtos[idx], ...dados, slug: gerarSlug(dados.nome, dados.safra) };
+    produtos[idx] = produtoFinal;
   } else {
     const novoId = String(Math.max(0, ...produtos.map(p => parseInt(p.id) || 0)) + 1).padStart(3, '0');
-    produtos.push({ id: novoId, slug: gerarSlug(dados.nome, dados.safra), ...dados });
-    mostrarToast('Produto adicionado com sucesso!', 'sucesso');
+    produtoFinal = { id: novoId, slug: gerarSlug(dados.nome, dados.safra), ...dados };
+    produtos.push(produtoFinal);
   }
 
   salvarLocal();
+
+  if (typeof DB !== 'undefined' && DB.isSupabaseAtivo()) {
+    DB.salvar(produtoFinal)
+      .then(() => mostrarToast(editandoId ? 'Produto atualizado e sincronizado!' : 'Produto adicionado e sincronizado!', 'sucesso'))
+      .catch(e => mostrarToast('Salvo local. Erro Supabase: ' + e.message, 'erro'));
+  } else {
+    mostrarToast(editandoId ? 'Produto atualizado!' : 'Produto adicionado!', 'sucesso');
+  }
+
   fecharModal('modal-produto');
   atualizarTudo();
 }
@@ -1377,7 +1405,14 @@ function salvarEstoque() {
   salvarLocal();
   fecharModal('modal-estoque');
   atualizarTudo();
-  mostrarToast(`Estoque de "${p.nome}" atualizado para ${estoqueNovoValor}.`, 'sucesso');
+
+  if (typeof DB !== 'undefined' && DB.isSupabaseAtivo()) {
+    DB.atualizar(p.id, { estoque: estoqueNovoValor })
+      .then(() => mostrarToast(`Estoque de "${p.nome}" atualizado e sincronizado.`, 'sucesso'))
+      .catch(e => mostrarToast('Salvo local. Erro Supabase: ' + e.message, 'erro'));
+  } else {
+    mostrarToast(`Estoque de "${p.nome}" atualizado para ${estoqueNovoValor}.`, 'sucesso');
+  }
 }
 
 /* ============================================================
@@ -1389,6 +1424,11 @@ function toggleAtivo(id) {
   p.ativo = !p.ativo;
   salvarLocal();
   atualizarTudo();
+
+  if (typeof DB !== 'undefined' && DB.isSupabaseAtivo()) {
+    DB.atualizar(p.id, { ativo: p.ativo })
+      .catch(e => mostrarToast('Erro Supabase: ' + e.message, 'erro'));
+  }
   mostrarToast(`"${p.nome}" ${p.ativo ? 'ativado' : 'desativado'}.`, 'sucesso');
 }
 
@@ -1406,7 +1446,14 @@ function excluirProduto(id) {
   produtos = produtos.filter(x => x.id !== id);
   salvarLocal();
   atualizarTudo();
-  mostrarToast(`"${p?.nome}" excluído.`, 'sucesso');
+
+  if (typeof DB !== 'undefined' && DB.isSupabaseAtivo()) {
+    DB.deletar(id)
+      .then(() => mostrarToast(`"${p?.nome}" excluído e sincronizado.`, 'sucesso'))
+      .catch(e => mostrarToast('Excluído local. Erro Supabase: ' + e.message, 'erro'));
+  } else {
+    mostrarToast(`"${p?.nome}" excluído.`, 'sucesso');
+  }
 }
 
 /* ============================================================
