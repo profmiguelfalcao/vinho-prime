@@ -1,0 +1,1540 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin — Vinho Prime</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ---- Variáveis ---- */
+    :root {
+      --bordeaux:    #3D0C0C;
+      --bordeaux-m:  #5C1515;
+      --bordeaux-l:  #7A1F1F;
+      --gold:        #C4973A;
+      --gold-l:      #D4A84A;
+      --cream:       #F8F4EE;
+      --cream-m:     #F0EAE0;
+      --bg:          #F5F5F7;
+      --white:       #FFFFFF;
+      --text:        #1A1A1A;
+      --text-s:      #5C5146;
+      --text-l:      #9A9A9A;
+      --border:      rgba(0,0,0,.09);
+      --success:     #4A7C59;
+      --success-bg:  #EDF7F1;
+      --warning:     #C4973A;
+      --warning-bg:  #FDF6E8;
+      --error:       #A02020;
+      --error-bg:    #FBF0F0;
+      --info:        #2563EB;
+      --info-bg:     #EFF6FF;
+      --sidebar-w:   240px;
+      --radius:      10px;
+      --shadow:      0 2px 12px rgba(0,0,0,.07);
+      --shadow-m:    0 8px 32px rgba(0,0,0,.12);
+      --transition:  .25s cubic-bezier(.4,0,.2,1);
+    }
+
+    /* ---- Reset ---- */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 15px; }
+    body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.5; overflow-x: hidden; }
+    input, select, textarea, button { font-family: inherit; font-size: inherit; }
+    button { cursor: pointer; border: none; background: none; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ---- Tela de Login ---- */
+    #login-screen {
+      position: fixed; inset: 0;
+      background: var(--bordeaux);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 9999;
+      transition: opacity .4s ease, transform .4s ease;
+    }
+    #login-screen.oculto { opacity: 0; pointer-events: none; }
+
+    .login-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 2.5rem;
+      width: min(400px, 90vw);
+      box-shadow: 0 20px 60px rgba(0,0,0,.3);
+      text-align: center;
+    }
+    .login-logo {
+      width: 56px; height: 56px;
+      background: var(--bordeaux);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1.25rem;
+      font-size: 1.5rem;
+    }
+    .login-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--bordeaux); margin-bottom: .25rem; }
+    .login-sub { font-size: .875rem; color: var(--text-s); margin-bottom: 2rem; }
+    .login-input {
+      width: 100%; padding: .75rem 1rem;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      font-size: .9375rem;
+      outline: none;
+      transition: border-color var(--transition);
+      margin-bottom: 1rem;
+      text-align: center; letter-spacing: .15em;
+    }
+    .login-input:focus { border-color: var(--bordeaux); }
+    .login-btn {
+      width: 100%; padding: .875rem;
+      background: var(--bordeaux);
+      color: var(--white);
+      border-radius: var(--radius);
+      font-size: .9375rem; font-weight: 600;
+      transition: background var(--transition);
+    }
+    .login-btn:hover { background: var(--bordeaux-m); }
+    .login-erro {
+      color: var(--error); font-size: .8125rem;
+      margin-top: .75rem; display: none;
+    }
+
+    /* ---- Layout Principal ---- */
+    #app { display: none; min-height: 100vh; }
+    #app.visivel { display: flex; }
+
+    /* ---- Sidebar ---- */
+    #sidebar {
+      width: var(--sidebar-w); min-height: 100vh;
+      background: var(--bordeaux);
+      display: flex; flex-direction: column;
+      position: sticky; top: 0; height: 100vh;
+      overflow-y: auto; flex-shrink: 0;
+    }
+
+    .sidebar-logo {
+      padding: 1.5rem 1.25rem 1rem;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+      display: flex; align-items: center; gap: .75rem;
+    }
+    .sidebar-logo-icon {
+      width: 36px; height: 36px;
+      background: rgba(255,255,255,.1);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; flex-shrink: 0;
+    }
+    .sidebar-logo-text strong {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem; color: var(--cream);
+    }
+    .sidebar-logo-text span { font-size: .6875rem; color: rgba(248,244,238,.45); letter-spacing: .08em; }
+
+    .sidebar-nav { padding: 1rem .75rem; flex: 1; }
+    .nav-section-label {
+      font-size: .625rem; font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase; color: rgba(248,244,238,.3);
+      padding: 1rem .5rem .375rem;
+    }
+    .nav-item {
+      display: flex; align-items: center; gap: .625rem;
+      padding: .625rem .75rem;
+      border-radius: 8px;
+      font-size: .875rem; font-weight: 500;
+      color: rgba(248,244,238,.65);
+      cursor: pointer;
+      transition: all var(--transition);
+      margin-bottom: 2px;
+    }
+    .nav-item:hover { background: rgba(255,255,255,.07); color: var(--cream); }
+    .nav-item.ativo { background: rgba(255,255,255,.12); color: var(--cream); }
+    .nav-item .nav-icon { font-size: 1rem; width: 20px; text-align: center; flex-shrink: 0; }
+    .nav-badge {
+      margin-left: auto;
+      background: var(--error);
+      color: white; font-size: .625rem; font-weight: 700;
+      padding: .15rem .4rem; border-radius: 100px;
+      min-width: 18px; text-align: center;
+    }
+
+    .sidebar-footer {
+      padding: 1rem .75rem;
+      border-top: 1px solid rgba(255,255,255,.1);
+    }
+    .sidebar-user {
+      display: flex; align-items: center; gap: .625rem;
+      padding: .625rem;
+    }
+    .user-avatar {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: rgba(196,151,58,.25);
+      border: 1.5px solid rgba(196,151,58,.4);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .75rem; font-weight: 700; color: var(--gold);
+      flex-shrink: 0;
+    }
+    .user-info strong { display: block; font-size: .8125rem; color: var(--cream); font-weight: 600; }
+    .user-info span { font-size: .6875rem; color: rgba(248,244,238,.4); }
+    .logout-btn {
+      margin-left: auto; padding: .375rem .625rem;
+      background: rgba(255,255,255,.07);
+      border-radius: 6px; font-size: .75rem;
+      color: rgba(248,244,238,.55);
+      transition: all var(--transition);
+    }
+    .logout-btn:hover { background: rgba(255,255,255,.12); color: var(--cream); }
+
+    /* ---- Conteúdo Principal ---- */
+    #main { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+
+    .topbar {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: .875rem 1.75rem;
+      display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; z-index: 100;
+      box-shadow: var(--shadow);
+    }
+    .topbar-title { font-family: 'Playfair Display', serif; font-size: 1.25rem; color: var(--bordeaux); }
+    .topbar-actions { display: flex; gap: .625rem; align-items: center; }
+
+    /* ---- Telas (views) ---- */
+    .view { display: none; padding: 1.75rem; }
+    .view.ativa { display: block; }
+
+    /* ---- Cards de Métrica ---- */
+    .metricas-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem; margin-bottom: 2rem;
+    }
+    .metrica-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      box-shadow: var(--shadow);
+      display: flex; flex-direction: column; gap: .25rem;
+    }
+    .metrica-label { font-size: .75rem; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--text-l); }
+    .metrica-valor { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--text); line-height: 1.1; }
+    .metrica-sub { font-size: .75rem; color: var(--text-s); }
+    .metrica-card--bordeaux { background: var(--bordeaux); }
+    .metrica-card--bordeaux .metrica-label { color: rgba(248,244,238,.5); }
+    .metrica-card--bordeaux .metrica-valor { color: var(--cream); }
+    .metrica-card--bordeaux .metrica-sub { color: rgba(248,244,238,.4); }
+    .metrica-card--gold { border-left: 3px solid var(--gold); }
+    .metrica-card--warn { border-left: 3px solid var(--error); }
+
+    /* ---- Alertas de Estoque ---- */
+    .alertas-section { margin-bottom: 2rem; }
+    .alertas-titulo { font-size: .8125rem; font-weight: 700; color: var(--text-s); text-transform: uppercase; letter-spacing: .06em; margin-bottom: .75rem; }
+    .alerta-item {
+      display: flex; align-items: center; gap: 1rem;
+      background: var(--white); border-radius: var(--radius);
+      padding: .875rem 1.25rem; margin-bottom: .5rem;
+      box-shadow: var(--shadow); border-left: 3px solid var(--error);
+    }
+    .alerta-nome { font-weight: 600; font-size: .875rem; flex: 1; }
+    .alerta-estoque { font-size: .8125rem; color: var(--error); font-weight: 600; }
+
+    /* ---- Tabela de Produtos ---- */
+    .toolbar {
+      display: flex; align-items: center; gap: .75rem;
+      margin-bottom: 1.25rem; flex-wrap: wrap;
+    }
+    .search-input {
+      flex: 1; min-width: 200px;
+      padding: .625rem 1rem;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      outline: none; transition: border-color var(--transition);
+      background: var(--white);
+    }
+    .search-input:focus { border-color: var(--bordeaux); }
+    .filter-select {
+      padding: .625rem .875rem;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      outline: none; background: var(--white);
+      cursor: pointer; transition: border-color var(--transition);
+    }
+    .filter-select:focus { border-color: var(--bordeaux); }
+
+    .tabela-wrap { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+    table { width: 100%; border-collapse: collapse; }
+    thead { background: var(--cream); }
+    th {
+      padding: .75rem 1rem; text-align: left;
+      font-size: .6875rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .08em; color: var(--text-s);
+      white-space: nowrap; cursor: pointer; user-select: none;
+    }
+    th:hover { color: var(--bordeaux); }
+    td { padding: .875rem 1rem; font-size: .875rem; border-top: 1px solid var(--border); vertical-align: middle; }
+    tr:hover td { background: var(--cream); }
+
+    .td-nome strong { display: block; font-weight: 600; margin-bottom: 2px; }
+    .td-nome span { font-size: .75rem; color: var(--text-l); }
+    .td-preco { font-weight: 600; }
+    .td-desconto { font-size: .75rem; color: var(--success); font-weight: 600; }
+    .td-estoque-val { font-weight: 700; }
+    .td-estoque-val.baixo { color: var(--error); }
+    .td-estoque-val.ok { color: var(--success); }
+    .td-estoque-val.zero { color: var(--text-l); }
+
+    .badge-tipo {
+      display: inline-block; padding: .2rem .625rem;
+      border-radius: 100px; font-size: .6875rem; font-weight: 600;
+      text-transform: capitalize;
+    }
+    .badge-tipo.vinho { background: rgba(61,12,12,.1); color: var(--bordeaux); }
+    .badge-tipo.destilado { background: rgba(196,151,58,.12); color: #8A6010; }
+
+    .status-toggle {
+      display: inline-flex; align-items: center; gap: .375rem;
+      padding: .25rem .625rem;
+      border-radius: 100px; font-size: .75rem; font-weight: 600;
+      cursor: pointer; border: none; transition: all var(--transition);
+    }
+    .status-toggle.ativo-sim { background: var(--success-bg); color: var(--success); }
+    .status-toggle.ativo-nao { background: var(--error-bg); color: var(--error); }
+
+    .acoes-td { display: flex; gap: .375rem; align-items: center; }
+    .btn-icone {
+      width: 32px; height: 32px;
+      border-radius: 7px; display: flex; align-items: center; justify-content: center;
+      font-size: .875rem; transition: all var(--transition);
+    }
+    .btn-editar { background: var(--info-bg); color: var(--info); }
+    .btn-editar:hover { background: var(--info); color: var(--white); }
+    .btn-excluir { background: var(--error-bg); color: var(--error); }
+    .btn-excluir:hover { background: var(--error); color: var(--white); }
+    .btn-estoque { background: var(--success-bg); color: var(--success); }
+    .btn-estoque:hover { background: var(--success); color: var(--white); }
+
+    .sem-resultados { text-align: center; padding: 3rem; color: var(--text-l); font-size: .9375rem; }
+
+    /* ---- Botões Principais ---- */
+    .btn {
+      display: inline-flex; align-items: center; gap: .375rem;
+      padding: .625rem 1.25rem; border-radius: var(--radius);
+      font-size: .875rem; font-weight: 600;
+      transition: all var(--transition); white-space: nowrap;
+    }
+    .btn-primary { background: var(--bordeaux); color: var(--white); }
+    .btn-primary:hover { background: var(--bordeaux-m); }
+    .btn-gold { background: var(--gold); color: var(--white); }
+    .btn-gold:hover { background: var(--gold-l); }
+    .btn-outline { background: transparent; color: var(--bordeaux); border: 1.5px solid var(--bordeaux); }
+    .btn-outline:hover { background: var(--bordeaux); color: var(--white); }
+    .btn-ghost { background: var(--bg); color: var(--text-s); border: 1.5px solid var(--border); }
+    .btn-ghost:hover { border-color: var(--bordeaux); color: var(--bordeaux); }
+    .btn-danger { background: var(--error); color: var(--white); }
+    .btn-danger:hover { background: #8A1A1A; }
+    .btn-sm { padding: .4rem .875rem; font-size: .8125rem; }
+
+    /* ---- Modal ---- */
+    .modal-overlay {
+      position: fixed; inset: 0;
+      background: rgba(26,26,26,.5);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      display: none; align-items: flex-start; justify-content: center;
+      padding: 2rem 1rem; overflow-y: auto;
+    }
+    .modal-overlay.aberto { display: flex; }
+
+    .modal {
+      background: var(--white);
+      border-radius: 16px;
+      width: min(720px, 100%);
+      box-shadow: 0 20px 60px rgba(0,0,0,.2);
+      margin: auto;
+    }
+    .modal-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .modal-titulo { font-family: 'Playfair Display', serif; font-size: 1.25rem; color: var(--bordeaux); }
+    .modal-fechar {
+      width: 36px; height: 36px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-l); font-size: 1.25rem;
+      transition: all var(--transition);
+    }
+    .modal-fechar:hover { background: var(--bg); color: var(--text); }
+    .modal-body { padding: 1.5rem; }
+    .modal-footer {
+      display: flex; justify-content: flex-end; gap: .625rem;
+      padding: 1.25rem 1.5rem;
+      border-top: 1px solid var(--border);
+      background: var(--bg); border-radius: 0 0 16px 16px;
+    }
+
+    /* ---- Formulário ---- */
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-full { grid-column: 1 / -1; }
+    .form-group { display: flex; flex-direction: column; gap: .375rem; }
+    .form-label { font-size: .8125rem; font-weight: 600; color: var(--text-s); }
+    .form-label .obrigatorio { color: var(--error); }
+    .form-control {
+      padding: .625rem .875rem;
+      border: 1.5px solid var(--border);
+      border-radius: 8px; outline: none;
+      transition: border-color var(--transition);
+      background: var(--white); width: 100%;
+    }
+    .form-control:focus { border-color: var(--bordeaux); }
+    textarea.form-control { resize: vertical; min-height: 80px; }
+    .form-hint { font-size: .75rem; color: var(--text-l); }
+
+    .form-section {
+      font-size: .6875rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .1em; color: var(--text-l);
+      margin: 1.25rem 0 .75rem;
+      padding-bottom: .375rem;
+      border-bottom: 1px solid var(--border);
+      grid-column: 1 / -1;
+    }
+
+    .checkboxes-group { display: flex; flex-wrap: wrap; gap: .625rem; }
+    .checkbox-label {
+      display: flex; align-items: center; gap: .375rem;
+      padding: .375rem .75rem;
+      border: 1.5px solid var(--border);
+      border-radius: 100px; cursor: pointer;
+      font-size: .8125rem; font-weight: 500;
+      transition: all var(--transition); user-select: none;
+    }
+    .checkbox-label:has(input:checked) { border-color: var(--bordeaux); background: rgba(61,12,12,.06); color: var(--bordeaux); }
+    .checkbox-label input { display: none; }
+
+    .toggle-label {
+      display: flex; align-items: center; gap: .75rem;
+      cursor: pointer; font-size: .875rem; font-weight: 500;
+    }
+    .toggle-switch {
+      width: 44px; height: 24px;
+      background: var(--border);
+      border-radius: 12px; position: relative;
+      transition: background var(--transition);
+    }
+    .toggle-switch::after {
+      content: '';
+      position: absolute; top: 3px; left: 3px;
+      width: 18px; height: 18px; border-radius: 50%;
+      background: var(--white);
+      box-shadow: 0 1px 3px rgba(0,0,0,.2);
+      transition: left var(--transition);
+    }
+    .toggle-label input:checked + .toggle-switch { background: var(--success); }
+    .toggle-label input:checked + .toggle-switch::after { left: 23px; }
+    .toggle-label input { display: none; }
+
+    /* ---- Tags Input ---- */
+    .tags-wrap {
+      display: flex; flex-wrap: wrap; gap: .375rem;
+      padding: .5rem .75rem;
+      border: 1.5px solid var(--border);
+      border-radius: 8px; min-height: 42px;
+      cursor: text; transition: border-color var(--transition);
+      background: var(--white);
+    }
+    .tags-wrap:focus-within { border-color: var(--bordeaux); }
+    .tag {
+      display: inline-flex; align-items: center; gap: .3rem;
+      background: rgba(61,12,12,.08); color: var(--bordeaux);
+      padding: .2rem .6rem; border-radius: 100px;
+      font-size: .8125rem; font-weight: 500;
+    }
+    .tag-remove { cursor: pointer; opacity: .6; font-size: .875rem; line-height: 1; }
+    .tag-remove:hover { opacity: 1; }
+    .tag-input {
+      border: none; outline: none;
+      background: transparent; font-size: .875rem;
+      min-width: 100px; flex: 1;
+    }
+
+    /* ---- Modal de Estoque Rápido ---- */
+    .estoque-rapido { text-align: center; }
+    .estoque-produto-nome { font-family: 'Playfair Display', serif; font-size: 1.125rem; color: var(--bordeaux); margin-bottom: .25rem; }
+    .estoque-atual { font-size: .875rem; color: var(--text-s); margin-bottom: 1.5rem; }
+    .estoque-controle { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 1rem; }
+    .estoque-btn {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--bg); border: 1.5px solid var(--border);
+      font-size: 1.25rem; color: var(--text-s);
+      display: flex; align-items: center; justify-content: center;
+      transition: all var(--transition);
+    }
+    .estoque-btn:hover { border-color: var(--bordeaux); color: var(--bordeaux); }
+    .estoque-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem; font-weight: 700; color: var(--bordeaux);
+      min-width: 80px; text-align: center; line-height: 1;
+    }
+
+    /* ---- Toast ---- */
+    #toast {
+      position: fixed; bottom: 1.5rem; right: 1.5rem;
+      background: var(--text); color: var(--white);
+      padding: .875rem 1.25rem; border-radius: var(--radius);
+      font-size: .875rem; font-weight: 500;
+      box-shadow: var(--shadow-m); z-index: 9999;
+      display: flex; align-items: center; gap: .625rem;
+      transform: translateX(120%); transition: transform .3s ease;
+      max-width: 300px;
+    }
+    #toast.visivel { transform: translateX(0); }
+    #toast.sucesso { background: var(--success); }
+    #toast.erro { background: var(--error); }
+
+    /* ---- Confirmação ---- */
+    #confirm-modal .modal { max-width: 380px; text-align: center; }
+    #confirm-modal .modal-body { padding: 2rem 1.5rem; }
+    .confirm-icone { font-size: 2.5rem; margin-bottom: 1rem; }
+    .confirm-titulo { font-family: 'Playfair Display', serif; font-size: 1.25rem; color: var(--text); margin-bottom: .5rem; }
+    .confirm-msg { font-size: .875rem; color: var(--text-s); }
+
+    /* ---- Estoque View ---- */
+    .estoque-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; }
+    .estoque-card {
+      background: var(--white); border-radius: var(--radius);
+      padding: 1.25rem; box-shadow: var(--shadow);
+      display: flex; flex-direction: column; gap: .5rem;
+    }
+    .estoque-card-nome { font-weight: 600; font-size: .9375rem; }
+    .estoque-card-info { font-size: .8125rem; color: var(--text-s); }
+    .barra-estoque { height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; margin: .25rem 0; }
+    .barra-fill { height: 100%; border-radius: 3px; transition: width .5s ease; }
+    .barra-fill.ok { background: var(--success); }
+    .barra-fill.baixo { background: var(--warning); }
+    .barra-fill.critico { background: var(--error); }
+    .barra-fill.zero { background: var(--text-l); width: 0 !important; }
+    .estoque-card-acao { margin-top: auto; padding-top: .5rem; }
+
+    /* ---- JSON Export View ---- */
+    .json-wrap {
+      background: #1e1e2e; border-radius: var(--radius);
+      padding: 1.25rem; overflow: auto; max-height: 500px;
+    }
+    .json-wrap pre { color: #cdd6f4; font-family: 'Courier New', monospace; font-size: .8125rem; white-space: pre; }
+    .json-acoes { display: flex; gap: .75rem; margin-bottom: 1rem; flex-wrap: wrap; }
+    .import-area {
+      border: 2px dashed var(--border);
+      border-radius: var(--radius); padding: 2rem;
+      text-align: center; cursor: pointer;
+      transition: all var(--transition); margin-top: 1.5rem;
+    }
+    .import-area:hover { border-color: var(--bordeaux); background: rgba(61,12,12,.03); }
+    .import-area p { font-size: .9375rem; color: var(--text-s); margin-top: .5rem; }
+  </style>
+</head>
+<body>
+
+<!-- ============================================================
+     LOGIN
+     ============================================================ -->
+<div id="login-screen">
+  <div class="login-card">
+    <div class="login-logo">🍷</div>
+    <h1 class="login-titulo">Vinho Prime</h1>
+    <p class="login-sub">Painel de Administração</p>
+    <input
+      type="password" id="login-senha"
+      class="login-input" placeholder="••••••••"
+      onkeydown="if(event.key==='Enter')fazerLogin()"
+      autofocus
+    >
+    <button class="login-btn" onclick="fazerLogin()">Entrar</button>
+    <p class="login-erro" id="login-erro">Senha incorreta. Tente novamente.</p>
+  </div>
+</div>
+
+<!-- ============================================================
+     APP
+     ============================================================ -->
+<div id="app">
+
+  <!-- Sidebar -->
+  <aside id="sidebar">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-icon">🍷</div>
+      <div class="sidebar-logo-text">
+        <strong>Vinho Prime</strong>
+        <span>ADMIN PANEL</span>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Principal</div>
+      <div class="nav-item ativo" onclick="navegarPara('dashboard')">
+        <span class="nav-icon">📊</span> Dashboard
+      </div>
+      <div class="nav-item" onclick="navegarPara('produtos')">
+        <span class="nav-icon">🍷</span> Produtos
+        <span class="nav-badge" id="badge-total">0</span>
+      </div>
+      <div class="nav-section-label">Gestão</div>
+      <div class="nav-item" onclick="navegarPara('estoque')">
+        <span class="nav-icon">📦</span> Estoque
+        <span class="nav-badge" id="badge-alertas" style="display:none">!</span>
+      </div>
+      <div class="nav-section-label">Dados</div>
+      <div class="nav-item" onclick="navegarPara('exportar')">
+        <span class="nav-icon">💾</span> Exportar / Importar
+      </div>
+      <div class="nav-item" onclick="window.open('index.html','_blank')">
+        <span class="nav-icon">🌐</span> Ver Site
+      </div>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <div class="user-avatar">VP</div>
+        <div class="user-info">
+          <strong>Admin</strong>
+          <span>Vinho Prime</span>
+        </div>
+        <button class="logout-btn" onclick="logout()">Sair</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Conteúdo -->
+  <div id="main">
+    <div class="topbar">
+      <h1 class="topbar-title" id="topbar-titulo">Dashboard</h1>
+      <div class="topbar-actions" id="topbar-acoes"></div>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div class="view ativa" id="view-dashboard">
+      <div class="metricas-grid" id="metricas-grid"></div>
+      <div class="alertas-section" id="alertas-section" style="display:none">
+        <p class="alertas-titulo">⚠️ Estoque crítico</p>
+        <div id="alertas-lista"></div>
+      </div>
+      <div id="tabela-recentes"></div>
+    </div>
+
+    <!-- PRODUTOS -->
+    <div class="view" id="view-produtos">
+      <div class="toolbar">
+        <input type="search" class="search-input" id="busca-input" placeholder="Buscar por nome, país, produtor…" oninput="renderizarTabela()">
+        <select class="filter-select" id="filtro-tipo" onchange="renderizarTabela()">
+          <option value="">Todos os tipos</option>
+          <option value="vinho">Vinhos</option>
+          <option value="destilado">Destilados</option>
+        </select>
+        <select class="filter-select" id="filtro-destaque" onchange="renderizarTabela()">
+          <option value="">Todos os destaques</option>
+          <option value="sommelier">Sommelier</option>
+          <option value="maisVendido">Mais Vendidos</option>
+          <option value="ofertas">Ofertas</option>
+        </select>
+        <select class="filter-select" id="filtro-status" onchange="renderizarTabela()">
+          <option value="">Todos os status</option>
+          <option value="ativo">Ativos</option>
+          <option value="inativo">Inativos</option>
+        </select>
+      </div>
+      <div class="tabela-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th onclick="ordenarPor('nome')">Produto ↕</th>
+              <th onclick="ordenarPor('tipo')">Tipo ↕</th>
+              <th onclick="ordenarPor('preco')">Preço ↕</th>
+              <th>Desconto</th>
+              <th onclick="ordenarPor('estoque')">Estoque ↕</th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="tabela-corpo"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ESTOQUE -->
+    <div class="view" id="view-estoque">
+      <div class="toolbar">
+        <input type="search" class="search-input" id="busca-estoque" placeholder="Filtrar produtos…" oninput="renderizarEstoque()">
+        <select class="filter-select" id="filtro-estoque-status" onchange="renderizarEstoque()">
+          <option value="">Todos</option>
+          <option value="critico">Crítico (0)</option>
+          <option value="baixo">Baixo (≤ mínimo)</option>
+          <option value="ok">Normal</option>
+        </select>
+      </div>
+      <div class="estoque-grid" id="estoque-grid"></div>
+    </div>
+
+    <!-- EXPORTAR/IMPORTAR -->
+    <div class="view" id="view-exportar">
+      <div class="json-acoes">
+        <button class="btn btn-primary" onclick="exportarJSON()">⬇️ Baixar produtos.json</button>
+        <button class="btn btn-outline" onclick="copiarJSON()">📋 Copiar JSON</button>
+      </div>
+      <div class="json-wrap">
+        <pre id="json-preview"></pre>
+      </div>
+      <div class="import-area" onclick="document.getElementById('import-file').click()">
+        <input type="file" id="import-file" accept=".json" style="display:none" onchange="importarJSON(event)">
+        <div style="font-size:2rem">📂</div>
+        <p>Clique para importar um <strong>produtos.json</strong></p>
+        <p style="font-size:.8125rem;margin-top:.25rem">Isso substituirá os dados atuais</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     MODAL — PRODUTO
+     ============================================================ -->
+<div class="modal-overlay" id="modal-produto">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 class="modal-titulo" id="modal-produto-titulo">Novo Produto</h2>
+      <button class="modal-fechar" onclick="fecharModal('modal-produto')">✕</button>
+    </div>
+    <div class="modal-body">
+      <form id="form-produto">
+        <div class="form-grid">
+
+          <div class="form-section">Identificação</div>
+
+          <div class="form-group form-full">
+            <label class="form-label">Nome do Produto <span class="obrigatorio">*</span></label>
+            <input type="text" class="form-control" id="f-nome" required placeholder="Ex: Achaval Ferrer Malbec">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Tipo <span class="obrigatorio">*</span></label>
+            <select class="form-control" id="f-tipo" onchange="atualizarSubtipos()" required>
+              <option value="vinho">Vinho</option>
+              <option value="destilado">Destilado</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Subtipo <span class="obrigatorio">*</span></label>
+            <select class="form-control" id="f-subtipo" required></select>
+          </div>
+
+          <div class="form-section">Origem</div>
+
+          <div class="form-group">
+            <label class="form-label">País <span class="obrigatorio">*</span></label>
+            <input type="text" class="form-control" id="f-pais" required placeholder="Ex: Argentina">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Região</label>
+            <input type="text" class="form-control" id="f-regiao" placeholder="Ex: Mendoza">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Produtor</label>
+            <input type="text" class="form-control" id="f-produtor" placeholder="Ex: Familia Zuccardi">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Safra / Ano</label>
+            <input type="number" class="form-control" id="f-safra" min="1900" max="2030" placeholder="Ex: 2021">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Uvas / Ingredientes</label>
+            <div class="tags-wrap" id="uvas-wrap" onclick="document.getElementById('uvas-input').focus()">
+              <input type="text" class="tag-input" id="uvas-input" placeholder="Digite e pressione Enter…" onkeydown="adicionarTag(event,'uvas')">
+            </div>
+            <span class="form-hint">Pressione Enter para adicionar cada uva</span>
+          </div>
+
+          <div class="form-section">Detalhes Técnicos</div>
+
+          <div class="form-group">
+            <label class="form-label">Volume (ml)</label>
+            <input type="number" class="form-control" id="f-volume" placeholder="750">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Teor Alcoólico (%)</label>
+            <input type="number" class="form-control" id="f-teor" step="0.1" placeholder="13.5">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Temperatura de Serviço</label>
+            <input type="text" class="form-control" id="f-temperatura" placeholder="16–18°C">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Tempo de Guarda</label>
+            <input type="text" class="form-control" id="f-guarda" placeholder="5–10 anos">
+          </div>
+
+          <div class="form-group form-full">
+            <label class="form-label">Descrição</label>
+            <textarea class="form-control" id="f-descricao" placeholder="Descrição do produto…"></textarea>
+          </div>
+
+          <div class="form-group form-full">
+            <label class="form-label">Notas de Degustação</label>
+            <textarea class="form-control" id="f-notas" style="min-height:60px" placeholder="Frutas negras, especiarias…"></textarea>
+          </div>
+
+          <div class="form-group form-full">
+            <label class="form-label">Harmonização</label>
+            <div class="tags-wrap" id="harm-wrap" onclick="document.getElementById('harm-input').focus()">
+              <input type="text" class="tag-input" id="harm-input" placeholder="Digite e pressione Enter…" onkeydown="adicionarTag(event,'harm')">
+            </div>
+          </div>
+
+          <div class="form-section">Preço & Estoque</div>
+
+          <div class="form-group">
+            <label class="form-label">Preço de Venda (R$) <span class="obrigatorio">*</span></label>
+            <input type="number" class="form-control" id="f-preco" step="0.01" min="0" required placeholder="89.90">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Preço Original (R$) <span style="font-weight:400;color:var(--text-l)">(para desconto)</span></label>
+            <input type="number" class="form-control" id="f-preco-original" step="0.01" min="0" placeholder="120.00">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Estoque <span class="obrigatorio">*</span></label>
+            <input type="number" class="form-control" id="f-estoque" min="0" required placeholder="30">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Estoque Mínimo <span style="font-weight:400;color:var(--text-l)">(alerta)</span></label>
+            <input type="number" class="form-control" id="f-estoque-minimo" min="0" placeholder="5">
+          </div>
+
+          <div class="form-section">Avaliação</div>
+
+          <div class="form-group">
+            <label class="form-label">Avaliação (1–5)</label>
+            <input type="number" class="form-control" id="f-avaliacao" step="0.1" min="1" max="5" placeholder="4.5">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Nº de Avaliações</label>
+            <input type="number" class="form-control" id="f-num-avaliacoes" min="0" placeholder="0">
+          </div>
+
+          <div class="form-section">Destaques & Badges</div>
+
+          <div class="form-group form-full">
+            <label class="form-label">Destaque em (seções da home)</label>
+            <div class="checkboxes-group">
+              <label class="checkbox-label"><input type="checkbox" id="f-dest-sommelier"> ⭐ Seleção do Sommelier</label>
+              <label class="checkbox-label"><input type="checkbox" id="f-dest-mais-vendido"> 🥇 Mais Vendidos</label>
+              <label class="checkbox-label"><input type="checkbox" id="f-dest-ofertas"> 🔥 Ofertas da Semana</label>
+            </div>
+          </div>
+
+          <div class="form-group form-full">
+            <label class="form-label">Badges do card</label>
+            <div class="checkboxes-group">
+              <label class="checkbox-label"><input type="checkbox" value="oferta" class="badge-cb"> Oferta</label>
+              <label class="checkbox-label"><input type="checkbox" value="novo" class="badge-cb"> Novo</label>
+              <label class="checkbox-label"><input type="checkbox" value="mais-vendido" class="badge-cb"> Mais Vendido</label>
+              <label class="checkbox-label"><input type="checkbox" value="sommelier" class="badge-cb"> Sommelier</label>
+            </div>
+          </div>
+
+          <div class="form-group form-full">
+            <label class="toggle-label">
+              <input type="checkbox" id="f-ativo" checked>
+              <div class="toggle-switch"></div>
+              Produto ativo (visível no site)
+            </label>
+          </div>
+
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="fecharModal('modal-produto')">Cancelar</button>
+      <button class="btn btn-primary" onclick="salvarProduto()">💾 Salvar Produto</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     MODAL — ESTOQUE RÁPIDO
+     ============================================================ -->
+<div class="modal-overlay" id="modal-estoque">
+  <div class="modal" style="max-width:380px">
+    <div class="modal-header">
+      <h2 class="modal-titulo">Atualizar Estoque</h2>
+      <button class="modal-fechar" onclick="fecharModal('modal-estoque')">✕</button>
+    </div>
+    <div class="modal-body estoque-rapido">
+      <p class="estoque-produto-nome" id="estoque-nome"></p>
+      <p class="estoque-atual" id="estoque-atual-txt"></p>
+      <div class="estoque-controle">
+        <button class="estoque-btn" onclick="ajustarEstoque(-1)">−</button>
+        <div class="estoque-num" id="estoque-novo-val">0</div>
+        <button class="estoque-btn" onclick="ajustarEstoque(+1)">+</button>
+      </div>
+      <div style="display:flex;gap:.5rem;justify-content:center;margin-bottom:1rem">
+        <button class="btn btn-ghost btn-sm" onclick="ajustarEstoque(-10)">−10</button>
+        <button class="btn btn-ghost btn-sm" onclick="ajustarEstoque(+10)">+10</button>
+        <button class="btn btn-ghost btn-sm" onclick="zerarEstoque()">Zerar</button>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="fecharModal('modal-estoque')">Cancelar</button>
+      <button class="btn btn-primary" onclick="salvarEstoque()">✅ Confirmar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     MODAL — CONFIRMAÇÃO
+     ============================================================ -->
+<div class="modal-overlay" id="confirm-modal">
+  <div class="modal" style="max-width:380px">
+    <div class="modal-body" style="padding:2rem 1.5rem;text-align:center">
+      <div class="confirm-icone" id="confirm-icone">⚠️</div>
+      <h3 class="confirm-titulo" id="confirm-titulo">Tem certeza?</h3>
+      <p class="confirm-msg" id="confirm-msg"></p>
+    </div>
+    <div class="modal-footer" style="justify-content:center">
+      <button class="btn btn-ghost" onclick="fecharModal('confirm-modal')">Cancelar</button>
+      <button class="btn btn-danger" id="confirm-btn">Confirmar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast"></div>
+
+<!-- ============================================================
+     SCRIPTS
+     ============================================================ -->
+<script>
+/* ============================================================
+   Estado
+   ============================================================ */
+const SENHA = 'admin123';
+const STORAGE_KEY = 'vp_produtos_admin';
+
+let produtos = [];
+let ordemColuna = 'nome';
+let ordemAsc = true;
+let editandoId = null;
+let estoqueEditandoId = null;
+let estoqueNovoValor = 0;
+let tagsUvas = [];
+let tagsHarm = [];
+
+/* ============================================================
+   Login / Logout
+   ============================================================ */
+function fazerLogin() {
+  const senha = document.getElementById('login-senha').value;
+  const erro = document.getElementById('login-erro');
+  if (senha === SENHA) {
+    document.getElementById('login-screen').classList.add('oculto');
+    document.getElementById('app').classList.add('visivel');
+    erro.style.display = 'none';
+    inicializar();
+  } else {
+    erro.style.display = 'block';
+    document.getElementById('login-senha').value = '';
+    document.getElementById('login-senha').focus();
+  }
+}
+
+function logout() {
+  document.getElementById('login-screen').classList.remove('oculto');
+  document.getElementById('app').classList.remove('visivel');
+  document.getElementById('login-senha').value = '';
+}
+
+/* ============================================================
+   Inicialização
+   ============================================================ */
+async function inicializar() {
+  const local = localStorage.getItem(STORAGE_KEY);
+  if (local) {
+    produtos = JSON.parse(local);
+  } else {
+    try {
+      const res = await fetch('dados/produtos.json');
+      const dados = await res.json();
+      produtos = dados.produtos;
+      salvarLocal();
+    } catch {
+      produtos = [];
+      mostrarToast('Nenhum produto encontrado. Comece adicionando produtos.', 'erro');
+    }
+  }
+  atualizarTudo();
+}
+
+function salvarLocal() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(produtos));
+}
+
+function atualizarTudo() {
+  atualizarBadges();
+  renderizarDashboard();
+  renderizarTabela();
+  renderizarEstoque();
+  atualizarPreviewJSON();
+}
+
+/* ============================================================
+   Navegação
+   ============================================================ */
+function navegarPara(view) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('ativa'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('ativo'));
+
+  document.getElementById(`view-${view}`).classList.add('ativa');
+  document.querySelectorAll('.nav-item').forEach(n => {
+    if (n.textContent.toLowerCase().includes(view.substring(0,5).toLowerCase()) ||
+        (view === 'dashboard' && n.textContent.includes('Dashboard')) ||
+        (view === 'exportar' && n.textContent.includes('Exportar'))) {
+      n.classList.add('ativo');
+    }
+  });
+
+  const titulos = {
+    dashboard: 'Dashboard',
+    produtos: 'Produtos',
+    estoque: 'Controle de Estoque',
+    exportar: 'Exportar / Importar JSON'
+  };
+  document.getElementById('topbar-titulo').textContent = titulos[view] || view;
+
+  const acoes = document.getElementById('topbar-acoes');
+  if (view === 'produtos') {
+    acoes.innerHTML = `<button class="btn btn-primary" onclick="abrirModalNovo()">＋ Novo Produto</button>`;
+  } else if (view === 'dashboard') {
+    acoes.innerHTML = `<button class="btn btn-ghost btn-sm" onclick="inicializar()">🔄 Atualizar</button>`;
+  } else {
+    acoes.innerHTML = '';
+  }
+}
+
+function atualizarBadges() {
+  const alertas = produtos.filter(p => p.ativo && p.estoque <= p.estoqueMinimo);
+  const badge = document.getElementById('badge-alertas');
+  badge.style.display = alertas.length > 0 ? 'inline' : 'none';
+  badge.textContent = alertas.length;
+  document.getElementById('badge-total').textContent = produtos.length;
+}
+
+/* ============================================================
+   Dashboard
+   ============================================================ */
+function renderizarDashboard() {
+  const ativos = produtos.filter(p => p.ativo);
+  const inativos = produtos.filter(p => !p.ativo);
+  const emOferta = produtos.filter(p => p.precoOriginal && p.ativo);
+  const estoqueCritico = produtos.filter(p => p.estoque === 0);
+  const estoqueBaixo = produtos.filter(p => p.ativo && p.estoque > 0 && p.estoque <= p.estoqueMinimo);
+  const valorEstoque = produtos.reduce((acc, p) => acc + (p.preco * p.estoque), 0);
+
+  document.getElementById('metricas-grid').innerHTML = `
+    <div class="metrica-card metrica-card--bordeaux">
+      <span class="metrica-label">Total de Produtos</span>
+      <span class="metrica-valor">${produtos.length}</span>
+      <span class="metrica-sub">${ativos.length} ativos · ${inativos.length} inativos</span>
+    </div>
+    <div class="metrica-card metrica-card--gold">
+      <span class="metrica-label">Valor em Estoque</span>
+      <span class="metrica-valor">${valorEstoque.toLocaleString('pt-BR', {style:'currency',currency:'BRL'})}</span>
+      <span class="metrica-sub">Com base nos preços atuais</span>
+    </div>
+    <div class="metrica-card metrica-card--warn">
+      <span class="metrica-label">Estoque Crítico</span>
+      <span class="metrica-valor" style="color:var(--error)">${estoqueCritico.length}</span>
+      <span class="metrica-sub">${estoqueBaixo.length} produtos com estoque baixo</span>
+    </div>
+    <div class="metrica-card">
+      <span class="metrica-label">Em Oferta</span>
+      <span class="metrica-valor">${emOferta.length}</span>
+      <span class="metrica-sub">Produtos com desconto ativo</span>
+    </div>
+  `;
+
+  const alertasEl = document.getElementById('alertas-section');
+  const alertasList = document.getElementById('alertas-lista');
+  const alertas = produtos.filter(p => p.ativo && p.estoque <= p.estoqueMinimo);
+  if (alertas.length > 0) {
+    alertasEl.style.display = 'block';
+    alertasList.innerHTML = alertas.map(p => `
+      <div class="alerta-item">
+        <span class="alerta-nome">${p.nome}${p.safra ? ` ${p.safra}` : ''}</span>
+        <span class="alerta-estoque">${p.estoque === 0 ? '⛔ Esgotado' : `⚠️ ${p.estoque} unidades`}</span>
+        <button class="btn btn-outline btn-sm" onclick="abrirModalEstoque('${p.id}')">Atualizar</button>
+      </div>
+    `).join('');
+  } else {
+    alertasEl.style.display = 'none';
+  }
+
+  const recentes = [...produtos].sort((a,b) => Number(b.id) - Number(a.id)).slice(0,5);
+  document.getElementById('tabela-recentes').innerHTML = `
+    <p class="alertas-titulo" style="margin-bottom:.75rem">Produtos recentes</p>
+    <div class="tabela-wrap">
+      <table>
+        <thead><tr><th>Produto</th><th>Preço</th><th>Estoque</th><th>Status</th><th>Ação</th></tr></thead>
+        <tbody>
+          ${recentes.map(p => `
+            <tr>
+              <td><strong>${p.nome}</strong><br><span style="font-size:.75rem;color:var(--text-l)">${p.pais} · ${p.subtipo}</span></td>
+              <td>${p.preco.toLocaleString('pt-BR',{style:'currency',currency:'BRL'})}</td>
+              <td class="td-estoque-val ${p.estoque === 0 ? 'zero' : p.estoque <= p.estoqueMinimo ? 'baixo' : 'ok'}">${p.estoque}</td>
+              <td><span class="status-toggle ${p.ativo ? 'ativo-sim' : 'ativo-nao'}">${p.ativo ? '✓ Ativo' : '✗ Inativo'}</span></td>
+              <td><button class="btn-icone btn-editar" onclick="abrirModalEditar('${p.id}')">✏️</button></td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    </div>
+  `;
+}
+
+/* ============================================================
+   Tabela de Produtos
+   ============================================================ */
+function renderizarTabela() {
+  const busca = (document.getElementById('busca-input')?.value || '').toLowerCase();
+  const filtroTipo = document.getElementById('filtro-tipo')?.value || '';
+  const filtroDestaque = document.getElementById('filtro-destaque')?.value || '';
+  const filtroStatus = document.getElementById('filtro-status')?.value || '';
+
+  let lista = produtos.filter(p => {
+    const texto = `${p.nome} ${p.pais} ${p.produtor} ${p.regiao} ${p.subtipo}`.toLowerCase();
+    if (busca && !texto.includes(busca)) return false;
+    if (filtroTipo && p.tipo !== filtroTipo) return false;
+    if (filtroDestaque && !p.destaque[filtroDestaque]) return false;
+    if (filtroStatus === 'ativo' && !p.ativo) return false;
+    if (filtroStatus === 'inativo' && p.ativo) return false;
+    return true;
+  });
+
+  lista.sort((a,b) => {
+    let va = a[ordemColuna], vb = b[ordemColuna];
+    if (typeof va === 'string') va = va.toLowerCase();
+    if (typeof vb === 'string') vb = vb.toLowerCase();
+    return ordemAsc ? (va > vb ? 1 : -1) : (va < vb ? 1 : -1);
+  });
+
+  const corpo = document.getElementById('tabela-corpo');
+  if (!corpo) return;
+
+  if (lista.length === 0) {
+    corpo.innerHTML = `<tr><td colspan="7" class="sem-resultados">Nenhum produto encontrado.</td></tr>`;
+    return;
+  }
+
+  corpo.innerHTML = lista.map(p => {
+    const desconto = p.precoOriginal ? Math.round(((p.precoOriginal - p.preco) / p.precoOriginal) * 100) : 0;
+    const classeEstoque = p.estoque === 0 ? 'zero' : p.estoque <= p.estoqueMinimo ? 'baixo' : 'ok';
+    return `
+      <tr>
+        <td class="td-nome">
+          <strong>${p.nome}${p.safra ? ` ${p.safra}` : ''}</strong>
+          <span>${p.pais} · ${p.produtor || '—'}</span>
+        </td>
+        <td><span class="badge-tipo ${p.tipo}">${p.tipo}</span></td>
+        <td class="td-preco">${p.preco.toLocaleString('pt-BR',{style:'currency',currency:'BRL'})}</td>
+        <td class="td-desconto">${desconto > 0 ? `-${desconto}%` : '—'}</td>
+        <td>
+          <span class="td-estoque-val ${classeEstoque}">${p.estoque}</span>
+          <span style="font-size:.6875rem;color:var(--text-l)"> / mín ${p.estoqueMinimo}</span>
+        </td>
+        <td>
+          <button class="status-toggle ${p.ativo ? 'ativo-sim' : 'ativo-nao'}" onclick="toggleAtivo('${p.id}')">
+            ${p.ativo ? '✓ Ativo' : '✗ Inativo'}
+          </button>
+        </td>
+        <td>
+          <div class="acoes-td">
+            <button class="btn-icone btn-estoque" title="Atualizar estoque" onclick="abrirModalEstoque('${p.id}')">📦</button>
+            <button class="btn-icone btn-editar" title="Editar produto" onclick="abrirModalEditar('${p.id}')">✏️</button>
+            <button class="btn-icone btn-excluir" title="Excluir produto" onclick="confirmarExcluir('${p.id}')">🗑️</button>
+          </div>
+        </td>
+      </tr>
+    `;
+  }).join('');
+}
+
+function ordenarPor(coluna) {
+  if (ordemColuna === coluna) ordemAsc = !ordemAsc;
+  else { ordemColuna = coluna; ordemAsc = true; }
+  renderizarTabela();
+}
+
+/* ============================================================
+   Modal de Produto
+   ============================================================ */
+const SUBTIPOS = {
+  vinho: ['tinto','branco','rosé','espumante','natural','sobremesa'],
+  destilado: ['whisky','gin','cognac','rum','cachaça','vodka','licor','aguardente']
+};
+
+function atualizarSubtipos() {
+  const tipo = document.getElementById('f-tipo').value;
+  const sel = document.getElementById('f-subtipo');
+  sel.innerHTML = SUBTIPOS[tipo].map(s => `<option value="${s}">${s.charAt(0).toUpperCase()+s.slice(1)}</option>`).join('');
+}
+
+function abrirModalNovo() {
+  editandoId = null;
+  tagsUvas = [];
+  tagsHarm = [];
+  document.getElementById('modal-produto-titulo').textContent = 'Novo Produto';
+  document.getElementById('form-produto').reset();
+  atualizarSubtipos();
+  renderizarTagsUI('uvas');
+  renderizarTagsUI('harm');
+  document.querySelectorAll('.badge-cb').forEach(cb => cb.checked = false);
+  document.getElementById('f-ativo').checked = true;
+  document.getElementById('modal-produto').classList.add('aberto');
+}
+
+function abrirModalEditar(id) {
+  const p = produtos.find(x => x.id === id);
+  if (!p) return;
+  editandoId = id;
+  tagsUvas = [...(p.uvas || [])];
+  tagsHarm = [...(p.harmonizacao || [])];
+
+  document.getElementById('modal-produto-titulo').textContent = 'Editar Produto';
+  document.getElementById('f-nome').value = p.nome;
+  document.getElementById('f-tipo').value = p.tipo;
+  atualizarSubtipos();
+  document.getElementById('f-subtipo').value = p.subtipo;
+  document.getElementById('f-pais').value = p.pais;
+  document.getElementById('f-regiao').value = p.regiao || '';
+  document.getElementById('f-produtor').value = p.produtor || '';
+  document.getElementById('f-safra').value = p.safra || '';
+  document.getElementById('f-volume').value = p.volume || '';
+  document.getElementById('f-teor').value = p.teorAlcoolico || '';
+  document.getElementById('f-temperatura').value = p.temperaturaServico || '';
+  document.getElementById('f-guarda').value = p.tempoDeGuarda || '';
+  document.getElementById('f-descricao').value = p.descricao || '';
+  document.getElementById('f-notas').value = p.notasDegustacao || '';
+  document.getElementById('f-preco').value = p.preco;
+  document.getElementById('f-preco-original').value = p.precoOriginal || '';
+  document.getElementById('f-estoque').value = p.estoque;
+  document.getElementById('f-estoque-minimo').value = p.estoqueMinimo;
+  document.getElementById('f-avaliacao').value = p.avaliacao;
+  document.getElementById('f-num-avaliacoes').value = p.numeroAvaliacoes;
+  document.getElementById('f-dest-sommelier').checked = p.destaque.sommelier;
+  document.getElementById('f-dest-mais-vendido').checked = p.destaque.maisVendido;
+  document.getElementById('f-dest-ofertas').checked = p.destaque.ofertas;
+  document.getElementById('f-ativo').checked = p.ativo;
+  document.querySelectorAll('.badge-cb').forEach(cb => cb.checked = p.badges.includes(cb.value));
+
+  renderizarTagsUI('uvas');
+  renderizarTagsUI('harm');
+  document.getElementById('modal-produto').classList.add('aberto');
+}
+
+function salvarProduto() {
+  const nome = document.getElementById('f-nome').value.trim();
+  const preco = parseFloat(document.getElementById('f-preco').value);
+  const estoque = parseInt(document.getElementById('f-estoque').value);
+  if (!nome || isNaN(preco) || isNaN(estoque)) {
+    mostrarToast('Preencha os campos obrigatórios.', 'erro');
+    return;
+  }
+
+  const badges = [...document.querySelectorAll('.badge-cb:checked')].map(cb => cb.value);
+  const precoOriginalVal = document.getElementById('f-preco-original').value;
+  const safraVal = document.getElementById('f-safra').value;
+
+  const dados = {
+    nome,
+    tipo: document.getElementById('f-tipo').value,
+    subtipo: document.getElementById('f-subtipo').value,
+    pais: document.getElementById('f-pais').value.trim(),
+    regiao: document.getElementById('f-regiao').value.trim(),
+    produtor: document.getElementById('f-produtor').value.trim(),
+    uvas: [...tagsUvas],
+    safra: safraVal ? parseInt(safraVal) : null,
+    volume: parseInt(document.getElementById('f-volume').value) || 750,
+    teorAlcoolico: parseFloat(document.getElementById('f-teor').value) || null,
+    temperaturaServico: document.getElementById('f-temperatura').value.trim(),
+    tempoDeGuarda: document.getElementById('f-guarda').value.trim(),
+    descricao: document.getElementById('f-descricao').value.trim(),
+    notasDegustacao: document.getElementById('f-notas').value.trim(),
+    harmonizacao: [...tagsHarm],
+    preco,
+    precoOriginal: precoOriginalVal ? parseFloat(precoOriginalVal) : null,
+    estoque,
+    estoqueMinimo: parseInt(document.getElementById('f-estoque-minimo').value) || 5,
+    badges,
+    imagem: null,
+    galeria: [],
+    avaliacao: parseFloat(document.getElementById('f-avaliacao').value) || 5,
+    numeroAvaliacoes: parseInt(document.getElementById('f-num-avaliacoes').value) || 0,
+    pontuacoes: {},
+    ativo: document.getElementById('f-ativo').checked,
+    destaque: {
+      sommelier: document.getElementById('f-dest-sommelier').checked,
+      maisVendido: document.getElementById('f-dest-mais-vendido').checked,
+      ofertas: document.getElementById('f-dest-ofertas').checked
+    }
+  };
+
+  if (editandoId) {
+    const idx = produtos.findIndex(p => p.id === editandoId);
+    produtos[idx] = { ...produtos[idx], ...dados, slug: gerarSlug(dados.nome, dados.safra) };
+    mostrarToast('Produto atualizado com sucesso!', 'sucesso');
+  } else {
+    const novoId = String(Math.max(0, ...produtos.map(p => parseInt(p.id) || 0)) + 1).padStart(3, '0');
+    produtos.push({ id: novoId, slug: gerarSlug(dados.nome, dados.safra), ...dados });
+    mostrarToast('Produto adicionado com sucesso!', 'sucesso');
+  }
+
+  salvarLocal();
+  fecharModal('modal-produto');
+  atualizarTudo();
+}
+
+function gerarSlug(nome, safra) {
+  let slug = nome.toLowerCase()
+    .normalize('NFD').replace(/[̀-ͯ]/g, '')
+    .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  if (safra) slug += `-${safra}`;
+  return slug;
+}
+
+/* ============================================================
+   Tags Input
+   ============================================================ */
+function adicionarTag(event, tipo) {
+  if (event.key !== 'Enter' && event.key !== ',') return;
+  event.preventDefault();
+  const input = document.getElementById(`${tipo === 'uvas' ? 'uvas' : 'harm'}-input`);
+  const val = input.value.trim();
+  if (!val) return;
+  if (tipo === 'uvas') tagsUvas.push(val);
+  else tagsHarm.push(val);
+  input.value = '';
+  renderizarTagsUI(tipo);
+}
+
+function removerTag(tipo, idx) {
+  if (tipo === 'uvas') tagsUvas.splice(idx, 1);
+  else tagsHarm.splice(idx, 1);
+  renderizarTagsUI(tipo);
+}
+
+function renderizarTagsUI(tipo) {
+  const lista = tipo === 'uvas' ? tagsUvas : tagsHarm;
+  const wrapId = tipo === 'uvas' ? 'uvas-wrap' : 'harm-wrap';
+  const inputId = tipo === 'uvas' ? 'uvas-input' : 'harm-input';
+  const wrap = document.getElementById(wrapId);
+  const input = document.getElementById(inputId);
+  const tagsHtml = lista.map((t, i) =>
+    `<span class="tag">${t}<span class="tag-remove" onclick="removerTag('${tipo}',${i})">×</span></span>`
+  ).join('');
+  wrap.innerHTML = tagsHtml + input.outerHTML;
+  document.getElementById(inputId).addEventListener('keydown', e => adicionarTag(e, tipo));
+}
+
+/* ============================================================
+   Estoque Rápido
+   ============================================================ */
+function abrirModalEstoque(id) {
+  const p = produtos.find(x => x.id === id);
+  if (!p) return;
+  estoqueEditandoId = id;
+  estoqueNovoValor = p.estoque;
+  document.getElementById('estoque-nome').textContent = p.nome + (p.safra ? ` ${p.safra}` : '');
+  document.getElementById('estoque-atual-txt').textContent = `Estoque atual: ${p.estoque} unidades`;
+  document.getElementById('estoque-novo-val').textContent = p.estoque;
+  document.getElementById('modal-estoque').classList.add('aberto');
+}
+
+function ajustarEstoque(delta) {
+  estoqueNovoValor = Math.max(0, estoqueNovoValor + delta);
+  document.getElementById('estoque-novo-val').textContent = estoqueNovoValor;
+}
+
+function zerarEstoque() { estoqueNovoValor = 0; document.getElementById('estoque-novo-val').textContent = 0; }
+
+function salvarEstoque() {
+  const p = produtos.find(x => x.id === estoqueEditandoId);
+  if (!p) return;
+  p.estoque = estoqueNovoValor;
+  salvarLocal();
+  fecharModal('modal-estoque');
+  atualizarTudo();
+  mostrarToast(`Estoque de "${p.nome}" atualizado para ${estoqueNovoValor}.`, 'sucesso');
+}
+
+/* ============================================================
+   Ações da Tabela
+   ============================================================ */
+function toggleAtivo(id) {
+  const p = produtos.find(x => x.id === id);
+  if (!p) return;
+  p.ativo = !p.ativo;
+  salvarLocal();
+  atualizarTudo();
+  mostrarToast(`"${p.nome}" ${p.ativo ? 'ativado' : 'desativado'}.`, 'sucesso');
+}
+
+function confirmarExcluir(id) {
+  const p = produtos.find(x => x.id === id);
+  if (!p) return;
+  document.getElementById('confirm-titulo').textContent = 'Excluir Produto';
+  document.getElementById('confirm-msg').textContent = `Tem certeza que deseja excluir "${p.nome}"? Esta ação não pode ser desfeita.`;
+  document.getElementById('confirm-btn').onclick = () => { excluirProduto(id); fecharModal('confirm-modal'); };
+  document.getElementById('confirm-modal').classList.add('aberto');
+}
+
+function excluirProduto(id) {
+  const p = produtos.find(x => x.id === id);
+  produtos = produtos.filter(x => x.id !== id);
+  salvarLocal();
+  atualizarTudo();
+  mostrarToast(`"${p?.nome}" excluído.`, 'sucesso');
+}
+
+/* ============================================================
+   Estoque View
+   ============================================================ */
+function renderizarEstoque() {
+  const busca = (document.getElementById('busca-estoque')?.value || '').toLowerCase();
+  const filtro = document.getElementById('filtro-estoque-status')?.value || '';
+  const grid = document.getElementById('estoque-grid');
+  if (!grid) return;
+
+  let lista = produtos.filter(p => {
+    if (busca && !p.nome.toLowerCase().includes(busca)) return false;
+    if (filtro === 'critico' && p.estoque !== 0) return false;
+    if (filtro === 'baixo' && !(p.estoque > 0 && p.estoque <= p.estoqueMinimo)) return false;
+    if (filtro === 'ok' && !(p.estoque > p.estoqueMinimo)) return false;
+    return true;
+  });
+
+  grid.innerHTML = lista.map(p => {
+    const max = Math.max(p.estoqueMinimo * 3, 30);
+    const pct = Math.min(100, (p.estoque / max) * 100);
+    const classe = p.estoque === 0 ? 'zero' : p.estoque <= p.estoqueMinimo ? 'critico' : p.estoque <= p.estoqueMinimo * 2 ? 'baixo' : 'ok';
+    return `
+      <div class="estoque-card">
+        <p class="estoque-card-nome">${p.nome}${p.safra ? ` ${p.safra}` : ''}</p>
+        <p class="estoque-card-info">${p.pais} · ${p.subtipo} · ${p.volume || 750}ml</p>
+        <div class="barra-estoque"><div class="barra-fill ${classe}" style="width:${pct}%"></div></div>
+        <p style="font-size:.8125rem;font-weight:600;color:${p.estoque===0?'var(--error)':p.estoque<=p.estoqueMinimo?'var(--warning)':'var(--success)'}">
+          ${p.estoque} unidades ${p.estoque === 0 ? '⛔' : p.estoque <= p.estoqueMinimo ? '⚠️' : '✅'}
+        </p>
+        <p style="font-size:.75rem;color:var(--text-l)">Mínimo: ${p.estoqueMinimo} · Preço: ${p.preco.toLocaleString('pt-BR',{style:'currency',currency:'BRL'})}</p>
+        <div class="estoque-card-acao">
+          <button class="btn btn-outline btn-sm" onclick="abrirModalEstoque('${p.id}')">📦 Atualizar estoque</button>
+        </div>
+      </div>
+    `;
+  }).join('') || '<p style="grid-column:1/-1;text-align:center;color:var(--text-l);padding:3rem">Nenhum produto encontrado.</p>';
+}
+
+/* ============================================================
+   Exportar / Importar
+   ============================================================ */
+function atualizarPreviewJSON() {
+  const dados = {
+    meta: { versao: '1.0', atualizadoEm: new Date().toISOString().split('T')[0], totalProdutos: produtos.length },
+    produtos
+  };
+  const el = document.getElementById('json-preview');
+  if (el) el.textContent = JSON.stringify(dados, null, 2);
+}
+
+function exportarJSON() {
+  const dados = {
+    meta: { versao: '1.0', atualizadoEm: new Date().toISOString().split('T')[0], totalProdutos: produtos.length },
+    produtos
+  };
+  const blob = new Blob([JSON.stringify(dados, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'produtos.json';
+  a.click(); URL.revokeObjectURL(url);
+  mostrarToast('produtos.json baixado!', 'sucesso');
+}
+
+function copiarJSON() {
+  const dados = { meta: { versao: '1.0', atualizadoEm: new Date().toISOString().split('T')[0], totalProdutos: produtos.length }, produtos };
+  navigator.clipboard.writeText(JSON.stringify(dados, null, 2));
+  mostrarToast('JSON copiado para a área de transferência!', 'sucesso');
+}
+
+function importarJSON(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    try {
+      const dados = JSON.parse(e.target.result);
+      if (!dados.produtos || !Array.isArray(dados.produtos)) throw new Error('Formato inválido');
+      document.getElementById('confirm-titulo').textContent = 'Importar JSON';
+      document.getElementById('confirm-msg').textContent = `Isso substituirá os ${produtos.length} produtos atuais por ${dados.produtos.length} produtos do arquivo. Continuar?`;
+      document.getElementById('confirm-btn').onclick = () => {
+        produtos = dados.produtos;
+        salvarLocal();
+        atualizarTudo();
+        fecharModal('confirm-modal');
+        mostrarToast(`${produtos.length} produtos importados com sucesso!`, 'sucesso');
+      };
+      document.getElementById('confirm-modal').classList.add('aberto');
+    } catch {
+      mostrarToast('Arquivo JSON inválido.', 'erro');
+    }
+  };
+  reader.readAsText(file);
+  event.target.value = '';
+}
+
+/* ============================================================
+   Utilitários
+   ============================================================ */
+function fecharModal(id) {
+  document.getElementById(id).classList.remove('aberto');
+}
+
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+  overlay.addEventListener('click', e => {
+    if (e.target === overlay) fecharModal(overlay.id);
+  });
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.modal-overlay.aberto').forEach(m => fecharModal(m.id));
+  }
+});
+
+let toastTimer;
+function mostrarToast(msg, tipo = '') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = `visivel ${tipo}`;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('visivel'), 3500);
+}
+
+/* Inicializar subtipos ao carregar */
+atualizarSubtipos();
+</script>
+
+</body>
+</html>
