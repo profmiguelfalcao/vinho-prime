@@ -1,0 +1,45 @@
+/* ============================================================
+   Vinho Prime — Skeleton Loading (estado de carregamento)
+   ============================================================ */
+
+@keyframes sk-shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+.sk-card {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: #e8e0d6;
+  min-height: 380px;
+  position: relative;
+}
+
+.sk-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0)    0%,
+    rgba(255,255,255,0.45) 50%,
+    rgba(255,255,255,0)    100%
+  );
+  background-size: 400px 100%;
+  animation: sk-shimmer 1.4s ease-in-out infinite;
+}
+
+.sk-card--dark {
+  background: rgba(255,255,255,.08);
+}
+
+.sk-card--dark::before {
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0)    0%,
+    rgba(255,255,255,.07)  50%,
+    rgba(255,255,255,0)    100%
+  );
+  background-size: 400px 100%;
+  animation: sk-shimmer 1.4s ease-in-out infinite;
+}
