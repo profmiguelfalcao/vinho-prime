@@ -1,34 +1,37 @@
 /* ============================================================
-   Vinho Prime — Busca Global
+   Vinho Prime — Busca Global (dropdown flutuante)
    ============================================================ */
 
+/* ---- Overlay invisível (captura clique fora para fechar) ---- */
 .busca-overlay {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(26,26,26,.75);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
   z-index: 1100;
-  align-items: flex-start;
-  justify-content: center;
-  padding-top: 8vh;
+  pointer-events: none; /* fundo invisível não bloqueia cliques */
 }
-.busca-overlay.aberta { display: flex; }
+.busca-overlay.aberta { display: block; }
 
+/* ---- Painel flutuante (top/right definidos via JS) ---- */
 .busca-modal {
-  width: 100%;
-  max-width: 640px;
-  margin: 0 1rem;
-  background: var(--white);
-  border-radius: var(--radius-lg);
-  box-shadow: 0 32px 80px rgba(0,0,0,.3);
+  position: fixed;
+  width: 420px;
+  max-width: calc(100vw - 2rem);
+  pointer-events: auto;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow:
+    0 4px 6px rgba(0,0,0,.05),
+    0 16px 48px rgba(0,0,0,.16),
+    0 0 0 1px rgba(92,81,70,.1);
   overflow: hidden;
-  animation: busca-entrar .18s ease;
+  animation: busca-drop .15s ease-out;
+  z-index: 1101;
 }
-@keyframes busca-entrar {
-  from { opacity:0; transform:translateY(-12px) scale(.98); }
-  to   { opacity:1; transform:none; }
+
+@keyframes busca-drop {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: none; }
 }
 
 /* ---- Campo de busca ---- */
@@ -36,20 +39,22 @@
   display: flex;
   align-items: center;
   gap: .75rem;
-  padding: 1rem 1.25rem;
+  padding: .875rem 1.125rem;
   border-bottom: 1px solid rgba(92,81,70,.1);
 }
 .busca-icone { color: var(--text-light); flex-shrink: 0; }
+
 #busca-input {
   flex: 1;
   border: none;
   outline: none;
   font-family: var(--font-body);
-  font-size: 1rem;
-  color: var(--text);
+  font-size: .9375rem;
+  color: var(--text-main);
   background: transparent;
 }
 #busca-input::placeholder { color: var(--text-light); }
+
 .busca-fechar-btn {
   font-size: .625rem;
   font-weight: 700;
@@ -61,13 +66,13 @@
   background: none;
   cursor: pointer;
   flex-shrink: 0;
-  transition: all var(--transition);
+  transition: border-color .15s, color .15s;
 }
 .busca-fechar-btn:hover { border-color: var(--bordeaux); color: var(--bordeaux); }
 
 /* ---- Área de resultados ---- */
 .busca-resultados {
-  max-height: 440px;
+  max-height: 420px;
   overflow-y: auto;
   overscroll-behavior: contain;
 }
@@ -75,23 +80,23 @@
 .busca-resultados::-webkit-scrollbar-track { background: transparent; }
 .busca-resultados::-webkit-scrollbar-thumb { background: rgba(92,81,70,.2); border-radius: 2px; }
 
-/* Dica inicial */
+/* ---- Dica inicial ---- */
 .busca-dica {
-  padding: 2.5rem 2rem;
+  padding: 1.5rem 1.25rem;
   text-align: center;
   color: var(--text-light);
   font-size: .875rem;
 }
-.busca-dica-icone { font-size: 2.25rem; margin-bottom: .625rem; opacity: .35; }
+.busca-dica-icone { font-size: 1.75rem; margin-bottom: .5rem; opacity: .35; }
 .busca-dica-categorias {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: .5rem;
-  margin-top: 1.25rem;
+  gap: .375rem;
+  margin-top: 1rem;
 }
 .busca-categoria-btn {
-  padding: .375rem .875rem;
+  padding: .3rem .75rem;
   background: var(--cream);
   border: 1px solid rgba(92,81,70,.12);
   border-radius: 100px;
@@ -99,19 +104,24 @@
   font-weight: 500;
   color: var(--text-sec);
   cursor: pointer;
-  transition: all var(--transition);
+  transition: background .15s, color .15s, border-color .15s;
   text-decoration: none;
+  display: inline-block;
 }
-.busca-categoria-btn:hover { background: rgba(61,12,12,.07); color: var(--bordeaux); border-color: rgba(61,12,12,.2); }
+.busca-categoria-btn:hover {
+  background: rgba(61,12,12,.07);
+  color: var(--bordeaux);
+  border-color: rgba(61,12,12,.2);
+}
 
-/* Resultado individual */
+/* ---- Resultado individual ---- */
 .busca-resultado {
   display: flex;
   align-items: center;
   gap: .875rem;
-  padding: .75rem 1.25rem;
+  padding: .625rem 1.125rem;
   cursor: pointer;
-  transition: background var(--transition);
+  transition: background .12s;
   text-decoration: none;
   color: inherit;
   border-bottom: 1px solid rgba(92,81,70,.06);
@@ -120,32 +130,28 @@
 .busca-resultado:hover { background: var(--cream); }
 
 .busca-resultado-img {
-  width: 44px;
-  height: 54px;
+  width: 40px;
+  height: 50px;
   border-radius: 6px;
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.25rem;
-  opacity: .7;
+  font-size: 1.125rem;
+  opacity: .85;
 }
-
 .busca-resultado-info { flex: 1; min-width: 0; }
 .busca-resultado-nome {
   font-family: var(--font-display);
   font-size: .9375rem;
   font-weight: 600;
-  color: var(--text);
+  color: var(--text-main);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin-bottom: .125rem;
+  margin-bottom: .1rem;
 }
-.busca-resultado-sub {
-  font-size: .75rem;
-  color: var(--text-sec);
-}
+.busca-resultado-sub { font-size: .75rem; color: var(--text-sec); }
 .busca-resultado-preco {
   font-family: var(--font-display);
   font-weight: 700;
@@ -154,16 +160,16 @@
   flex-shrink: 0;
 }
 
-/* Destaque de termo encontrado */
+/* ---- Destaque do termo ---- */
 mark.busca-match {
   background: rgba(196,151,58,.25);
   color: inherit;
   border-radius: 2px;
 }
 
-/* Separador de tipo */
+/* ---- Separador de grupo ---- */
 .busca-grupo-label {
-  padding: .5rem 1.25rem .25rem;
+  padding: .4rem 1.125rem .2rem;
   font-size: .6875rem;
   font-weight: 700;
   letter-spacing: .1em;
@@ -173,13 +179,13 @@ mark.busca-match {
   border-bottom: 1px solid rgba(92,81,70,.07);
 }
 
-/* Ver todos */
+/* ---- Botão ver todos ---- */
 .busca-ver-todos {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: .375rem;
-  padding: .875rem;
+  padding: .75rem;
   width: 100%;
   border: none;
   border-top: 1px solid rgba(92,81,70,.1);
@@ -189,37 +195,38 @@ mark.busca-match {
   font-weight: 600;
   color: var(--bordeaux);
   cursor: pointer;
-  transition: background var(--transition);
+  transition: background .12s;
 }
 .busca-ver-todos:hover { background: var(--cream); }
 
-/* Sem resultados */
+/* ---- Sem resultados ---- */
 .busca-vazio {
-  padding: 3rem 2rem;
+  padding: 2rem 1.25rem;
   text-align: center;
 }
 .busca-vazio-titulo {
   font-family: var(--font-display);
   font-size: 1rem;
   font-weight: 600;
-  color: var(--text);
-  margin-bottom: .375rem;
+  color: var(--text-main);
+  margin-bottom: .25rem;
 }
 .busca-vazio-sub { font-size: .875rem; color: var(--text-sec); }
 
-/* ---- Mobile ---- */
+/* ---- Mobile: painel ocupa a largura toda abaixo do header ---- */
 @media (max-width: 640px) {
-  .busca-overlay { align-items: flex-end; padding-top: 0; }
   .busca-modal {
-    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-    margin: 0;
-    max-width: none;
+    position: fixed;
+    top: var(--header-h);
+    left: 0;
+    right: 0;
     width: 100%;
-    animation: busca-entrar-mobile .2s ease;
+    border-radius: 0 0 14px 14px;
+    animation: busca-drop-mobile .15s ease both;
   }
-  @keyframes busca-entrar-mobile {
-    from { transform: translateY(20px); }
-    to   { transform: none; }
+  @keyframes busca-drop-mobile {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: none; }
   }
-  .busca-resultados { max-height: 62vh; }
+  .busca-resultados { max-height: 55vh; }
 }
