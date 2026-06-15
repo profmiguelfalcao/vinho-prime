@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Política de Privacidade da Vinho Prime — saiba como coletamos e tratamos seus dados pessoais em conformidade com a LGPD.">
+  <meta name="robots" content="index, follow">
+  <title>Política de Privacidade — Vinho Prime</title>
+
+  <!-- Open Graph -->
+  <meta property="og:site_name" content="Vinho Prime">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Política de Privacidade — Vinho Prime">
+  <meta property="og:description" content="Saiba como a Vinho Prime coleta, usa e protege seus dados pessoais, em conformidade com a Lei Geral de Proteção de Dados (LGPD).">
+  <meta property="og:image" content="https://vinhoprime.com.br/img/og-image.jpg">
+  <meta property="og:url" content="https://vinhoprime.com.br/privacidade.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://vinhoprime.com.br/privacidade.html">
+
+  <!-- Favicon -->
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="shortcut icon" href="favicon.svg">
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/busca.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    .politica-wrapper {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 3rem var(--space-side) 5rem;
+    }
+    .politica-header {
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(92,81,70,.15);
+    }
+    .politica-categoria {
+      font-size: .8125rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: .75rem;
+    }
+    .politica-titulo {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--bordeaux);
+      margin-bottom: .75rem;
+      line-height: 1.2;
+    }
+    .politica-meta {
+      font-size: .875rem;
+      color: var(--text-sec);
+    }
+    .politica-intro {
+      background: rgba(61,12,12,.04);
+      border-left: 3px solid var(--bordeaux);
+      padding: 1.25rem 1.5rem;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 2.5rem;
+      font-size: .9375rem;
+      color: var(--text-sec);
+      line-height: 1.7;
+    }
+    .politica-secao {
+      margin-bottom: 2.5rem;
+    }
+    .politica-secao h2 {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--bordeaux);
+      margin-bottom: 1rem;
+      padding-bottom: .5rem;
+      border-bottom: 1px solid rgba(92,81,70,.12);
+      counter-increment: secao;
+    }
+    .politica-secao h2::before {
+      content: counter(secao) ". ";
+      color: var(--gold);
+    }
+    .politica-wrapper { counter-reset: secao; }
+    .politica-secao p {
+      font-size: .9375rem;
+      color: var(--text-sec);
+      line-height: 1.75;
+      margin-bottom: 1rem;
+    }
+    .politica-secao ul,
+    .politica-secao ol {
+      padding-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .politica-secao li {
+      font-size: .9375rem;
+      color: var(--text-sec);
+      line-height: 1.7;
+      margin-bottom: .375rem;
+    }
+    .politica-secao strong { color: var(--text-main); }
+    .politica-tabela {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1rem;
+      font-size: .875rem;
+    }
+    .politica-tabela th {
+      background: rgba(61,12,12,.06);
+      color: var(--bordeaux);
+      font-weight: 600;
+      padding: .625rem .875rem;
+      text-align: left;
+      border: 1px solid rgba(92,81,70,.15);
+    }
+    .politica-tabela td {
+      padding: .625rem .875rem;
+      border: 1px solid rgba(92,81,70,.12);
+      color: var(--text-sec);
+      vertical-align: top;
+    }
+    .politica-tabela tr:nth-child(even) td { background: rgba(92,81,70,.03); }
+    .politica-contato-card {
+      background: var(--bordeaux);
+      color: var(--cream);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      margin-top: 1rem;
+    }
+    .politica-contato-card p { color: rgba(248,244,238,.8); margin-bottom: .375rem; font-size: .9375rem; }
+    .politica-contato-card a { color: var(--gold); }
+    .politica-contato-card strong { color: #fff; }
+    .politica-direito-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: .375rem;
+      background: rgba(61,12,12,.06);
+      border: 1px solid rgba(61,12,12,.1);
+      color: var(--bordeaux);
+      font-size: .8125rem;
+      font-weight: 600;
+      padding: .3rem .7rem;
+      border-radius: 100px;
+      margin: .25rem .2rem;
+    }
+    .politica-aviso {
+      background: #fff8e1;
+      border: 1px solid #ffe082;
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      font-size: .875rem;
+      color: #5d4037;
+      margin-bottom: 1rem;
+    }
+    .politica-nav-topo {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 1.5rem;
+    }
+    .politica-nav-topo a {
+      font-size: .8125rem;
+      color: var(--bordeaux);
+      text-decoration: none;
+    }
+    .politica-nav-topo a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<!-- ============================================================
+     MODAL VERIFICAÇÃO DE IDADE
+     ============================================================ -->
+<div id="age-modal" role="dialog" aria-modal="true" aria-labelledby="age-title">
+  <div class="age-modal-card">
+    <div class="age-modal-icon">🍷</div>
+    <h2 class="age-modal-title" id="age-title">Você tem 18 anos ou mais?</h2>
+    <p class="age-modal-desc">Este site comercializa bebidas alcoólicas. O acesso é permitido apenas para maiores de idade.</p>
+    <div class="age-modal-btns">
+      <button class="age-yes" onclick="confirmAge()">Sim, tenho 18+</button>
+      <button class="age-no"  onclick="denyAge()">Não, sou menor</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     TOP BANNER
+     ============================================================ -->
+<div id="top-banner">
+  <div class="banner-messages">
+    <div class="banner-msg active">🚚 Frete grátis acima de R$ 299 em todo o Brasil</div>
+    <div class="banner-msg">🍷 Clube Prime com 15% de desconto todo mês</div>
+    <div class="banner-msg">💳 Parcele em até 12x sem juros no cartão</div>
+  </div>
+</div>
+
+<!-- ============================================================
+     HEADER
+     ============================================================ -->
+<header id="header">
+  <div class="container header-inner">
+    <a href="index.html" class="header-logo" aria-label="Vinho Prime — Página inicial">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C8 2 5 5.5 5 9c0 3 1.5 5.5 4 7v4h6v-4c2.5-1.5 4-4 4-7 0-3.5-3-7-7-7zm0 2c2.8 0 5 2.7 5 5 0 2.2-1.1 4.1-3 5.3V18h-4v-3.7C8.1 13.1 7 11.2 7 9c0-2.3 2.2-5 5-5z"/></svg>
+      </div>
+      <div class="logo-text-wrap">
+        <span class="logo-name">Vinho Prime</span>
+        <span class="logo-tagline">Curadoria &amp; Destilados</span>
+      </div>
+    </a>
+
+    <nav class="header-nav" aria-label="Navegação principal">
+      <ul class="nav-list">
+        <li class="nav-item">
+          <a href="vinhos.html" class="nav-link">Vinhos
+            <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+          </a>
+          <div class="nav-dropdown">
+            <a href="vinhos.html?subtipo=tinto"><span class="dot"></span>Tintos</a>
+            <a href="vinhos.html?subtipo=branco"><span class="dot"></span>Brancos</a>
+            <a href="vinhos.html?subtipo=rosé"><span class="dot"></span>Rosés</a>
+            <a href="vinhos.html?subtipo=espumante"><span class="dot"></span>Espumantes</a>
+            <a href="vinhos.html?subtipo=natural"><span class="dot"></span>Naturais</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a href="destilados.html" class="nav-link">Destilados
+            <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+          </a>
+          <div class="nav-dropdown">
+            <a href="destilados.html?subtipo=whisky"><span class="dot"></span>Whisky</a>
+            <a href="destilados.html?subtipo=gin"><span class="dot"></span>Gin</a>
+            <a href="destilados.html?subtipo=cognac"><span class="dot"></span>Cognac</a>
+            <a href="destilados.html?subtipo=rum"><span class="dot"></span>Rum</a>
+            <a href="destilados.html?subtipo=cachaça"><span class="dot"></span>Cachaça Artesanal</a>
+          </div>
+        </li>
+        <li class="nav-item"><a href="index.html#sommelier" class="nav-link nav-link--highlight">Seleção do Sommelier</a></li>
+        <li class="nav-item"><a href="index.html#ofertas" class="nav-link nav-link--offers">Ofertas 🔥</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">Box &amp; Kits</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">Clube</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">Blog</a></li>
+      </ul>
+    </nav>
+
+    <a href="#" class="btn-vip">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+      Grupo VIP
+    </a>
+
+    <div class="header-actions">
+      <button class="action-btn" aria-label="Buscar" onclick="Busca.abrir()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>
+      </button>
+      <button class="action-btn" aria-label="Lista de desejos">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </button>
+      <button class="action-btn" aria-label="Minha conta">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </button>
+      <button class="action-btn" aria-label="Carrinho" onclick="toggleCart()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="cart-badge" id="cart-count" style="display:none">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mini Carrinho -->
+<div id="cart-overlay" onclick="toggleCart()"></div>
+<aside id="cart-drawer" aria-label="Carrinho">
+  <div class="cart-drawer-header">
+    <h2 class="cart-drawer-title">Carrinho</h2>
+    <button class="cart-close-btn" onclick="toggleCart()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <div class="free-ship-bar">
+    <p class="free-ship-text" id="ship-text">Faltam <strong>R$ 299,00</strong> para frete grátis!</p>
+    <div class="progress-bar"><div class="progress-fill" id="ship-bar" style="width:0%"></div></div>
+  </div>
+  <div class="cart-items" id="cart-items">
+    <div class="cart-empty">
+      <div class="cart-empty-icon">🛒</div>
+      <p class="cart-empty-text">Seu carrinho está vazio.<br>Adicione alguns vinhos!</p>
+    </div>
+  </div>
+  <div class="cart-footer" id="cart-footer" style="display:none">
+    <div class="cart-subtotal">
+      <span class="cart-subtotal-label">Subtotal</span>
+      <span class="cart-subtotal-value" id="cart-total">R$ 0,00</span>
+    </div>
+    <p class="cart-pix-price" id="cart-pix">💰 R$ 0,00 no PIX</p>
+    <div class="cart-ctas">
+      <a href="checkout.html" class="btn btn-gold" style="justify-content:center">Finalizar Compra</a>
+      <a href="checkout.html" class="btn btn-outline-gold btn-sm" style="justify-content:center">Ver Carrinho</a>
+    </div>
+  </div>
+</aside>
+
+<!-- ============================================================
+     CONTEÚDO PRINCIPAL
+     ============================================================ -->
+<main>
+  <div class="politica-wrapper">
+
+    <!-- Cabeçalho da página -->
+    <header class="politica-header">
+      <p class="politica-categoria">Transparência &amp; Privacidade</p>
+      <h1 class="politica-titulo">Política de Privacidade</h1>
+      <p class="politica-meta">
+        Última atualização: <strong>15 de junho de 2026</strong> &nbsp;·&nbsp;
+        Vigência: a partir de <strong>15 de junho de 2026</strong>
+      </p>
+    </header>
+
+    <!-- Introdução -->
+    <div class="politica-intro">
+      A <strong>Vinho Prime</strong> respeita e protege a privacidade de seus clientes e visitantes. Esta Política descreve quais dados pessoais coletamos, por que os coletamos, como os usamos e quais são os seus direitos, em conformidade com a <strong>Lei Geral de Proteção de Dados Pessoais (Lei nº 13.709/2018 — LGPD)</strong>.
+    </div>
+
+    <!-- Índice rápido -->
+    <div class="politica-nav-topo">
+      <a href="#contato-dpo">→ Falar com o Encarregado de Dados</a>
+    </div>
+
+    <!-- 1. Quem somos -->
+    <section class="politica-secao">
+      <h2>Controlador dos Dados</h2>
+      <table class="politica-tabela">
+        <tr><th>Campo</th><th>Informação</th></tr>
+        <tr><td><strong>Razão social</strong></td><td>Vinho Prime Comércio de Bebidas Ltda.</td></tr>
+        <tr><td><strong>CNPJ</strong></td><td>00.000.000/0001-00 <!-- substitua pelo CNPJ real --></td></tr>
+        <tr><td><strong>Endereço</strong></td><td><!-- substitua pelo endereço real --></td></tr>
+        <tr><td><strong>E-mail</strong></td><td><a href="mailto:privacidade@vinhoprime.com.br">privacidade@vinhoprime.com.br</a></td></tr>
+        <tr><td><strong>Site</strong></td><td><a href="https://vinhoprime.com.br">vinhoprime.com.br</a></td></tr>
+      </table>
+    </section>
+
+    <!-- 2. Dados coletados -->
+    <section class="politica-secao">
+      <h2>Dados Pessoais que Coletamos</h2>
+      <p>Coletamos apenas os dados necessários para as finalidades descritas abaixo:</p>
+      <table class="politica-tabela">
+        <tr>
+          <th>Dado</th>
+          <th>Quando é coletado</th>
+          <th>Obrigatório?</th>
+        </tr>
+        <tr><td>Nome completo</td><td>Ao finalizar uma compra</td><td>Sim</td></tr>
+        <tr><td>CPF</td><td>Ao finalizar uma compra</td><td>Sim (nota fiscal)</td></tr>
+        <tr><td>E-mail</td><td>Ao finalizar uma compra</td><td>Sim</td></tr>
+        <tr><td>Número de WhatsApp</td><td>Ao finalizar uma compra</td><td>Sim (confirmação do pedido)</td></tr>
+        <tr><td>Endereço completo</td><td>Ao finalizar uma compra</td><td>Sim (entrega)</td></tr>
+        <tr><td>Dados do carrinho</td><td>Ao adicionar produtos (armazenado localmente no navegador)</td><td>Funcional</td></tr>
+        <tr><td>Preferência de idade</td><td>Ao confirmar ser maior de 18 anos na primeira visita</td><td>Funcional</td></tr>
+      </table>
+      <p><strong>Não coletamos</strong> dados de cartão de crédito diretamente. Pagamentos via cartão são processados por gateways de pagamento certificados (Mercado Pago, PagSeguro ou similar).</p>
+    </section>
+
+    <!-- 3. Finalidades -->
+    <section class="politica-secao">
+      <h2>Finalidades do Tratamento</h2>
+      <p>Utilizamos seus dados exclusivamente para as seguintes finalidades:</p>
+      <ul>
+        <li><strong>Processamento de pedidos:</strong> confirmar, preparar e entregar o pedido.</li>
+        <li><strong>Atendimento via WhatsApp:</strong> enviar confirmação do pedido, rastreamento e suporte.</li>
+        <li><strong>Emissão de nota fiscal:</strong> exigência legal (CPF/CNPJ do comprador).</li>
+        <li><strong>Cumprimento de obrigações legais:</strong> registros contábeis e fiscais.</li>
+        <li><strong>Prevenção de fraudes:</strong> verificar a legitimidade das transações.</li>
+      </ul>
+      <p><strong>Não</strong> utilizamos seus dados para venda a terceiros, criação de perfis para publicidade ou qualquer finalidade incompatível com a compra realizada.</p>
+    </section>
+
+    <!-- 4. Base legal -->
+    <section class="politica-secao">
+      <h2>Base Legal (LGPD, Art. 7º)</h2>
+      <table class="politica-tabela">
+        <tr><th>Finalidade</th><th>Base legal</th></tr>
+        <tr><td>Processamento do pedido e entrega</td><td>Execução de contrato (Art. 7º, V)</td></tr>
+        <tr><td>Emissão de nota fiscal</td><td>Cumprimento de obrigação legal (Art. 7º, II)</td></tr>
+        <tr><td>Contato via WhatsApp sobre o pedido</td><td>Execução de contrato (Art. 7º, V)</td></tr>
+        <tr><td>Prevenção de fraudes</td><td>Legítimo interesse (Art. 7º, IX)</td></tr>
+        <tr><td>Verificação de maioridade</td><td>Cumprimento de obrigação legal — Lei nº 9.294/96 (Art. 7º, II)</td></tr>
+      </table>
+    </section>
+
+    <!-- 5. Compartilhamento -->
+    <section class="politica-secao">
+      <h2>Compartilhamento de Dados</h2>
+      <p>Seus dados podem ser compartilhados apenas com:</p>
+      <ul>
+        <li><strong>Transportadoras e Correios:</strong> nome e endereço para entrega do pedido.</li>
+        <li><strong>Processadores de pagamento (Mercado Pago, PagSeguro ou similar):</strong> somente os dados necessários para processar o pagamento, sob suas próprias políticas de privacidade.</li>
+        <li><strong>Autoridades fiscais e regulatórias:</strong> quando exigido por lei (Receita Federal, SEFAZ).</li>
+      </ul>
+      <p><strong>Nunca</strong> vendemos, alugamos ou cedemos seus dados pessoais a terceiros para fins de marketing.</p>
+    </section>
+
+    <!-- 6. Armazenamento e retenção -->
+    <section class="politica-secao">
+      <h2>Armazenamento e Prazo de Retenção</h2>
+      <p>Os dados de pedidos são armazenados em nossos sistemas por:</p>
+      <ul>
+        <li><strong>5 anos</strong> — dados fiscais e contábeis (exigência da legislação tributária).</li>
+        <li><strong>2 anos</strong> — histórico de pedidos para suporte ao cliente.</li>
+        <li><strong>Enquanto durar o interesse legítimo</strong> — dados de prevenção a fraudes.</li>
+      </ul>
+      <p>Dados armazenados no seu <strong>navegador</strong> (localStorage) — como o carrinho de compras e a confirmação de maioridade — permanecem apenas no seu dispositivo e podem ser apagados limpando os dados do navegador. A Vinho Prime não tem acesso a esses dados.</p>
+    </section>
+
+    <!-- 7. Cookies e localStorage -->
+    <section class="politica-secao">
+      <h2>Cookies e Armazenamento Local</h2>
+      <p>Este site <strong>não utiliza cookies de rastreamento</strong> de terceiros (como Google Analytics ou Facebook Pixel). Utilizamos apenas armazenamento local do navegador (<em>localStorage</em>) para:</p>
+      <table class="politica-tabela">
+        <tr><th>Chave</th><th>Conteúdo</th><th>Finalidade</th></tr>
+        <tr><td><code>vp_carrinho</code></td><td>Itens no carrinho</td><td>Manter o carrinho entre visitas</td></tr>
+        <tr><td><code>vp_age_ok</code></td><td>Confirmação de maioridade</td><td>Não exibir o modal a cada visita</td></tr>
+        <tr><td><code>vp_wishlist</code></td><td>Produtos na lista de desejos</td><td>Manter a lista entre visitas</td></tr>
+      </table>
+      <p>Esses dados ficam <strong>somente no seu dispositivo</strong> e não são enviados para nossos servidores.</p>
+    </section>
+
+    <!-- 8. Direitos do titular -->
+    <section class="politica-secao">
+      <h2>Seus Direitos (LGPD, Art. 18)</h2>
+      <p>Você, como titular dos dados, tem os seguintes direitos garantidos pela LGPD:</p>
+      <div style="display:flex;flex-wrap:wrap;gap:.375rem;margin-bottom:1rem">
+        <span class="politica-direito-tag">✓ Confirmação de tratamento</span>
+        <span class="politica-direito-tag">✓ Acesso aos dados</span>
+        <span class="politica-direito-tag">✓ Correção de dados</span>
+        <span class="politica-direito-tag">✓ Anonimização ou bloqueio</span>
+        <span class="politica-direito-tag">✓ Portabilidade</span>
+        <span class="politica-direito-tag">✓ Exclusão dos dados</span>
+        <span class="politica-direito-tag">✓ Revogação do consentimento</span>
+        <span class="politica-direito-tag">✓ Informação sobre compartilhamento</span>
+        <span class="politica-direito-tag">✓ Revisão de decisões automatizadas</span>
+      </div>
+      <p>Para exercer qualquer um desses direitos, entre em contato com nosso Encarregado de Dados (<a href="#contato-dpo">seção abaixo</a>). Respondemos em até <strong>15 dias corridos</strong>.</p>
+    </section>
+
+    <!-- 9. Segurança -->
+    <section class="politica-secao">
+      <h2>Segurança dos Dados</h2>
+      <p>Adotamos medidas técnicas e organizacionais para proteger seus dados contra acesso não autorizado, perda, destruição ou divulgação indevida:</p>
+      <ul>
+        <li>Conexão via <strong>HTTPS</strong> (TLS) em todo o site.</li>
+        <li>Dados do banco de dados protegidos por <strong>Row Level Security (RLS)</strong> no Supabase.</li>
+        <li>Acesso administrativo restrito por autenticação.</li>
+        <li>Não armazenamos dados de cartão de crédito em nossos sistemas.</li>
+      </ul>
+      <p>Em caso de incidente de segurança que afete seus dados, notificaremos você e a ANPD (Autoridade Nacional de Proteção de Dados) dentro dos prazos estabelecidos pela LGPD.</p>
+    </section>
+
+    <!-- 10. Menores de idade -->
+    <section class="politica-secao">
+      <h2>Menores de Idade</h2>
+      <div class="politica-aviso">
+        🔞 Este site comercializa bebidas alcoólicas e é destinado exclusivamente a maiores de 18 anos, nos termos da Lei nº 9.294/1996. <strong>Não coletamos intencionalmente dados de menores de idade.</strong> Caso identifique que dados de um menor foram coletados, entre em contato imediatamente para a exclusão.
+      </div>
+    </section>
+
+    <!-- 11. Alterações -->
+    <section class="politica-secao">
+      <h2>Alterações nesta Política</h2>
+      <p>Esta Política pode ser atualizada periodicamente. Quando houver alterações relevantes, publicaremos um aviso em destaque no site com a data de vigência. A data de "Última atualização" no topo desta página sempre refletirá a versão mais recente.</p>
+      <p>O uso continuado do site após a publicação de alterações constitui aceite da Política revisada.</p>
+    </section>
+
+    <!-- 12. Contato -->
+    <section class="politica-secao" id="contato-dpo">
+      <h2>Encarregado de Dados (DPO)</h2>
+      <p>Para dúvidas, solicitações de exercício de direitos ou reclamações relacionadas à privacidade:</p>
+      <div class="politica-contato-card">
+        <p><strong>Encarregado de Proteção de Dados — Vinho Prime</strong></p>
+        <p>📧 <a href="mailto:privacidade@vinhoprime.com.br">privacidade@vinhoprime.com.br</a></p>
+        <p>📱 WhatsApp: <a href="#">(11) 9 9999-9999</a> <!-- substitua pelo número real --></p>
+        <p style="margin-top:.75rem;font-size:.8125rem;opacity:.7">Respondemos em até 15 dias corridos. Para reclamações não resolvidas, você pode contatar a <a href="https://www.gov.br/anpd" target="_blank" rel="noopener" style="color:var(--gold)">ANPD — Autoridade Nacional de Proteção de Dados</a>.</p>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer id="footer" style="margin-top:2rem">
+  <div class="container">
+    <div class="footer-grid" style="grid-template-columns:1fr 1fr 1fr">
+      <div class="footer-brand" style="grid-column:1/-1">
+        <div class="header-logo" style="margin-bottom:.75rem">
+          <div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2C8 2 5 5.5 5 9c0 3 1.5 5.5 4 7v4h6v-4c2.5-1.5 4-4 4-7 0-3.5-3-7-7-7zm0 2c2.8 0 5 2.7 5 5 0 2.2-1.1 4.1-3 5.3V18h-4v-3.7C8.1 13.1 7 11.2 7 9c0-2.3 2.2-5 5-5z" fill="var(--gold)"/></svg></div>
+          <div class="logo-text-wrap"><span class="logo-name">Vinho Prime</span></div>
+        </div>
+      </div>
+      <div>
+        <h3 class="footer-col-title">Vinhos</h3>
+        <ul class="footer-links">
+          <li><a href="vinhos.html?subtipo=tinto">Tintos</a></li>
+          <li><a href="vinhos.html?subtipo=branco">Brancos</a></li>
+          <li><a href="vinhos.html?subtipo=rosé">Rosés</a></li>
+          <li><a href="vinhos.html?subtipo=espumante">Espumantes</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="footer-col-title">Destilados</h3>
+        <ul class="footer-links">
+          <li><a href="destilados.html?subtipo=whisky">Whisky</a></li>
+          <li><a href="destilados.html?subtipo=gin">Gin</a></li>
+          <li><a href="destilados.html?subtipo=cognac">Cognac</a></li>
+          <li><a href="destilados.html?subtipo=rum">Rum</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="footer-col-title">Atendimento</h3>
+        <ul class="footer-links">
+          <li><a href="#">Contato</a></li>
+          <li><a href="#">Rastrear Pedido</a></li>
+          <li><a href="privacidade.html" style="color:var(--gold)">Política de Privacidade</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal-warning">
+        <div class="warning-icon">🔞</div>
+        <div class="warning-text">Venda e consumo de bebidas alcoólicas proibidos para menores de 18 anos.<span>Beba com moderação.</span></div>
+      </div>
+      <p class="footer-copy">© 2026 Vinho Prime. CNPJ: 00.000.000/0001-00</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Busca Global -->
+<div id="busca-overlay" onclick="if(event.target===this)Busca.fechar()">
+  <div class="busca-modal" role="dialog" aria-modal="true" aria-label="Buscar produtos">
+    <div class="busca-input-wrap">
+      <svg class="busca-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" width="20" height="20" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" id="busca-input" placeholder="Buscar vinhos, destilados, produtores..." autocomplete="off" oninput="Busca.aoDigitar(this.value)">
+      <button class="busca-fechar-btn" onclick="Busca.fechar()">ESC</button>
+    </div>
+    <div class="busca-resultados" id="busca-resultados"></div>
+  </div>
+</div>
+
+<!-- WhatsApp Flutuante -->
+<div id="whatsapp-float">
+  <span class="whatsapp-tooltip">Fale com a gente!</span>
+  <a href="#" class="whatsapp-bubble" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z" fill="white"/><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.06L2 22l5.1-1.34C8.5 21.53 10.21 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z" fill="none" stroke="white" stroke-width="1.5"/></svg>
+  </a>
+</div>
+
+<script src="js/db.js"></script>
+<script src="js/app.js"></script>
+<script src="js/busca.js"></script>
+<script>
+const ageModal = document.getElementById('age-modal');
+if (!localStorage.getItem('vp_age_ok')) ageModal.classList.add('active');
+function confirmAge() { localStorage.setItem('vp_age_ok','1'); ageModal.classList.remove('active'); }
+function denyAge() { document.body.innerHTML='<div style="display:flex;align-items:center;justify-content:center;height:100vh;background:#3D0C0C;color:#F8F4EE;font-family:Georgia,serif;text-align:center"><div><p style="font-size:2rem">🔞</p><h1>Acesso restrito</h1><p>Apenas maiores de 18 anos.</p></div></div>'; }
+const msgs = document.querySelectorAll('.banner-msg');
+let bi = 0;
+setInterval(() => { msgs[bi].classList.remove('active'); bi=(bi+1)%msgs.length; msgs[bi].classList.add('active'); }, 3500);
+const header = document.getElementById('header');
+window.addEventListener('scroll', () => header.classList.toggle('scrolled', scrollY > 20), {passive:true});
+function toggleCart() {
+  const overlay = document.getElementById('cart-overlay');
+  const drawer  = document.getElementById('cart-drawer');
+  const open = drawer.classList.toggle('open');
+  overlay.classList.toggle('open', open);
+  document.body.style.overflow = open ? 'hidden' : '';
+  if (open) atualizarDrawer();
+}
+function atualizarDrawer() {
+  const itens = JSON.parse(localStorage.getItem('vp_carrinho') || '[]');
+  const itemsEl  = document.getElementById('cart-items');
+  const footerEl = document.getElementById('cart-footer');
+  const badgeEl  = document.getElementById('cart-count');
+  const total = itens.reduce((acc, i) => acc + i.preco * i.quantidade, 0);
+  const totalItens = itens.reduce((acc, i) => acc + i.quantidade, 0);
+  badgeEl.textContent = totalItens;
+  badgeEl.style.display = totalItens > 0 ? 'flex' : 'none';
+  if (itens.length === 0) {
+    itemsEl.innerHTML = '<div class="cart-empty"><div class="cart-empty-icon">🛒</div><p class="cart-empty-text">Seu carrinho está vazio.</p></div>';
+    footerEl.style.display = 'none';
+    return;
+  }
+  document.getElementById('ship-text').innerHTML = `Faltam <strong>${Math.max(0,299-total).toLocaleString('pt-BR',{style:'currency',currency:'BRL'})}</strong> para frete grátis!`;
+  document.getElementById('ship-bar').style.width = `${Math.min(100,(total/299)*100)}%`;
+  itemsEl.innerHTML = itens.map(i => `<div style="display:flex;gap:.875rem;padding:.875rem 0;border-bottom:1px solid rgba(92,81,70,.1)"><div style="width:60px;height:72px;background:linear-gradient(160deg,#5C1515,#3D0C0C);border-radius:8px;flex-shrink:0"></div><div style="flex:1;min-width:0"><p style="font-family:var(--font-display);font-size:.875rem;font-weight:600;margin-bottom:.25rem">${i.nome}</p><span style="font-family:var(--font-display);font-weight:700;color:var(--bordeaux)">${(i.preco*i.quantidade).toLocaleString('pt-BR',{style:'currency',currency:'BRL'})}</span> <span style="font-size:.8125rem;color:var(--text-sec)">× ${i.quantidade}</span></div></div>`).join('');
+  document.getElementById('cart-total').textContent = total.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+  document.getElementById('cart-pix').textContent = `💰 ${(total*.95).toLocaleString('pt-BR',{style:'currency',currency:'BRL'})} no PIX`;
+  footerEl.style.display = 'block';
+}
+</script>
+</body>
+</html>

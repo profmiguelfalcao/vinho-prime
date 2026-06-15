@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <!-- Fundo bordeaux -->
+  <rect width="1200" height="630" fill="#3D0C0C"/>
+  <!-- Gradiente decorativo -->
+  <radialGradient id="glow" cx="30%" cy="50%" r="60%">
+    <stop offset="0%" stop-color="#6B1A1A" stop-opacity="1"/>
+    <stop offset="100%" stop-color="#3D0C0C" stop-opacity="1"/>
+  </radialGradient>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <!-- Linha dourada decorativa -->
+  <rect x="0" y="620" width="1200" height="10" fill="#C4973A" opacity=".6"/>
+  <rect x="0" y="0" width="1200" height="10" fill="#C4973A" opacity=".6"/>
+  <!-- Ícone taça -->
+  <g transform="translate(120, 115) scale(5)">
+    <path d="M16 5C12.5 5 10 8 10 11c0 2.8 1.4 5.1 3.75 6.5V22h-2v2h8.5v-2h-2v-4.5C20.6 16.1 22 13.8 22 11c0-3-2.5-6-6-6zm0 2c2.5 0 4.25 2.3 4.25 4 0 2-1 3.7-2.75 4.8V22h-3v-6.2C12.75 14.7 11.75 13 11.75 11c0-1.7 1.75-4 4.25-4z" fill="#C4973A"/>
+  </g>
+  <!-- Textos -->
+  <text x="380" y="270" font-family="Georgia, serif" font-size="88" font-weight="700" fill="#F8F4EE" letter-spacing="-1">Vinho Prime</text>
+  <text x="382" y="350" font-family="Georgia, serif" font-size="36" fill="#C4973A" letter-spacing="3">CURADORIA &amp; DESTILADOS</text>
+  <text x="382" y="430" font-family="Georgia, serif" font-size="28" fill="rgba(248,244,238,0.55)">Os melhores vinhos e destilados do mundo</text>
+  <text x="382" y="480" font-family="Georgia, serif" font-size="28" fill="rgba(248,244,238,0.55)">entregues até sua porta · Frete grátis acima de R$ 299</text>
+</svg>

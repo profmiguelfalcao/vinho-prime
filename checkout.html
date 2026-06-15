@@ -3,27 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Catálogo completo de vinhos premium. Tintos, brancos, rosés, espumantes e naturais com curadoria do sommelier.">
-  <title>Vinhos — Vinho Prime</title>
+  <meta name="description" content="Finalizar compra — Vinho Prime, curadoria de vinhos e destilados.">
+  <title>Checkout — Vinho Prime</title>
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/skeleton.css">
-  <link rel="stylesheet" href="css/catalogo.css">
+  <link rel="stylesheet" href="css/busca.css">
+  <link rel="stylesheet" href="css/checkout.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/busca.css">
   <!-- Open Graph / WhatsApp / redes sociais -->
   <meta property="og:site_name" content="Vinho Prime">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Catálogo de Vinhos — Vinho Prime">
-  <meta property="og:description" content="Tintos, brancos, rosés, espumantes e naturais selecionados pelo sommelier. Filtre por país, uva e preço. Entrega em todo o Brasil.">
+  <meta property="og:title" content="Finalizar Compra — Vinho Prime">
+  <meta property="og:description" content="Finalize seu pedido de vinhos e destilados com segurança. Pagamento via PIX, cartão ou boleto.">
   <meta property="og:image" content="https://vinhoprime.com.br/img/og-image.jpg">
-  <meta property="og:url" content="https://vinhoprime.com.br/vinhos.html">
+  <meta property="og:url" content="https://vinhoprime.com.br/checkout.html">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Catálogo de Vinhos — Vinho Prime">
-  <meta name="twitter:description" content="Tintos, brancos, rosés, espumantes e naturais selecionados pelo sommelier. Filtre por país, uva e preço. Entrega em todo o Brasil.">
+  <meta name="twitter:title" content="Finalizar Compra — Vinho Prime">
+  <meta name="twitter:description" content="Finalize seu pedido de vinhos e destilados com segurança. Pagamento via PIX, cartão ou boleto.">
   <meta name="twitter:image" content="https://vinhoprime.com.br/img/og-image.jpg">
-  <link rel="canonical" href="https://vinhoprime.com.br/vinhos.html">
+  <link rel="canonical" href="https://vinhoprime.com.br/checkout.html">
   <!-- Favicon -->
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="shortcut icon" href="favicon.svg">
@@ -40,7 +39,7 @@
     <p class="age-modal-desc">Este site comercializa bebidas alcoólicas. O acesso é permitido apenas para maiores de idade.</p>
     <div class="age-modal-btns">
       <button class="age-yes" onclick="confirmAge()">Sim, tenho 18+</button>
-      <button class="age-no" onclick="denyAge()">Não, sou menor</button>
+      <button class="age-no"  onclick="denyAge()">Não, sou menor</button>
     </div>
   </div>
 </div>
@@ -68,14 +67,14 @@
       </div>
       <div class="logo-text-wrap">
         <span class="logo-name">Vinho Prime</span>
-        <span class="logo-tagline">Curadoria & Destilados</span>
+        <span class="logo-tagline">Curadoria &amp; Destilados</span>
       </div>
     </a>
 
     <nav class="header-nav" aria-label="Navegação principal">
       <ul class="nav-list">
         <li class="nav-item">
-          <a href="vinhos.html" class="nav-link" style="color:var(--bordeaux);font-weight:600">
+          <a href="vinhos.html" class="nav-link">
             Vinhos
             <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
           </a>
@@ -102,7 +101,7 @@
         </li>
         <li class="nav-item"><a href="index.html#sommelier" class="nav-link nav-link--highlight">Seleção do Sommelier</a></li>
         <li class="nav-item"><a href="index.html#ofertas" class="nav-link nav-link--offers">Ofertas 🔥</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">Box & Kits</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">Box &amp; Kits</a></li>
         <li class="nav-item"><a href="#" class="nav-link">Clube</a></li>
         <li class="nav-item"><a href="#" class="nav-link">Blog</a></li>
       </ul>
@@ -168,106 +167,292 @@
 <!-- ============================================================
      BREADCRUMB
      ============================================================ -->
-<nav class="breadcrumb" aria-label="Caminho">
-  <div class="container breadcrumb-inner" id="cat-breadcrumb">
+<div class="checkout-breadcrumb">
+  <div class="container checkout-breadcrumb-inner">
     <a href="index.html">Home</a>
-    <span class="breadcrumb-sep">›</span>
-    <span class="breadcrumb-current">Vinhos</span>
+    <span class="checkout-breadcrumb-sep">›</span>
+    <span>Checkout</span>
   </div>
-</nav>
-
-<!-- ============================================================
-     HERO DO CATÁLOGO
-     ============================================================ -->
-<section class="catalogo-hero">
-  <div class="container catalogo-hero-inner">
-    <div class="catalogo-hero-label">Curadoria Especializada</div>
-    <h1 class="catalogo-hero-title" id="cat-titulo">Vinhos</h1>
-    <p class="catalogo-hero-sub" id="cat-subtitulo">Tintos, brancos, rosés, espumantes e naturais selecionados pelo sommelier</p>
-  </div>
-</section>
+</div>
 
 <!-- ============================================================
      CONTEÚDO PRINCIPAL
      ============================================================ -->
 <main>
   <div class="container">
-    <div class="catalogo-layout">
 
-      <!-- ---- Overlay Mobile ---- -->
-      <div class="filtros-overlay" id="filtros-overlay" onclick="Catalogo.fecharFiltrosMobile()"></div>
+    <!-- Estado: carrinho vazio (visível enquanto JS não carrega ou carrinho estiver vazio) -->
+    <div class="checkout-vazio" id="checkout-vazio" style="display:none">
+      <div class="checkout-vazio-icone">🛒</div>
+      <h2 class="checkout-vazio-titulo">Seu carrinho está vazio</h2>
+      <p class="checkout-vazio-desc">Adicione produtos antes de finalizar a compra.</p>
+      <a href="vinhos.html" class="btn btn-gold">Ver vinhos</a>
+    </div>
 
-      <!-- ---- Sidebar de Filtros ---- -->
-      <aside class="filtros-sidebar" id="filtros-sidebar" aria-label="Filtros">
-        <div class="filtros-card">
-          <div class="filtros-header">
-            <span class="filtros-titulo">Filtros</span>
-            <span class="filtros-limpar" onclick="Catalogo.limparFiltros()">Limpar tudo</span>
-          </div>
-          <div id="filtros-corpo">
-            <!-- Populado pelo catalogo.js -->
-            <div style="padding:1rem;display:flex;flex-direction:column;gap:.75rem">
-              <div class="sk-card" style="height:32px;border-radius:6px"></div>
-              <div class="sk-card" style="height:32px;border-radius:6px"></div>
-              <div class="sk-card" style="height:32px;border-radius:6px"></div>
-              <div class="sk-card" style="height:32px;border-radius:6px"></div>
+    <!-- Tela de confirmação pós-pedido -->
+    <div class="checkout-confirmacao" id="checkout-confirmacao">
+      <div class="checkout-conf-icone">✅</div>
+      <h2 class="checkout-conf-titulo">Pedido enviado!</h2>
+      <p class="checkout-conf-desc">Sua mensagem foi enviada via WhatsApp. Nossa equipe entrará em contato em breve para confirmar o pagamento e o envio.</p>
+      <div class="checkout-conf-num" id="checkout-conf-num">VP-000000</div>
+      <a href="index.html" class="btn btn-gold">Continuar comprando</a>
+    </div>
+
+    <!-- Layout principal do checkout -->
+    <div class="checkout-layout" id="checkout-layout">
+
+      <!-- ---- Coluna do formulário ---- -->
+      <div class="checkout-form-col">
+        <h1 class="checkout-titulo">Finalizar Compra</h1>
+
+        <form id="form-checkout" novalidate>
+
+          <!-- Seção 1: Dados pessoais -->
+          <div class="checkout-secao">
+            <h2 class="checkout-secao-titulo">
+              <span class="secao-num">1</span>
+              Seus dados
+            </h2>
+            <div class="form-grid">
+              <div class="form-campo col-full">
+                <label class="form-label" for="nome">Nome completo <span>*</span></label>
+                <input class="form-input" type="text" id="nome" name="nome" autocomplete="name" placeholder="João da Silva">
+                <span class="form-msg-erro" id="erro-nome">Por favor, informe seu nome.</span>
+              </div>
+              <div class="form-campo">
+                <label class="form-label" for="cpf">CPF <span>*</span></label>
+                <input class="form-input" type="text" id="cpf" name="cpf" autocomplete="off" placeholder="000.000.000-00" maxlength="14" oninput="Checkout.mascaraCPF(this)">
+                <span class="form-msg-erro" id="erro-cpf">CPF inválido.</span>
+              </div>
+              <div class="form-campo">
+                <label class="form-label" for="email">E-mail <span>*</span></label>
+                <input class="form-input" type="email" id="email" name="email" autocomplete="email" placeholder="joao@email.com">
+                <span class="form-msg-erro" id="erro-email">E-mail inválido.</span>
+              </div>
+              <div class="form-campo col-full">
+                <label class="form-label" for="whatsapp">WhatsApp <span>*</span></label>
+                <input class="form-input" type="tel" id="whatsapp" name="whatsapp" autocomplete="tel" placeholder="(11) 99999-9999" maxlength="15" oninput="Checkout.mascaraTel(this)">
+                <span class="form-msg-erro" id="erro-whatsapp">Informe um WhatsApp válido.</span>
+              </div>
             </div>
           </div>
+
+          <!-- Seção 2: Entrega -->
+          <div class="checkout-secao">
+            <h2 class="checkout-secao-titulo">
+              <span class="secao-num">2</span>
+              Endereço de entrega
+            </h2>
+            <div class="form-grid">
+              <div class="form-campo">
+                <label class="form-label" for="cep">CEP <span>*</span></label>
+                <div class="cep-row">
+                  <div class="form-campo" style="margin:0">
+                    <input class="form-input" type="text" id="cep" name="cep" placeholder="00000-000" maxlength="9" oninput="Checkout.mascaraCEP(this)">
+                  </div>
+                  <button type="button" class="cep-buscar-btn" onclick="Checkout.buscarCEP()">Buscar</button>
+                </div>
+                <span class="cep-status" id="cep-status"></span>
+                <span class="form-msg-erro" id="erro-cep">CEP inválido.</span>
+              </div>
+              <div class="form-campo">
+                <label class="form-label" for="estado">Estado <span>*</span></label>
+                <select class="form-select" id="estado" name="estado">
+                  <option value="">Selecione</option>
+                  <option value="AC">AC</option><option value="AL">AL</option><option value="AP">AP</option>
+                  <option value="AM">AM</option><option value="BA">BA</option><option value="CE">CE</option>
+                  <option value="DF">DF</option><option value="ES">ES</option><option value="GO">GO</option>
+                  <option value="MA">MA</option><option value="MT">MT</option><option value="MS">MS</option>
+                  <option value="MG">MG</option><option value="PA">PA</option><option value="PB">PB</option>
+                  <option value="PR">PR</option><option value="PE">PE</option><option value="PI">PI</option>
+                  <option value="RJ">RJ</option><option value="RN">RN</option><option value="RS">RS</option>
+                  <option value="RO">RO</option><option value="RR">RR</option><option value="SC">SC</option>
+                  <option value="SP">SP</option><option value="SE">SE</option><option value="TO">TO</option>
+                </select>
+                <span class="form-msg-erro" id="erro-estado">Selecione o estado.</span>
+              </div>
+              <div class="form-campo col-full">
+                <label class="form-label" for="endereco">Rua / Avenida <span>*</span></label>
+                <input class="form-input" type="text" id="endereco" name="endereco" autocomplete="street-address" placeholder="Rua das Flores">
+                <span class="form-msg-erro" id="erro-endereco">Informe o endereço.</span>
+              </div>
+              <div class="form-campo">
+                <label class="form-label" for="numero">Número <span>*</span></label>
+                <input class="form-input" type="text" id="numero" name="numero" placeholder="123">
+                <span class="form-msg-erro" id="erro-numero">Informe o número.</span>
+              </div>
+              <div class="form-campo">
+                <label class="form-label" for="complemento">Complemento</label>
+                <input class="form-input" type="text" id="complemento" name="complemento" placeholder="Apto 4B (opcional)">
+              </div>
+              <div class="form-campo">
+                <label class="form-label" for="bairro">Bairro <span>*</span></label>
+                <input class="form-input" type="text" id="bairro" name="bairro" placeholder="Centro">
+                <span class="form-msg-erro" id="erro-bairro">Informe o bairro.</span>
+              </div>
+              <div class="form-campo">
+                <label class="form-label" for="cidade">Cidade <span>*</span></label>
+                <input class="form-input" type="text" id="cidade" name="cidade" placeholder="São Paulo">
+                <span class="form-msg-erro" id="erro-cidade">Informe a cidade.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Seção 3: Pagamento -->
+          <div class="checkout-secao">
+            <h2 class="checkout-secao-titulo">
+              <span class="secao-num">3</span>
+              Forma de pagamento
+            </h2>
+
+            <div class="pagamento-opcoes" role="radiogroup" aria-label="Forma de pagamento">
+
+              <!-- PIX -->
+              <div class="pag-opcao ativo" id="pag-pix" onclick="Checkout.selecionarPagamento('pix')">
+                <label class="pag-label">
+                  <input type="radio" name="pagamento" value="pix" checked>
+                  <div class="pag-icone">💰</div>
+                  <div class="pag-info">
+                    <p class="pag-titulo">PIX</p>
+                    <p class="pag-desc">5% de desconto · Confirmação imediata</p>
+                  </div>
+                  <div class="pag-check"></div>
+                </label>
+                <div class="pag-detalhe visivel" id="detalhe-pix">
+                  <div class="pix-bloco">
+                    <div class="pix-qr-placeholder">📱</div>
+                    <div class="pix-info">
+                      <p class="pix-label">Chave PIX (copie e pague)</p>
+                      <div class="pix-chave" onclick="Checkout.copiarPix(this)" title="Clique para copiar">
+                        <span class="pix-copy-msg" id="pix-copy-msg">Copiado!</span>
+                        <!-- ATENÇÃO: substitua pela sua chave PIX real -->
+                        pague@vinhoprime.com.br
+                      </div>
+                      <div class="pix-desconto-tag">✅ 5% OFF aplicado automaticamente</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Cartão de crédito -->
+              <div class="pag-opcao" id="pag-cartao" onclick="Checkout.selecionarPagamento('cartao')">
+                <label class="pag-label">
+                  <input type="radio" name="pagamento" value="cartao">
+                  <div class="pag-icone">💳</div>
+                  <div class="pag-info">
+                    <p class="pag-titulo">Cartão de crédito</p>
+                    <p class="pag-desc">Até 12x sem juros</p>
+                  </div>
+                  <div class="pag-check"></div>
+                </label>
+                <div class="pag-detalhe" id="detalhe-cartao">
+                  <div class="cartao-grid">
+                    <div class="form-campo">
+                      <label class="form-label" for="cartao-numero">Número do cartão</label>
+                      <input class="form-input cartao-numero" type="text" id="cartao-numero" placeholder="0000 0000 0000 0000" maxlength="19" oninput="Checkout.mascaraCartao(this)">
+                      <p class="cartao-bandeira-tag" id="cartao-bandeira"></p>
+                    </div>
+                    <div class="form-campo">
+                      <label class="form-label" for="cartao-nome">Nome no cartão</label>
+                      <input class="form-input" type="text" id="cartao-nome" placeholder="JOÃO DA SILVA" style="text-transform:uppercase">
+                    </div>
+                    <div class="form-grid">
+                      <div class="form-campo">
+                        <label class="form-label" for="cartao-validade">Validade</label>
+                        <input class="form-input" type="text" id="cartao-validade" placeholder="MM/AA" maxlength="5" oninput="Checkout.mascaraValidade(this)">
+                      </div>
+                      <div class="form-campo">
+                        <label class="form-label" for="cartao-cvv">CVV</label>
+                        <input class="form-input" type="text" id="cartao-cvv" placeholder="123" maxlength="4">
+                      </div>
+                    </div>
+                    <div class="form-campo">
+                      <label class="form-label" for="cartao-parcelas">Parcelamento</label>
+                      <select class="form-select" id="cartao-parcelas"></select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Boleto -->
+              <div class="pag-opcao" id="pag-boleto" onclick="Checkout.selecionarPagamento('boleto')">
+                <label class="pag-label">
+                  <input type="radio" name="pagamento" value="boleto">
+                  <div class="pag-icone">📄</div>
+                  <div class="pag-info">
+                    <p class="pag-titulo">Boleto bancário</p>
+                    <p class="pag-desc">Vence em 3 dias úteis</p>
+                  </div>
+                  <div class="pag-check"></div>
+                </label>
+                <div class="pag-detalhe" id="detalhe-boleto">
+                  <div class="boleto-info">
+                    <div class="boleto-step">
+                      <span class="boleto-step-num">1</span>
+                      <span>Finalize o pedido via WhatsApp</span>
+                    </div>
+                    <div class="boleto-step">
+                      <span class="boleto-step-num">2</span>
+                      <span>Receberá o boleto em até 1 hora no seu e-mail</span>
+                    </div>
+                    <div class="boleto-step">
+                      <span class="boleto-step-num">3</span>
+                      <span>Pague o boleto e aguarde a confirmação (1–2 dias úteis)</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </form>
+      </div><!-- /form-col -->
+
+      <!-- ---- Resumo do pedido (sidebar) ---- -->
+      <aside class="checkout-resumo" aria-label="Resumo do pedido">
+        <div class="resumo-header">
+          <span>Resumo do pedido</span>
+          <span class="resumo-contagem" id="resumo-contagem">0 itens</span>
+        </div>
+        <div class="resumo-itens" id="resumo-itens"></div>
+        <div class="resumo-totais">
+          <div class="resumo-linha">
+            <span>Subtotal</span>
+            <span id="resumo-subtotal">R$ 0,00</span>
+          </div>
+          <div class="resumo-linha">
+            <span>Frete</span>
+            <span id="resumo-frete">—</span>
+          </div>
+          <div class="resumo-linha resumo-linha--pix" id="resumo-linha-pix" style="display:none">
+            <span>Desconto PIX (5%)</span>
+            <span id="resumo-desc-pix">−R$ 0,00</span>
+          </div>
+          <div class="resumo-linha resumo-linha--total">
+            <span>Total</span>
+            <span id="resumo-total">R$ 0,00</span>
+          </div>
+        </div>
+        <div class="resumo-cta">
+          <button type="button" class="btn-finalizar" onclick="Checkout.finalizar()">
+            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.06L2 22l5.1-1.34C8.5 21.53 10.21 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z" fill="none" stroke="white" stroke-width="1.5"/></svg>
+            Finalizar via WhatsApp
+          </button>
+          <p class="checkout-seguranca">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Seus dados estão seguros
+          </p>
         </div>
       </aside>
 
-      <!-- ---- Resultados ---- -->
-      <div class="resultados-area">
+    </div><!-- /checkout-layout -->
 
-        <!-- Toolbar -->
-        <div class="resultados-toolbar">
-          <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap">
-            <button
-              class="btn-filtros-mobile"
-              onclick="Catalogo.abrirFiltrosMobile()"
-              aria-label="Abrir filtros"
-            >
-              ⚙️ Filtros
-              <span class="filtros-badge-mobile" id="badge-filtros-mobile">0</span>
-            </button>
-            <p class="resultados-count" id="resultados-count">Carregando…</p>
-          </div>
-          <div class="ordenacao-wrap">
-            <label class="ordenacao-label" for="ordenacao">Ordenar por:</label>
-            <select class="ordenacao-select" id="ordenacao" onchange="Catalogo.mudarOrdem(this.value)">
-              <option value="relevancia">Relevância</option>
-              <option value="preco-asc">Menor preço</option>
-              <option value="preco-desc">Maior preço</option>
-              <option value="mais-vendidos">Mais vendidos</option>
-              <option value="novidades">Novidades</option>
-              <option value="avaliacao">Melhor avaliação</option>
-            </select>
-          </div>
-        </div>
-
-        <!-- Chips de filtros ativos -->
-        <div class="chips-ativos" id="chips-ativos"></div>
-
-        <!-- Grade de Produtos -->
-        <div class="produtos-grid" id="produtos-grid">
-          <div class="sk-card"></div>
-          <div class="sk-card"></div>
-          <div class="sk-card"></div>
-          <div class="sk-card"></div>
-          <div class="sk-card"></div>
-          <div class="sk-card"></div>
-        </div>
-
-        <!-- Paginação -->
-        <div class="paginacao" id="paginacao"></div>
-
-      </div>
-    </div>
   </div>
 </main>
 
 <!-- ============================================================
-     FOOTER (simplificado)
+     FOOTER
      ============================================================ -->
 <footer id="footer" style="margin-top:4rem">
   <div class="container">
@@ -315,7 +500,6 @@
   </div>
 </footer>
 
-
 <!-- ============================================================
      BUSCA GLOBAL
      ============================================================ -->
@@ -333,6 +517,7 @@
 <!-- WhatsApp Flutuante -->
 <div id="whatsapp-float">
   <span class="whatsapp-tooltip">Fale com a gente!</span>
+  <!-- ATENÇÃO: substitua pelo número real: https://wa.me/5511999999999 -->
   <a href="#" class="whatsapp-bubble" aria-label="WhatsApp">
     <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z" fill="white"/><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.06L2 22l5.1-1.34C8.5 21.53 10.21 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z" fill="none" stroke="white" stroke-width="1.5"/></svg>
   </a>
@@ -341,7 +526,7 @@
 <script src="js/db.js"></script>
 <script src="js/app.js"></script>
 <script src="js/busca.js"></script>
-<script src="js/catalogo.js"></script>
+<script src="js/checkout.js"></script>
 <script>
 /* ---- Verificação de maioridade ---- */
 const ageModal = document.getElementById('age-modal');
@@ -352,13 +537,13 @@ function denyAge() { document.body.innerHTML='<div style="display:flex;align-ite
 /* ---- Banner rotativo ---- */
 const msgs = document.querySelectorAll('.banner-msg');
 let bi = 0;
-setInterval(() => { msgs[bi].classList.remove('active'); bi = (bi+1)%msgs.length; msgs[bi].classList.add('active'); }, 3500);
+setInterval(() => { msgs[bi].classList.remove('active'); bi=(bi+1)%msgs.length; msgs[bi].classList.add('active'); }, 3500);
 
 /* ---- Header sticky ---- */
 const header = document.getElementById('header');
 window.addEventListener('scroll', () => header.classList.toggle('scrolled', scrollY > 20), {passive:true});
 
-/* ---- Carrinho ---- */
+/* ---- Carrinho (drawer) ---- */
 function toggleCart() {
   const overlay = document.getElementById('cart-overlay');
   const drawer  = document.getElementById('cart-drawer');
@@ -367,31 +552,25 @@ function toggleCart() {
   document.body.style.overflow = open ? 'hidden' : '';
   if (open) atualizarDrawer();
 }
-
 function atualizarDrawer() {
   const itens = JSON.parse(localStorage.getItem('vp_carrinho') || '[]');
   const itemsEl  = document.getElementById('cart-items');
   const footerEl = document.getElementById('cart-footer');
   const badgeEl  = document.getElementById('cart-count');
-
   const total = itens.reduce((acc, i) => acc + i.preco * i.quantidade, 0);
   const totalItens = itens.reduce((acc, i) => acc + i.quantidade, 0);
-
   badgeEl.textContent = totalItens;
   badgeEl.style.display = totalItens > 0 ? 'flex' : 'none';
-
   if (itens.length === 0) {
     itemsEl.innerHTML = '<div class="cart-empty"><div class="cart-empty-icon">🛒</div><p class="cart-empty-text">Seu carrinho está vazio.</p></div>';
     footerEl.style.display = 'none';
     return;
   }
-
   const faltaFrete = Math.max(0, 299 - total);
   document.getElementById('ship-text').innerHTML = faltaFrete > 0
     ? `Faltam <strong>${faltaFrete.toLocaleString('pt-BR',{style:'currency',currency:'BRL'})}</strong> para frete grátis!`
     : '✅ <strong>Frete grátis</strong> desbloqueado!';
   document.getElementById('ship-bar').style.width = `${Math.min(100, (total/299)*100)}%`;
-
   itemsEl.innerHTML = itens.map(i => `
     <div style="display:flex;gap:.875rem;padding:.875rem 0;border-bottom:1px solid rgba(92,81,70,.1)">
       <div style="width:60px;height:72px;background:linear-gradient(160deg,#5C1515,#3D0C0C);border-radius:8px;flex-shrink:0"></div>
@@ -404,24 +583,10 @@ function atualizarDrawer() {
         </div>
       </div>
     </div>`).join('');
-
   document.getElementById('cart-total').textContent = total.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
   document.getElementById('cart-pix').textContent = `💰 ${(total*.95).toLocaleString('pt-BR',{style:'currency',currency:'BRL'})} no PIX`;
   footerEl.style.display = 'block';
 }
-
-/* Filtro por subtipo via URL */
-window.addEventListener('DOMContentLoaded', () => {
-  const params = new URLSearchParams(window.location.search);
-  const subtipo = params.get('subtipo');
-  if (subtipo) {
-    setTimeout(() => {
-      const cb = document.querySelector(`#filtros-corpo input[value="${subtipo}"]`);
-      if (cb) { cb.checked = true; Catalogo.filtrarSubtipo(cb); }
-    }, 300);
-  }
-});
 </script>
-
 </body>
 </html>
