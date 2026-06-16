@@ -9,8 +9,8 @@
 const DB = (function () {
 
   /* ---- Configuração Supabase ---- */
-  const SUPABASE_URL = '';   // ex: 'https://xyzabc.supabase.co'
-  const SUPABASE_KEY = '';   // anon/public key
+  const SUPABASE_URL = 'https://zpifnlumawnkzxlbmcnq.supabase.co';
+  const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpwaWZubHVtYXdua3p4bGJtY25xIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE1OTQyODMsImV4cCI6MjA5NzE3MDI4M30.taDCuonSaibYKrkZSvOI9JJNKhttp2Ll6uf0gniTUU8';
 
   const TABELA = 'produtos';
   const JSON_FALLBACK = 'dados/produtos.json';
