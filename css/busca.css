@@ -220,8 +220,7 @@ mark.busca-match {
     background: rgba(0,0,0,.4);
     cursor: pointer;
   }
-  /* Posicionamento APENAS quando aberta — evita modal fantasma */
-  .busca-overlay.aberta .busca-modal {
+  .busca-modal {
     position: fixed;
     top: var(--header-h);
     left: 0;
@@ -230,6 +229,8 @@ mark.busca-match {
     max-width: 100%;
     border-radius: 0 0 14px 14px;
     cursor: default;
+  }
+  .busca-overlay.aberta .busca-modal {
     animation: busca-drop-mobile .15s ease both;
   }
   @keyframes busca-drop-mobile {
