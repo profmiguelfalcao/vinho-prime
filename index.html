@@ -764,6 +764,7 @@
     <div class="busca-resultados" id="busca-resultados"></div>
   </div>
 </div>
+<script src="js/nav.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
     <script src="js/db.js"></script>
 <script src="js/app.js"></script>
@@ -815,23 +816,6 @@ const header = document.getElementById('header');
 window.addEventListener('scroll', () => {
   header.classList.toggle('scrolled', window.scrollY > 20);
 }, { passive: true });
-
-/* ---- Mobile Nav ---- */
-function toggleMobileNav() {
-  const nav = document.getElementById('mobile-nav');
-  const toggle = document.getElementById('menu-toggle');
-  const isOpen = nav.classList.toggle('open');
-  toggle.setAttribute('aria-expanded', isOpen);
-  document.body.style.overflow = isOpen ? 'hidden' : '';
-}
-function closeMobileNav() {
-  document.getElementById('mobile-nav').classList.remove('open');
-  document.getElementById('menu-toggle').setAttribute('aria-expanded', 'false');
-  document.body.style.overflow = '';
-}
-function closeMobileNavOutside(e) {
-  if (e.target === document.getElementById('mobile-nav')) closeMobileNav();
-}
 
 /* ---- Cart Drawer ---- */
 function toggleCart() {
