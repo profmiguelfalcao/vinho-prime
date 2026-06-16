@@ -2064,34 +2064,64 @@ h1, h2, h3, h4, h5 {
    RESPONSIVE — MOBILE (≤ 640px)
    ============================================================ */
 @media (max-width: 640px) {
+  :root { --header-h: 58px; }
+
+  .container { padding-inline: 1rem; }
+
+  /* Grids */
+  .grid-4 { grid-template-columns: repeat(2, 1fr); gap: .875rem; }
+  .grid-3 { grid-template-columns: repeat(2, 1fr); gap: .875rem; }
+  .grid-2 { grid-template-columns: 1fr; gap: .875rem; }
+
   .benefits-grid { grid-template-columns: 1fr; }
   .benefit-item { border-right: none !important; }
   .benefit-item:not(:last-child) { border-right: none; border-bottom: 1px solid rgba(92,81,70,.1); padding-bottom: 1rem; }
 
   .banners-grid { grid-template-columns: 1fr; }
-
   .blog-grid { grid-template-columns: 1fr; }
   .testimonials-track { grid-template-columns: 1fr; }
-
   .plans-grid { grid-template-columns: 1fr; }
 
-  .footer-grid { grid-template-columns: 1fr 1fr; }
+  /* Footer */
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
   .footer-brand { grid-column: 1 / -1; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; gap: 1rem; }
 
-  .footer-bottom { flex-direction: column; align-items: flex-start; }
-
+  /* Modais e banners */
   .age-modal-btns { grid-template-columns: 1fr; }
+  #top-banner { font-size: .75rem; padding: .375rem 1rem; }
 
+  /* Seções */
   .vip-inner { grid-template-columns: 1fr; text-align: center; }
   .vip-icon { margin: 0 auto; }
   .vip-benefits { align-items: flex-start; }
-
   .quiz-inner { grid-template-columns: 1fr; }
 
-  #whatsapp-float { bottom: 1.25rem; right: 1.25rem; }
+  /* Headers de seção */
+  .sommelier-header { flex-direction: column; align-items: flex-start; gap: .5rem; }
+  .section-header { flex-direction: column; align-items: flex-start; gap: .5rem; }
+  .section-title { font-size: clamp(1.25rem, 5vw, 1.75rem); }
 
-  .sommelier-header { flex-direction: column; align-items: flex-start; }
-  .section-header { flex-direction: column; align-items: flex-start; }
+  /* Hero */
+  .hero-ctas { flex-direction: column; gap: .75rem; }
+  .hero-ctas .btn { width: 100%; justify-content: center; }
+
+  /* Cards de produto mais compactos */
+  .produto-card { border-radius: 10px; }
+  .produto-img { height: 180px; }
+  .produto-info { padding: .75rem; }
+  .produto-nome { font-size: .875rem; }
+  .produto-preco-atual { font-size: 1rem; }
+
+  /* WhatsApp float */
+  #whatsapp-float { bottom: 1.25rem; right: 1.25rem; }
+  .whatsapp-bubble { width: 50px; height: 50px; }
+}
+
+/* ---- Telas muito pequenas (≤ 380px) ---- */
+@media (max-width: 380px) {
+  .grid-4 { grid-template-columns: 1fr; gap: .75rem; }
+  .grid-3 { grid-template-columns: 1fr; gap: .75rem; }
 }
 
 /* ============================================================

@@ -29,8 +29,9 @@ const Busca = (function () {
     }
   }
 
-  /* ---- Posicionar modal abaixo da lupa ---- */
+  /* ---- Posicionar modal abaixo da lupa (desktop only) ---- */
   function _posicionar() {
+    if (window.innerWidth <= 640) return; // mobile: CSS cuida do posicionamento
     const modal = document.querySelector('.busca-modal');
     const btn   = document.querySelector('.action-btn[aria-label="Buscar"]');
     if (!modal || !btn) return;
@@ -65,6 +66,9 @@ const Busca = (function () {
     _aberta = false;
     overlay.classList.remove('aberta');
     clearTimeout(_timer);
+    // Limpar inline styles para não conflitar com CSS mobile
+    const modal = document.querySelector('.busca-modal');
+    if (modal) { modal.style.top = ''; modal.style.right = ''; modal.style.left = ''; }
   }
 
   /* ---- Alternar (clique no botão da lupa) ---- */

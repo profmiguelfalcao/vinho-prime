@@ -215,12 +215,17 @@ mark.busca-match {
 
 /* ---- Mobile: painel ocupa a largura toda abaixo do header ---- */
 @media (max-width: 640px) {
+  .busca-overlay.aberta {
+    pointer-events: auto;
+    background: rgba(0,0,0,.35);
+  }
   .busca-modal {
     position: fixed;
-    top: var(--header-h);
-    left: 0;
-    right: 0;
-    width: 100%;
+    top: var(--header-h) !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    max-width: 100%;
     border-radius: 0 0 14px 14px;
     animation: busca-drop-mobile .15s ease both;
   }
