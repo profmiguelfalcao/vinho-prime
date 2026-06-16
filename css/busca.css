@@ -218,6 +218,7 @@ mark.busca-match {
   .busca-overlay.aberta {
     pointer-events: auto;
     background: rgba(0,0,0,.35);
+    cursor: pointer;
   }
   .busca-modal {
     position: fixed;

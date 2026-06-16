@@ -177,13 +177,15 @@ const Busca = (function () {
     if ((e.ctrlKey || e.metaKey) && e.key === 'k') { e.preventDefault(); abrir(); }
   });
 
-  // Clique fora do modal fecha
-  document.addEventListener('click', e => {
+  // Clique/toque fora do modal fecha (capture:true + touchstart para iOS)
+  function _cliqueForaHandler(e) {
     if (!_aberta) return;
     const modal = e.target.closest('.busca-modal');
     const btn   = e.target.closest('.action-btn[aria-label="Buscar"]');
     if (!modal && !btn) fechar();
-  }, true); // capture: true para pegar antes de outros handlers
+  }
+  document.addEventListener('click',      _cliqueForaHandler, true);
+  document.addEventListener('touchstart', _cliqueForaHandler, { capture: true, passive: true });
 
   return { abrir, fechar, alternar, aoDigitar };
 

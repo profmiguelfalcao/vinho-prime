@@ -2106,12 +2106,13 @@ h1, h2, h3, h4, h5 {
   .hero-ctas { flex-direction: column; gap: .75rem; }
   .hero-ctas .btn { width: 100%; justify-content: center; }
 
-  /* Cards de produto mais compactos */
-  .produto-card { border-radius: 10px; }
-  .produto-img { height: 180px; }
-  .produto-info { padding: .75rem; }
-  .produto-nome { font-size: .875rem; }
-  .produto-preco-atual { font-size: 1rem; }
+  /* Cards de produto */
+  .product-card { border-radius: 10px; }
+  .card-img-wrap { aspect-ratio: 4/3; }
+  .card-body { padding: .75rem; }
+  .card-name { font-size: .875rem; }
+  .price-current { font-size: 1rem; }
+  .card-add-btn { padding: .6rem .75rem; font-size: .75rem; }
 
   /* WhatsApp float */
   #whatsapp-float { bottom: 1.25rem; right: 1.25rem; }
