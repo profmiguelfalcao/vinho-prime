@@ -228,6 +228,7 @@ mark.busca-match {
     width: 100%;
     max-width: 100%;
     border-radius: 0 0 14px 14px;
+    cursor: default;
   }
   .busca-overlay.aberta .busca-modal {
     animation: busca-drop-mobile .15s ease both;
@@ -237,4 +238,15 @@ mark.busca-match {
     to   { opacity: 1; transform: none; }
   }
   .busca-resultados { max-height: 55vh; }
+
+  /* Botão fechar maior no mobile */
+  .busca-fechar-btn {
+    font-size: .75rem;
+    padding: .35rem .6rem;
+    min-width: 2.25rem;
+    min-height: 2.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }

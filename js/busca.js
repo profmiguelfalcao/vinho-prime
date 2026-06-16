@@ -64,13 +64,11 @@ const Busca = (function () {
 
   /* ---- Fechar ---- */
   function fechar() {
-    if (!_aberta) return;
+    _aberta = false;
+    clearTimeout(_timer);
     const overlay = document.getElementById('busca-overlay');
     if (!overlay) return;
-    _aberta = false;
     overlay.classList.remove('aberta');
-    clearTimeout(_timer);
-    // Limpar inline styles para não conflitar com CSS mobile
     const modal = document.querySelector('.busca-modal');
     if (modal) { modal.style.top = ''; modal.style.right = ''; modal.style.left = ''; }
   }
@@ -174,6 +172,9 @@ const Busca = (function () {
   }
 
   /* ---- Eventos globais ---- */
+
+  // Garante estado limpo ao restaurar do bfcache (back/forward navigation)
+  window.addEventListener('pageshow', () => fechar());
 
   // ESC fecha, Ctrl+K abre
   document.addEventListener('keydown', e => {
