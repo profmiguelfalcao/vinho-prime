@@ -2,15 +2,20 @@
    Vinho Prime — Busca Global (dropdown flutuante)
    ============================================================ */
 
-/* ---- Overlay invisível (captura clique fora para fechar) ---- */
+/* ---- Overlay: cobre a tela quando aberto, fecha ao clicar fora ---- */
 .busca-overlay {
   display: none;
   position: fixed;
   inset: 0;
   z-index: 1100;
-  pointer-events: none; /* fundo invisível não bloqueia cliques */
+  pointer-events: none;
+  cursor: default;
 }
-.busca-overlay.aberta { display: block; }
+.busca-overlay.aberta {
+  display: block;
+  pointer-events: auto; /* captura cliques fora do modal */
+  cursor: pointer;      /* indica que é clicável para fechar */
+}
 
 /* ---- Painel flutuante (top/right definidos via JS) ---- */
 .busca-modal {
@@ -18,6 +23,7 @@
   width: 420px;
   max-width: calc(100vw - 2rem);
   pointer-events: auto;
+  cursor: default;
   background: #fff;
   border-radius: 14px;
   box-shadow:
@@ -220,9 +226,7 @@ mark.busca-match {
 /* ---- Mobile: painel ocupa a largura toda abaixo do header ---- */
 @media (max-width: 640px) {
   .busca-overlay.aberta {
-    pointer-events: auto;
-    background: rgba(0,0,0,.4);
-    cursor: pointer;
+    background: rgba(0,0,0,.4); /* backdrop escuro no mobile */
   }
   .busca-modal {
     position: fixed;
@@ -232,7 +236,6 @@ mark.busca-match {
     width: 100%;
     max-width: 100%;
     border-radius: 0 0 14px 14px;
-    cursor: default;
   }
   .busca-overlay.aberta .busca-modal {
     animation: busca-drop-mobile .15s ease both;

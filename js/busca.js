@@ -170,9 +170,9 @@ const Busca = (function () {
       </a>`;
   }
 
-  /* ---- Eventos globais ---- */
+  /* ---- Eventos ---- */
 
-  // Garante estado limpo ao carregar/restaurar do bfcache
+  // Garante estado limpo ao restaurar do bfcache
   window.addEventListener('pageshow', () => fechar());
 
   // ESC fecha, Ctrl+K abre
@@ -181,15 +181,15 @@ const Busca = (function () {
     if ((e.ctrlKey || e.metaKey) && e.key === 'k') { e.preventDefault(); abrir(); }
   });
 
-  // Clique FORA do modal fecha — apenas 'click' (capture).
-  // Não usamos touchstart pois ele dispara antes do click sintético:
-  // touchstart fecha → click sintético cai na lupa → busca reabre.
-  document.addEventListener('click', function _cliqueForaHandler(e) {
-    if (!_aberta) return;
-    if (e.target.closest('.busca-modal')) return;
-    if (e.target.closest('.action-btn[aria-label="Buscar"]')) return;
-    fechar();
-  }, true);
+  // Fechar ao clicar no overlay (fora do modal) — registrado via JS
+  // para garantir que o elemento já existe no DOM
+  document.addEventListener('DOMContentLoaded', () => {
+    const overlay = document.getElementById('busca-overlay');
+    if (!overlay) return;
+    overlay.addEventListener('click', e => {
+      if (e.target === overlay) fechar();
+    });
+  });
 
   return { abrir, fechar, alternar, aoDigitar };
 
