@@ -81,6 +81,8 @@ const VinhoPrime = (() => {
         : '✅ <strong>Frete grátis</strong> desbloqueado!';
       if (shipBar) shipBar.style.width = Math.min(100, (total / 299) * 100) + '%';
       if (this.itens.length === 0) {
+        if (shipText) shipText.innerHTML = 'Faltam <strong>R$ 299,00</strong> para frete grátis!';
+        if (shipBar)  shipBar.style.width = '0%';
         itemsEl.innerHTML = '<div class="cart-empty"><div class="cart-empty-icon">🛒</div><p class="cart-empty-text">Seu carrinho está vazio.</p></div>';
         if (footerEl) footerEl.style.display = 'none';
         return;
