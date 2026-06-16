@@ -38,37 +38,65 @@ const VinhoPrime = (() => {
       this.atualizarBadge();
     },
 
+    confirmarRemover(id, nome) {
+      var self = this;
+      var modal = document.getElementById('vp-confirm-modal');
+      if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'vp-confirm-modal';
+        modal.style.cssText = 'position:fixed;inset:0;z-index:3000;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.45)';
+        document.body.appendChild(modal);
+      }
+      modal.innerHTML =
+        '<div style="background:#fff;border-radius:14px;padding:1.75rem 1.5rem;max-width:300px;width:calc(100% - 2rem);text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.25)">' +
+          '<p style="font-family:var(--font-display);font-size:1rem;font-weight:700;color:var(--text-main);margin-bottom:.375rem">Remover item?</p>' +
+          '<p style="font-size:.8125rem;color:var(--text-sec);margin-bottom:1.25rem;line-height:1.4">' + nome + '</p>' +
+          '<div style="display:flex;gap:.625rem;justify-content:center">' +
+            '<button id="vp-confirm-cancel" style="flex:1;padding:.625rem;border:1.5px solid rgba(92,81,70,.2);border-radius:8px;background:none;cursor:pointer;font-size:.875rem;font-weight:600;color:var(--text-sec)">Cancelar</button>' +
+            '<button id="vp-confirm-ok" style="flex:1;padding:.625rem;border:none;border-radius:8px;background:var(--bordeaux);color:#fff;cursor:pointer;font-size:.875rem;font-weight:600">Remover</button>' +
+          '</div>' +
+        '</div>';
+      modal.style.display = 'flex';
+      document.getElementById('vp-confirm-cancel').onclick = function() { modal.style.display = 'none'; };
+      document.getElementById('vp-confirm-ok').onclick = function() {
+        modal.style.display = 'none';
+        self.remover(id);
+        self.atualizarDrawer();
+      };
+    },
+
     atualizarDrawer() {
       const itemsEl  = document.getElementById('cart-items');
       const footerEl = document.getElementById('cart-footer');
       const tituloEl = document.querySelector('.cart-drawer-title');
+      const shipText = document.getElementById('ship-text');
+      const shipBar  = document.getElementById('ship-bar');
       if (!itemsEl) return;
       this.atualizarBadge();
       if (tituloEl) tituloEl.textContent = 'Carrinho (' + this.totalItens + ')';
+      const total = this.total;
+      const faltaFrete = Math.max(0, 299 - total);
+      if (shipText) shipText.innerHTML = faltaFrete > 0
+        ? 'Faltam <strong>' + faltaFrete.toLocaleString('pt-BR', {style:'currency',currency:'BRL'}) + '</strong> para frete grátis!'
+        : '✅ <strong>Frete grátis</strong> desbloqueado!';
+      if (shipBar) shipBar.style.width = Math.min(100, (total / 299) * 100) + '%';
       if (this.itens.length === 0) {
         itemsEl.innerHTML = '<div class="cart-empty"><div class="cart-empty-icon">🛒</div><p class="cart-empty-text">Seu carrinho está vazio.</p></div>';
         if (footerEl) footerEl.style.display = 'none';
         return;
       }
-      const total = this.total;
-      const faltaFrete = Math.max(0, 299 - total);
-      const shipText = document.getElementById('ship-text');
-      const shipBar  = document.getElementById('ship-bar');
-      if (shipText) shipText.innerHTML = faltaFrete > 0
-        ? 'Faltam <strong>' + faltaFrete.toLocaleString('pt-BR', {style:'currency',currency:'BRL'}) + '</strong> para frete grátis!'
-        : '✅ <strong>Frete grátis</strong> desbloqueado!';
-      if (shipBar) shipBar.style.width = Math.min(100, (total / 299) * 100) + '%';
       itemsEl.innerHTML = this.itens.map(function(i) {
         var max = i.estoque || 999;
         var podeMais = i.quantidade < max;
         var preco = (i.preco * i.quantidade).toLocaleString('pt-BR', {style:'currency',currency:'BRL'});
+        var nomeEsc = i.nome.replace(/'/g, '&#39;');
         return '<div style="display:flex;gap:.875rem;padding:.875rem 0;border-bottom:1px solid rgba(92,81,70,.1)">' +
           '<div style="width:60px;height:72px;background:linear-gradient(160deg,#5C1515,#3D0C0C);border-radius:8px;flex-shrink:0"></div>' +
           '<div style="flex:1;min-width:0">' +
             '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:.5rem">' +
               '<p style="font-family:var(--font-display);font-size:.875rem;font-weight:600;line-height:1.3">' + i.nome + '</p>' +
-              '<button onclick="VinhoPrime.carrinho.remover(\'' + i.id + '\');VinhoPrime.carrinho.atualizarDrawer()" ' +
-                'title="Remover item" aria-label="Remover ' + i.nome + '" ' +
+              '<button onclick="VinhoPrime.carrinho.confirmarRemover(\'' + i.id + '\',\'' + nomeEsc + '\')" ' +
+                'title="Remover item" aria-label="Remover ' + nomeEsc + '" ' +
                 'style="flex-shrink:0;background:none;border:none;cursor:pointer;padding:.25rem;color:var(--text-light);transition:color .15s" ' +
                 'onmouseover="this.style.color=\'var(--bordeaux)\'" onmouseout="this.style.color=\'var(--text-light)\'">' +
                 '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="pointer-events:none"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/></svg>' +
