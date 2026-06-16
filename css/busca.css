@@ -56,19 +56,23 @@
 #busca-input::placeholder { color: var(--text-light); }
 
 .busca-fechar-btn {
-  font-size: .625rem;
-  font-weight: 700;
-  letter-spacing: .04em;
   color: var(--text-light);
   border: 1.5px solid rgba(92,81,70,.2);
-  border-radius: 4px;
-  padding: .2rem .45rem;
+  border-radius: 6px;
+  padding: .3rem .5rem;
   background: none;
   cursor: pointer;
   flex-shrink: 0;
   transition: border-color .15s, color .15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2rem;
+  min-height: 2rem;
 }
 .busca-fechar-btn:hover { border-color: var(--bordeaux); color: var(--bordeaux); }
+/* SVG dentro de botões não deve capturar eventos de ponteiro */
+.busca-fechar-btn svg { pointer-events: none; }
 
 /* ---- Área de resultados ---- */
 .busca-resultados {
@@ -238,15 +242,4 @@ mark.busca-match {
     to   { opacity: 1; transform: none; }
   }
   .busca-resultados { max-height: 55vh; }
-
-  /* Botão fechar com ícone ✕ */
-  .busca-fechar-btn {
-    padding: .4rem;
-    min-width: 2.25rem;
-    min-height: 2.25rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 6px;
-  }
 }

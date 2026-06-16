@@ -31,7 +31,7 @@ const Busca = (function () {
 
   /* ---- Posicionar modal abaixo da lupa (desktop only) ---- */
   function _posicionar() {
-    if (window.innerWidth <= 640) return; // mobile: CSS cuida do posicionamento
+    if (window.innerWidth <= 640) return;
     const modal = document.querySelector('.busca-modal');
     const btn   = document.querySelector('.action-btn[aria-label="Buscar"]');
     if (!modal || !btn) return;
@@ -47,7 +47,6 @@ const Busca = (function () {
     const overlay = document.getElementById('busca-overlay');
     if (!overlay) return;
 
-    // Limpar inline styles antes de posicionar (necessário para CSS mobile funcionar)
     const modal = document.querySelector('.busca-modal');
     if (modal) { modal.style.top = ''; modal.style.right = ''; modal.style.left = ''; }
 
@@ -136,9 +135,9 @@ const Busca = (function () {
       return;
     }
 
-    const MAX      = 8;
-    const exibir   = lista.slice(0, MAX);
-    const vinhos   = exibir.filter(p => p.tipo === 'vinho');
+    const MAX        = 8;
+    const exibir     = lista.slice(0, MAX);
+    const vinhos     = exibir.filter(p => p.tipo === 'vinho');
     const destilados = exibir.filter(p => p.tipo === 'destilado');
 
     let html = '';
@@ -173,7 +172,7 @@ const Busca = (function () {
 
   /* ---- Eventos globais ---- */
 
-  // Garante estado limpo ao restaurar do bfcache (back/forward navigation)
+  // Garante estado limpo ao carregar/restaurar do bfcache
   window.addEventListener('pageshow', () => fechar());
 
   // ESC fecha, Ctrl+K abre
@@ -182,15 +181,15 @@ const Busca = (function () {
     if ((e.ctrlKey || e.metaKey) && e.key === 'k') { e.preventDefault(); abrir(); }
   });
 
-  // Clique/toque fora do modal fecha (capture:true + touchstart para iOS)
-  function _cliqueForaHandler(e) {
+  // Clique FORA do modal fecha — apenas 'click' (capture).
+  // Não usamos touchstart pois ele dispara antes do click sintético:
+  // touchstart fecha → click sintético cai na lupa → busca reabre.
+  document.addEventListener('click', function _cliqueForaHandler(e) {
     if (!_aberta) return;
-    const modal = e.target.closest('.busca-modal');
-    const btn   = e.target.closest('.action-btn[aria-label="Buscar"]');
-    if (!modal && !btn) fechar();
-  }
-  document.addEventListener('click',      _cliqueForaHandler, true);
-  document.addEventListener('touchstart', _cliqueForaHandler, { capture: true, passive: true });
+    if (e.target.closest('.busca-modal')) return;
+    if (e.target.closest('.action-btn[aria-label="Buscar"]')) return;
+    fechar();
+  }, true);
 
   return { abrir, fechar, alternar, aoDigitar };
 
