@@ -47,6 +47,10 @@ const Busca = (function () {
     const overlay = document.getElementById('busca-overlay');
     if (!overlay) return;
 
+    // Limpar inline styles antes de posicionar (necessário para CSS mobile funcionar)
+    const modal = document.querySelector('.busca-modal');
+    if (modal) { modal.style.top = ''; modal.style.right = ''; modal.style.left = ''; }
+
     _posicionar();
     _aberta = true;
     overlay.classList.add('aberta');

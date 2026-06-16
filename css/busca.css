@@ -217,17 +217,19 @@ mark.busca-match {
 @media (max-width: 640px) {
   .busca-overlay.aberta {
     pointer-events: auto;
-    background: rgba(0,0,0,.35);
+    background: rgba(0,0,0,.4);
     cursor: pointer;
   }
   .busca-modal {
     position: fixed;
-    top: var(--header-h) !important;
-    left: 0 !important;
-    right: 0 !important;
-    width: 100% !important;
+    top: var(--header-h);
+    left: 0;
+    right: 0;
+    width: 100%;
     max-width: 100%;
     border-radius: 0 0 14px 14px;
+  }
+  .busca-overlay.aberta .busca-modal {
     animation: busca-drop-mobile .15s ease both;
   }
   @keyframes busca-drop-mobile {

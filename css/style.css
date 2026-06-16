@@ -49,6 +49,7 @@ html {
   scroll-behavior: smooth;
   font-size: 16px;
   -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -2067,6 +2068,33 @@ h1, h2, h3, h4, h5 {
   :root { --header-h: 58px; }
 
   .container { padding-inline: 1rem; }
+
+  /* ---- Header mobile: ☰ | Logo | 🔍🛒 ---- */
+  .header-inner {
+    position: relative;
+    justify-content: center;
+    gap: 0;
+    padding: 0 1rem;
+  }
+  .logo-tagline { display: none; }
+  .header-nav { display: none; }
+  .header-actions {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: 0;
+    gap: 0;
+  }
+  .menu-toggle {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  /* Esconder wishlist e conta no mobile */
+  .action-btn[aria-label="Lista de desejos"],
+  .action-btn[aria-label="Minha conta"] { display: none; }
 
   /* Grids */
   .grid-4 { grid-template-columns: repeat(2, 1fr); gap: .875rem; }
