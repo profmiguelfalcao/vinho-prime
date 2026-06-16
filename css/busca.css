@@ -14,7 +14,6 @@
 
 /* ---- Painel flutuante (top/right definidos via JS no desktop) ---- */
 .busca-modal {
-  display: none; /* escondido por padrão; mostrado via .aberta abaixo */
   position: fixed;
   width: 420px;
   max-width: calc(100vw - 2rem);
@@ -30,7 +29,6 @@
   z-index: 1101;
 }
 .busca-overlay.aberta .busca-modal {
-  display: block;
   animation: busca-drop .15s ease-out;
 }
 

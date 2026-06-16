@@ -53,10 +53,11 @@ const Busca = (function () {
     const overlay = document.getElementById('busca-overlay');
     if (!overlay) return;
     const modal = document.querySelector('.busca-modal');
-    if (modal) { modal.style.top = ''; modal.style.right = ''; modal.style.left = ''; }
+    if (modal) { modal.style.top = ''; modal.style.right = ''; modal.style.left = ''; modal.style.display = 'none'; }
     _posicionar();
     _aberta = true;
     overlay.classList.add('aberta');
+    if (modal) modal.style.display = 'block';
     _ultimoTermo = '';
     const input = document.getElementById('busca-input');
     if (input) { input.value = ''; setTimeout(function () { input.focus(); }, 60); }
@@ -72,7 +73,7 @@ const Busca = (function () {
     const overlay = document.getElementById('busca-overlay');
     if (overlay) overlay.classList.remove('aberta');
     const modal = document.querySelector('.busca-modal');
-    if (modal) { modal.style.top = ''; modal.style.right = ''; modal.style.left = ''; }
+    if (modal) { modal.style.top = ''; modal.style.right = ''; modal.style.left = ''; modal.style.display = 'none'; }
   }
 
   /* ---- Alternar ---- */
@@ -204,7 +205,10 @@ const Busca = (function () {
   function _resetarBusca() {
     var overlay = document.getElementById('busca-overlay');
     if (overlay) overlay.classList.remove('aberta');
+    var modal = document.querySelector('.busca-modal');
+    if (modal) modal.style.display = 'none';
     _aberta = false;
+    _ultimoTermo = '';
   }
   window.addEventListener('pageshow', _resetarBusca);
   if (document.readyState === 'loading') {
