@@ -220,7 +220,8 @@ mark.busca-match {
     background: rgba(0,0,0,.4);
     cursor: pointer;
   }
-  .busca-modal {
+  /* Posicionamento APENAS quando aberta — evita modal fantasma */
+  .busca-overlay.aberta .busca-modal {
     position: fixed;
     top: var(--header-h);
     left: 0;
@@ -229,8 +230,6 @@ mark.busca-match {
     max-width: 100%;
     border-radius: 0 0 14px 14px;
     cursor: default;
-  }
-  .busca-overlay.aberta .busca-modal {
     animation: busca-drop-mobile .15s ease both;
   }
   @keyframes busca-drop-mobile {
@@ -239,14 +238,14 @@ mark.busca-match {
   }
   .busca-resultados { max-height: 55vh; }
 
-  /* Botão fechar maior no mobile */
+  /* Botão fechar com ícone ✕ */
   .busca-fechar-btn {
-    font-size: .75rem;
-    padding: .35rem .6rem;
+    padding: .4rem;
     min-width: 2.25rem;
     min-height: 2.25rem;
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 6px;
   }
 }
