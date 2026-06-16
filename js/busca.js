@@ -17,13 +17,15 @@ const Busca = (function () {
 
   const EMOJI = { vinho: '🍷', destilado: '🥃' };
 
+  const _norm = s => (s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+
   /* ---- Carregar produtos (lazy) ---- */
   async function _carregar() {
     if (_carregado) return;
     try {
-      const { produtos } = await DB.getProdutos();
-      _produtos = produtos.filter(p => p.ativo);
-      _carregado = true;
+      const res = await DB.getProdutos();
+      _produtos = (res.produtos || []).filter(p => p.ativo);
+      _carregado = _produtos.length > 0;
     } catch (e) {
       console.warn('[Busca] Erro ao carregar produtos:', e);
     }
@@ -72,7 +74,7 @@ const Busca = (function () {
     if (modal) { modal.style.top = ''; modal.style.right = ''; modal.style.left = ''; }
   }
 
-  /* ---- Alternar (clique no botão da lupa) ---- */
+  /* ---- Alternar ---- */
   function alternar() {
     _aberta ? fechar() : abrir();
   }
@@ -81,16 +83,16 @@ const Busca = (function () {
   function aoDigitar(valor) {
     clearTimeout(_timer);
     if (valor.trim().length < 2) { _renderizarDica(); return; }
-    _timer = setTimeout(() => _buscar(valor.trim()), 220);
+    _timer = setTimeout(() => _buscar(valor.trim()), 250);
   }
 
   /* ---- Executar busca ---- */
   function _buscar(termo) {
-    const t = termo.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+    const t = _norm(termo);
     const resultados = _produtos.filter(p => {
       const campos = [p.nome, p.produtor, p.pais, p.regiao, ...(p.uvas || []), p.subtipo, p.descricao]
-        .filter(Boolean).join(' ').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
-      return campos.includes(t);
+        .filter(Boolean).join(' ');
+      return _norm(campos).includes(t);
     });
     _renderizarResultados(resultados, termo);
   }
@@ -127,11 +129,10 @@ const Busca = (function () {
     if (!el) return;
 
     if (!lista.length) {
-      el.innerHTML = `
-        <div class="busca-vazio">
-          <p class="busca-vazio-titulo">Nenhum resultado para "${termo}"</p>
-          <p class="busca-vazio-sub">Tente outro nome, país ou uva.</p>
-        </div>`;
+      const msg = _carregado
+        ? `<p class="busca-vazio-titulo">Nenhum resultado para "<em>${termo}</em>"</p><p class="busca-vazio-sub">Tente outro nome, país ou uva.</p>`
+        : `<p class="busca-vazio-titulo">Carregando catálogo…</p>`;
+      el.innerHTML = `<div class="busca-vazio">${msg}</div>`;
       return;
     }
 
@@ -141,14 +142,12 @@ const Busca = (function () {
     const destilados = exibir.filter(p => p.tipo === 'destilado');
 
     let html = '';
-    if (vinhos.length)     { html += `<div class="busca-grupo-label">Vinhos</div>`; html += vinhos.map(p => _cardHTML(p, termo)).join(''); }
-    if (destilados.length) { html += `<div class="busca-grupo-label">Destilados</div>`; html += destilados.map(p => _cardHTML(p, termo)).join(''); }
+    if (vinhos.length)     { html += `<div class="busca-grupo-label">Vinhos</div>` + vinhos.map(p => _cardHTML(p, termo)).join(''); }
+    if (destilados.length) { html += `<div class="busca-grupo-label">Destilados</div>` + destilados.map(p => _cardHTML(p, termo)).join(''); }
 
     if (lista.length > MAX) {
-      const query = encodeURIComponent(document.getElementById('busca-input')?.value.trim() || '');
-      html += `<button class="busca-ver-todos" onclick="Busca.fechar();location.href='vinhos.html?busca=${query}'">
-        Ver todos os ${lista.length} resultados →
-      </button>`;
+      const q = encodeURIComponent(document.getElementById('busca-input')?.value.trim() || '');
+      html += `<button class="busca-ver-todos" onclick="Busca.fechar();location.href='vinhos.html?busca=${q}'">Ver todos os ${lista.length} resultados →</button>`;
     }
 
     el.innerHTML = html;
@@ -158,7 +157,7 @@ const Busca = (function () {
     const cor   = GRADIENTES[p.subtipo] || '#3D0C0C';
     const preco = (p.preco || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
     const nome  = _destacar(p.nome, termo);
-    const sub   = `${p.produtor || ''} · ${p.pais || ''}`.replace(/^ · | · $/, '');
+    const sub   = [p.produtor, p.pais].filter(Boolean).join(' · ');
     return `
       <a class="busca-resultado" href="produto.html?slug=${p.slug}" onclick="Busca.fechar()">
         <div class="busca-resultado-img" style="background:${cor}">${EMOJI[p.tipo] || '🍾'}</div>
@@ -172,24 +171,22 @@ const Busca = (function () {
 
   /* ---- Eventos ---- */
 
-  // Garante estado limpo ao restaurar do bfcache
-  window.addEventListener('pageshow', () => fechar());
+  // Fechar ao clicar fora do modal (click em capture = antes do target)
+  document.addEventListener('click', function (e) {
+    if (!_aberta) return;
+    if (e.target.closest('.busca-modal')) return;
+    if (e.target.closest('[aria-label="Buscar"]')) return;
+    fechar();
+  }, true);
 
   // ESC fecha, Ctrl+K abre
-  document.addEventListener('keydown', e => {
+  document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') fechar();
     if ((e.ctrlKey || e.metaKey) && e.key === 'k') { e.preventDefault(); abrir(); }
   });
 
-  // Fechar ao clicar no overlay (fora do modal) — registrado via JS
-  // para garantir que o elemento já existe no DOM
-  document.addEventListener('DOMContentLoaded', () => {
-    const overlay = document.getElementById('busca-overlay');
-    if (!overlay) return;
-    overlay.addEventListener('click', e => {
-      if (e.target === overlay) fechar();
-    });
-  });
+  // Garante estado limpo ao restaurar do bfcache
+  window.addEventListener('pageshow', function () { fechar(); });
 
   return { abrir, fechar, alternar, aoDigitar };
 
