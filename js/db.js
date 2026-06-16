@@ -21,7 +21,12 @@ const DB = (function () {
   function client() {
     if (_client) return _client;
     if (!ativo) return null;
-    _client = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    try {
+      _client = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    } catch (e) {
+      console.warn('[DB] SDK Supabase não disponível, usando JSON:', e.message);
+      return null;
+    }
     return _client;
   }
 
