@@ -589,5 +589,14 @@
 <script src="js/app.js"></script>
 <script src="js/busca.js"></script>
 <script src="js/quiz.js"></script>
+<script>
+const ageModal = document.getElementById('age-modal');
+if (localStorage.getItem('vp_age_ok') === '1') ageModal.classList.remove('active');
+function confirmAge() { localStorage.setItem('vp_age_ok','1'); ageModal.classList.remove('active'); }
+function denyAge() { document.body.innerHTML='<div style="display:flex;align-items:center;justify-content:center;height:100vh;background:#3D0C0C;color:#F8F4EE;font-family:Georgia,serif;text-align:center"><div><p style="font-size:2rem">🔞</p><h1>Acesso restrito</h1><p>Apenas maiores de 18 anos.</p></div></div>'; }
+function acceptCookies() { localStorage.setItem('vp_cookies','1'); document.getElementById('cookie-banner').style.display='none'; }
+function declineCookies() { document.getElementById('cookie-banner').style.display='none'; }
+if (localStorage.getItem('vp_cookies')) document.getElementById('cookie-banner').style.display='none';
+</script>
 </body>
 </html>
