@@ -227,54 +227,22 @@
 <div id="cart-overlay" onclick="toggleCart()"></div>
 <aside id="cart-drawer" aria-label="Carrinho de compras">
   <div class="cart-drawer-header">
-    <h2 class="cart-drawer-title">Carrinho (2)</h2>
+    <h2 class="cart-drawer-title">Carrinho (0)</h2>
     <button class="cart-close-btn" onclick="toggleCart()" aria-label="Fechar carrinho">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
   </div>
   <div class="free-ship-bar">
-    <p class="free-ship-text">Faltam <strong>R$ 119,00</strong> para frete grátis!</p>
-    <div class="progress-bar"><div class="progress-fill" style="width:60%"></div></div>
+    <p class="free-ship-text" id="ship-text">Faltam <strong>R$ 299,00</strong> para frete grátis!</p>
+    <div class="progress-bar"><div class="progress-fill" id="ship-bar" style="width:0%"></div></div>
   </div>
-  <div class="cart-items">
-    <!-- Sample item -->
-    <div style="display:flex;gap:1rem;padding:1rem 0;border-bottom:1px solid rgba(92,81,70,.1)">
-      <div style="width:64px;height:80px;background:linear-gradient(160deg,#5C1515,#3D0C0C);border-radius:8px;flex-shrink:0"></div>
-      <div style="flex:1">
-        <p style="font-size:.8125rem;color:var(--text-light);margin-bottom:.25rem">Argentina · Malbec</p>
-        <p style="font-family:var(--font-display);font-size:.9375rem;font-weight:600;margin-bottom:.5rem">Achaval Ferrer Malbec 2021</p>
-        <div style="display:flex;align-items:center;justify-content:space-between">
-          <div style="display:flex;align-items:center;gap:.5rem;border:1px solid rgba(92,81,70,.2);border-radius:6px;overflow:hidden">
-            <button style="width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-size:1rem;color:var(--text-sec)" onclick="this.nextElementSibling.textContent=Math.max(1,+this.nextElementSibling.textContent-1)">−</button>
-            <span style="font-size:.875rem;font-weight:600;min-width:20px;text-align:center">1</span>
-            <button style="width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-size:1rem;color:var(--text-sec)" onclick="this.previousElementSibling.textContent=+this.previousElementSibling.textContent+1">+</button>
-          </div>
-          <p style="font-family:var(--font-display);font-weight:700;color:var(--bordeaux)">R$ 89,90</p>
-        </div>
-      </div>
-    </div>
-    <div style="display:flex;gap:1rem;padding:1rem 0">
-      <div style="width:64px;height:80px;background:linear-gradient(160deg,#2A1A0A,#1A0A00);border-radius:8px;flex-shrink:0"></div>
-      <div style="flex:1">
-        <p style="font-size:.8125rem;color:var(--text-light);margin-bottom:.25rem">Escócia · Single Malt</p>
-        <p style="font-family:var(--font-display);font-size:.9375rem;font-weight:600;margin-bottom:.5rem">Glenfiddich 12 Anos</p>
-        <div style="display:flex;align-items:center;justify-content:space-between">
-          <div style="display:flex;align-items:center;gap:.5rem;border:1px solid rgba(92,81,70,.2);border-radius:6px;overflow:hidden">
-            <button style="width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-size:1rem;color:var(--text-sec)">−</button>
-            <span style="font-size:.875rem;font-weight:600;min-width:20px;text-align:center">1</span>
-            <button style="width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-size:1rem;color:var(--text-sec)">+</button>
-          </div>
-          <p style="font-family:var(--font-display);font-weight:700;color:var(--bordeaux)">R$ 209,90</p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="cart-footer">
+  <div class="cart-items" id="cart-items"></div>
+  <div class="cart-footer" id="cart-footer" style="display:none">
     <div class="cart-subtotal">
       <span class="cart-subtotal-label">Subtotal</span>
-      <span class="cart-subtotal-value">R$ 299,80</span>
+      <span class="cart-subtotal-value" id="cart-total">R$ 0,00</span>
     </div>
-    <p class="cart-pix-price">💰 R$ 284,81 no PIX (5% OFF)</p>
+    <p class="cart-pix-price" id="cart-pix">💰 R$ 0,00 no PIX</p>
     <div class="cart-ctas">
       <a href="checkout.html" class="btn btn-gold" style="justify-content:center">Finalizar Compra</a>
       <a href="checkout.html" class="btn btn-outline-gold btn-sm" style="justify-content:center">Ver Carrinho</a>
@@ -824,6 +792,10 @@ function toggleCart() {
   const isOpen = drawer.classList.toggle('open');
   overlay.classList.toggle('open', isOpen);
   document.body.style.overflow = isOpen ? 'hidden' : '';
+  if (isOpen) VinhoPrime.carrinho.atualizarDrawer();
+}
+function atualizarDrawer() {
+  VinhoPrime.carrinho.atualizarDrawer();
 }
 
 /* ---- Countdown Timer ---- */
