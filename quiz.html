@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Quiz de Harmonização Vinho Prime — Descubra qual vinho combina com o seu jantar em segundos.">
+  <title>Quiz de Harmonização — Vinho Prime</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/busca.css">
+  <meta property="og:site_name" content="Vinho Prime">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Quiz de Harmonização — Vinho Prime">
+  <meta property="og:description" content="Descubra qual vinho combina com o seu jantar em segundos.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="shortcut icon" href="favicon.svg">
+  <style>
+    /* ---- Página do quiz ---- */
+    .quiz-hero {
+      background: linear-gradient(135deg, #3D0C0C 0%, #5C1515 60%, #3D0C0C 100%);
+      padding: 4rem 0 3rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .quiz-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 30% 50%, rgba(196,151,58,.12) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .quiz-hero-eyebrow {
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+    .quiz-hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.75rem, 4vw, 2.75rem);
+      font-weight: 700;
+      color: #F8F4EE;
+      margin-bottom: .875rem;
+      line-height: 1.2;
+    }
+    .quiz-hero-sub {
+      font-size: 1rem;
+      color: rgba(248,244,238,.65);
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    /* ---- Step 1: seleção do prato ---- */
+    .quiz-section {
+      padding: 3rem 0 5rem;
+      background: var(--cream);
+      min-height: 60vh;
+    }
+    .quiz-step-label {
+      text-align: center;
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: .5rem;
+    }
+    .quiz-step-question {
+      text-align: center;
+      font-family: var(--font-display);
+      font-size: clamp(1.2rem, 3vw, 1.625rem);
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 2.5rem;
+    }
+    .quiz-pratos-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1rem;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    @media (max-width: 768px) { .quiz-pratos-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 480px) { .quiz-pratos-grid { grid-template-columns: repeat(2, 1fr); } }
+
+    .quiz-prato-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .5rem;
+      padding: 1.25rem .75rem;
+      background: #fff;
+      border: 2px solid rgba(92,81,70,.1);
+      border-radius: 14px;
+      cursor: pointer;
+      transition: border-color .15s, box-shadow .15s, transform .12s;
+      font-family: var(--font-body);
+      color: var(--text-main);
+    }
+    .quiz-prato-btn:hover {
+      border-color: var(--bordeaux);
+      box-shadow: 0 4px 20px rgba(61,12,12,.12);
+      transform: translateY(-2px);
+    }
+    .quiz-prato-emoji { font-size: 2rem; line-height: 1; }
+    .quiz-prato-label { font-size: .8125rem; font-weight: 500; text-align: center; line-height: 1.3; }
+
+    /* ---- Step 2: resultados ---- */
+    .quiz-resultado-section {
+      padding: 3rem 0 5rem;
+      background: var(--cream);
+      min-height: 60vh;
+    }
+    .quiz-resultado-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+    .quiz-resultado-prato {
+      display: inline-block;
+      background: var(--bordeaux);
+      color: #F8F4EE;
+      font-size: .8125rem;
+      font-weight: 600;
+      padding: .3rem .875rem;
+      border-radius: 100px;
+      margin-bottom: 1rem;
+    }
+    .quiz-resultado-titulo {
+      font-family: var(--font-display);
+      font-size: clamp(1.2rem, 3vw, 1.75rem);
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: .625rem;
+    }
+    .quiz-resultado-msg {
+      font-size: .9375rem;
+      color: var(--text-sec);
+      max-width: 520px;
+      margin: 0 auto;
+    }
+    .quiz-nota-catalogo {
+      display: inline-block;
+      background: rgba(196,151,58,.12);
+      border: 1px solid rgba(196,151,58,.3);
+      border-radius: 8px;
+      padding: .5rem 1rem;
+      font-size: .8125rem;
+      color: #7a5c1a;
+      margin-top: 1rem;
+    }
+
+    .quiz-results-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+      max-width: 900px;
+      margin: 0 auto 2.5rem;
+    }
+    @media (max-width: 860px) { .quiz-results-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 480px) { .quiz-results-grid { grid-template-columns: 1fr; } }
+
+    .quiz-result-card {
+      background: #fff;
+      border-radius: 14px;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      border: 1px solid rgba(92,81,70,.1);
+      box-shadow: 0 2px 12px rgba(0,0,0,.05);
+      transition: transform .15s, box-shadow .15s;
+      display: block;
+    }
+    .quiz-result-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(61,12,12,.13);
+    }
+    .quiz-result-img {
+      height: 130px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+    }
+    .quiz-result-body {
+      padding: 1rem;
+      position: relative;
+    }
+    .quiz-result-badge {
+      display: inline-block;
+      background: var(--gold);
+      color: #fff;
+      font-size: .625rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: .2rem .5rem;
+      border-radius: 4px;
+      margin-bottom: .5rem;
+    }
+    .quiz-result-nome {
+      font-family: var(--font-display);
+      font-size: .9375rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: .25rem;
+      line-height: 1.3;
+    }
+    .quiz-result-sub {
+      font-size: .75rem;
+      color: var(--text-sec);
+      margin-bottom: .5rem;
+    }
+    .quiz-result-preco {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--bordeaux);
+    }
+
+    .quiz-reiniciar-wrap {
+      text-align: center;
+    }
+    .quiz-reiniciar-btn {
+      background: none;
+      border: 1.5px solid rgba(61,12,12,.2);
+      border-radius: 8px;
+      padding: .625rem 1.5rem;
+      font-family: var(--font-body);
+      font-size: .875rem;
+      font-weight: 500;
+      color: var(--bordeaux);
+      cursor: pointer;
+      transition: border-color .15s, background .15s;
+    }
+    .quiz-reiniciar-btn:hover {
+      background: rgba(61,12,12,.06);
+      border-color: var(--bordeaux);
+    }
+  </style>
+</head>
+<body>
+
+<div id="age-modal" class="active" role="dialog" aria-modal="true" aria-labelledby="age-title">
+  <div class="age-modal-card">
+    <div class="age-modal-icon">🍷</div>
+    <h2 class="age-modal-title" id="age-title">Você tem 18 anos ou mais?</h2>
+    <p class="age-modal-desc">Este site comercializa bebidas alcoólicas. O acesso é permitido apenas para maiores de idade, conforme legislação brasileira.</p>
+    <div class="age-modal-btns">
+      <button class="age-yes" onclick="confirmAge()">Sim, tenho 18+</button>
+      <button class="age-no" onclick="denyAge()">Não, sou menor</button>
+    </div>
+    <p class="age-legal">Ao entrar, você declara ser maior de 18 anos e concorda com nossos <a href="#" style="color:var(--bordeaux)">Termos de Uso</a>.</p>
+  </div>
+</div>
+
+<div id="cookie-banner" role="region" aria-label="Aviso de cookies">
+  <div class="cookie-inner">
+    <p class="cookie-text">Utilizamos cookies para melhorar sua experiência. Ao continuar, você concorda com nossa <a href="privacidade.html">Política de Privacidade</a> (LGPD).</p>
+    <div class="cookie-btns">
+      <button class="cookie-accept" onclick="acceptCookies()">Aceitar</button>
+      <button class="cookie-decline" onclick="declineCookies()">Recusar</button>
+    </div>
+  </div>
+</div>
+
+<div id="top-banner" role="marquee" aria-live="polite">
+  <div class="banner-messages">
+    <div class="banner-msg active">🚚 Frete grátis acima de R$ 299 em todo o Brasil</div>
+    <div class="banner-msg">🍷 Clube Prime com 15% de desconto todo mês</div>
+    <div class="banner-msg">💳 Parcele em até 12x sem juros no cartão</div>
+    <div class="banner-msg">📦 Embalagem especial anti-impacto para suas garrafas</div>
+  </div>
+</div>
+
+<header id="header">
+  <div class="container header-inner">
+    <a href="index.html" class="header-logo" aria-label="Vinho Prime — Página inicial">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C8 2 5 5.5 5 9c0 3 1.5 5.5 4 7v4h6v-4c2.5-1.5 4-4 4-7 0-3.5-3-7-7-7zm0 2c2.8 0 5 2.7 5 5 0 2.2-1.1 4.1-3 5.3V18h-4v-3.7C8.1 13.1 7 11.2 7 9c0-2.3 2.2-5 5-5z"/></svg>
+      </div>
+      <div class="logo-text-wrap">
+        <span class="logo-name">Vinho Prime</span>
+        <span class="logo-tagline">Curadoria & Destilados</span>
+      </div>
+    </a>
+
+    <nav class="header-nav" aria-label="Navegação principal">
+      <ul class="nav-list">
+        <li class="nav-item">
+          <a href="vinhos.html" class="nav-link">Vinhos
+            <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+          </a>
+          <div class="nav-dropdown">
+            <a href="vinhos.html?subtipo=tinto"><span class="dot"></span>Tintos</a>
+            <a href="vinhos.html?subtipo=branco"><span class="dot"></span>Brancos</a>
+            <a href="vinhos.html?subtipo=rosé"><span class="dot"></span>Rosés</a>
+            <a href="vinhos.html?subtipo=espumante"><span class="dot"></span>Espumantes</a>
+            <a href="vinhos.html?subtipo=natural"><span class="dot"></span>Naturais</a>
+            <a href="#"><span class="dot"></span>Miniaturas</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a href="destilados.html" class="nav-link">Destilados
+            <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+          </a>
+          <div class="nav-dropdown">
+            <a href="destilados.html?subtipo=whisky"><span class="dot"></span>Whisky</a>
+            <a href="destilados.html?subtipo=gin"><span class="dot"></span>Gin</a>
+            <a href="destilados.html?subtipo=cognac"><span class="dot"></span>Cognac</a>
+            <a href="destilados.html?subtipo=rum"><span class="dot"></span>Rum</a>
+            <a href="destilados.html?subtipo=cachaça"><span class="dot"></span>Cachaça Artesanal</a>
+            <a href="destilados.html?subtipo=vodka"><span class="dot"></span>Vodka</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a href="vinhos.html" class="nav-link nav-link--highlight">Seleção do Sommelier</a>
+        </li>
+        <li class="nav-item">
+          <a href="index.html#ofertas" class="nav-link nav-link--offers">Ofertas 🔥</a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">Box & Kits</a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">Clube</a>
+        </li>
+        <li class="nav-item">
+          <a href="quiz.html" class="nav-link nav-link--highlight">Quiz 🍷</a>
+        </li>
+      </ul>
+    </nav>
+
+    <a href="#" class="btn-vip" aria-label="Entrar no Grupo VIP WhatsApp">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.978-1.305A9.94 9.94 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+      Grupo VIP
+    </a>
+
+    <div class="header-actions">
+      <button class="action-btn" aria-label="Buscar" onclick="Busca.alternar()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>
+      </button>
+      <button class="action-btn" aria-label="Lista de desejos">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </button>
+      <button class="action-btn" aria-label="Minha conta">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </button>
+      <button class="action-btn" id="cart-btn" aria-label="Carrinho de compras" onclick="toggleCart()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="cart-badge" id="cart-count">0</span>
+      </button>
+      <button class="menu-toggle" id="menu-toggle" onclick="toggleMobileNav()" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div id="mobile-nav" onclick="closeMobileNavOutside(event)">
+  <div class="mobile-nav-panel">
+    <div class="mobile-nav-header">
+      <div class="header-logo">
+        <div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2C8 2 5 5.5 5 9c0 3 1.5 5.5 4 7v4h6v-4c2.5-1.5 4-4 4-7 0-3.5-3-7-7-7zm0 2c2.8 0 5 2.7 5 5 0 2.2-1.1 4.1-3 5.3V18h-4v-3.7C8.1 13.1 7 11.2 7 9c0-2.3 2.2-5 5-5z" fill="var(--gold)"/></svg></div>
+        <span class="logo-name" style="color:var(--bordeaux)">Vinho Prime</span>
+      </div>
+      <button onclick="closeMobileNav()" aria-label="Fechar menu" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:var(--transition)" onmouseover="this.style.background='var(--cream)'" onmouseout="this.style.background=''">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <nav class="mobile-nav-links">
+      <a href="vinhos.html" class="mobile-nav-link">Vinhos</a>
+      <div class="mobile-nav-sub">
+        <a href="vinhos.html?subtipo=tinto">Tintos</a>
+        <a href="vinhos.html?subtipo=branco">Brancos</a>
+        <a href="vinhos.html?subtipo=rosé">Rosés</a>
+        <a href="vinhos.html?subtipo=espumante">Espumantes</a>
+        <a href="vinhos.html?subtipo=natural">Naturais</a>
+      </div>
+      <a href="destilados.html" class="mobile-nav-link">Destilados</a>
+      <a href="vinhos.html" class="mobile-nav-link mobile-nav-link--highlight">Seleção do Sommelier</a>
+      <a href="index.html#ofertas" class="mobile-nav-link mobile-nav-link--offer">Ofertas 🔥</a>
+      <a href="#" class="mobile-nav-link">Box & Kits</a>
+      <a href="#" class="mobile-nav-link">Clube de Assinatura</a>
+      <a href="quiz.html" class="mobile-nav-link mobile-nav-link--highlight">Quiz de Harmonização 🍷</a>
+      <a href="#" class="mobile-nav-link">Sobre</a>
+      <a href="#" class="mobile-nav-link">Para Empresas</a>
+      <a href="#" class="mobile-nav-link">Contato</a>
+    </nav>
+    <a href="#" class="mobile-nav-vip">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z" fill="currentColor"/></svg>
+      Entrar no Grupo VIP
+    </a>
+  </div>
+</div>
+
+<div id="cart-overlay" onclick="toggleCart()"></div>
+<aside id="cart-drawer" aria-label="Carrinho de compras">
+  <div class="cart-drawer-header">
+    <h2 class="cart-drawer-title">Carrinho</h2>
+    <button class="cart-close-btn" onclick="toggleCart()" aria-label="Fechar carrinho">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <div class="cart-items" id="cart-items-list"></div>
+  <div class="cart-footer" id="cart-footer-wrap"></div>
+</aside>
+
+<!-- BUSCA -->
+<div id="busca-overlay" class="busca-overlay">
+  <div class="busca-modal" role="dialog" aria-label="Busca de produtos">
+    <div class="busca-input-wrap">
+      <svg class="busca-icone" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>
+      <input id="busca-input" type="search" placeholder="Buscar vinhos, países, uvas…" autocomplete="off" oninput="Busca.aoDigitar(this.value)" aria-label="Campo de busca">
+      <button class="busca-fechar-btn" onclick="Busca.fechar()" aria-label="Fechar busca">ESC</button>
+    </div>
+    <div class="busca-resultados" id="busca-resultados"></div>
+  </div>
+</div>
+
+<!-- ============================================================
+     QUIZ
+     ============================================================ -->
+<main>
+
+  <!-- HERO -->
+  <div class="quiz-hero">
+    <div class="container">
+      <p class="quiz-hero-eyebrow">Sommelier Virtual</p>
+      <h1 class="quiz-hero-title">Qual vinho combina<br>com o seu jantar?</h1>
+      <p class="quiz-hero-sub">Responda em segundos e receba a sugestão perfeita do nosso sommelier.</p>
+    </div>
+  </div>
+
+  <!-- STEP 1: escolha do prato -->
+  <section class="quiz-section" id="quiz-step-1">
+    <div class="container">
+      <p class="quiz-step-label">Passo 1 de 1</p>
+      <h2 class="quiz-step-question">O que você vai servir hoje?</h2>
+      <div class="quiz-pratos-grid">
+        <button class="quiz-prato-btn" onclick="Quiz.selecionarPrato('carnes')">
+          <span class="quiz-prato-emoji">🥩</span>
+          <span class="quiz-prato-label">Carnes vermelhas</span>
+        </button>
+        <button class="quiz-prato-btn" onclick="Quiz.selecionarPrato('churrasco')">
+          <span class="quiz-prato-emoji">🔥</span>
+          <span class="quiz-prato-label">Churrasco</span>
+        </button>
+        <button class="quiz-prato-btn" onclick="Quiz.selecionarPrato('frango')">
+          <span class="quiz-prato-emoji">🍗</span>
+          <span class="quiz-prato-label">Frango & Aves</span>
+        </button>
+        <button class="quiz-prato-btn" onclick="Quiz.selecionarPrato('peixe')">
+          <span class="quiz-prato-emoji">🐟</span>
+          <span class="quiz-prato-label">Peixe & Frutos do mar</span>
+        </button>
+        <button class="quiz-prato-btn" onclick="Quiz.selecionarPrato('massas')">
+          <span class="quiz-prato-emoji">🍝</span>
+          <span class="quiz-prato-label">Massas & Risoto</span>
+        </button>
+        <button class="quiz-prato-btn" onclick="Quiz.selecionarPrato('pizza')">
+          <span class="quiz-prato-emoji">🍕</span>
+          <span class="quiz-prato-label">Pizza</span>
+        </button>
+        <button class="quiz-prato-btn" onclick="Quiz.selecionarPrato('queijos')">
+          <span class="quiz-prato-emoji">🧀</span>
+          <span class="quiz-prato-label">Queijos & Frios</span>
+        </button>
+        <button class="quiz-prato-btn" onclick="Quiz.selecionarPrato('sobremesas')">
+          <span class="quiz-prato-emoji">🍰</span>
+          <span class="quiz-prato-label">Sobremesas</span>
+        </button>
+        <button class="quiz-prato-btn" onclick="Quiz.selecionarPrato('aperitivo')">
+          <span class="quiz-prato-emoji">🫒</span>
+          <span class="quiz-prato-label">Aperitivo & Petiscos</span>
+        </button>
+        <button class="quiz-prato-btn" onclick="Quiz.selecionarPrato('destilado')">
+          <span class="quiz-prato-emoji">🥃</span>
+          <span class="quiz-prato-label">Quero um destilado</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 2: resultados -->
+  <section class="quiz-resultado-section" id="quiz-resultado" hidden>
+    <div class="container">
+      <div class="quiz-resultado-header">
+        <span class="quiz-resultado-prato" id="quiz-prato-label"></span>
+        <h2 class="quiz-resultado-titulo">Sugestão do nosso sommelier</h2>
+        <p class="quiz-resultado-msg" id="quiz-mensagem"></p>
+        <p class="quiz-nota-catalogo" id="quiz-nota-catalogo" hidden>
+          Nosso catálogo está crescendo! Por enquanto, estes tintos são as melhores opções disponíveis.
+        </p>
+      </div>
+      <div class="quiz-results-grid" id="quiz-grid"></div>
+      <div class="quiz-reiniciar-wrap">
+        <button class="quiz-reiniciar-btn" onclick="Quiz.reiniciar()">← Fazer outra escolha</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="footer-logo">
+          <div class="logo-icon" style="width:36px;height:36px">
+            <svg viewBox="0 0 24 24"><path d="M12 2C8 2 5 5.5 5 9c0 3 1.5 5.5 4 7v4h6v-4c2.5-1.5 4-4 4-7 0-3.5-3-7-7-7zm0 2c2.8 0 5 2.7 5 5 0 2.2-1.1 4.1-3 5.3V18h-4v-3.7C8.1 13.1 7 11.2 7 9c0-2.3 2.2-5 5-5z" fill="var(--gold)"/></svg>
+          </div>
+          <span class="logo-name" style="color:#F8F4EE">Vinho Prime</span>
+        </a>
+        <p class="footer-tagline">Curadoria especializada de vinhos e destilados premium para quem aprecia o melhor.</p>
+      </div>
+      <div>
+        <h3 class="footer-col-title">Vinhos</h3>
+        <ul class="footer-links">
+          <li><a href="vinhos.html?subtipo=tinto">Tintos</a></li>
+          <li><a href="vinhos.html?subtipo=branco">Brancos</a></li>
+          <li><a href="vinhos.html?subtipo=rosé">Rosés</a></li>
+          <li><a href="vinhos.html?subtipo=espumante">Espumantes</a></li>
+          <li><a href="vinhos.html?subtipo=natural">Naturais</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="footer-col-title">Destilados</h3>
+        <ul class="footer-links">
+          <li><a href="destilados.html?subtipo=whisky">Whisky</a></li>
+          <li><a href="destilados.html?subtipo=gin">Gin</a></li>
+          <li><a href="destilados.html?subtipo=cognac">Cognac</a></li>
+          <li><a href="destilados.html?subtipo=rum">Rum</a></li>
+          <li><a href="#">Box & Kits</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="footer-col-title">A Empresa</h3>
+        <ul class="footer-links">
+          <li><a href="#">Quem Somos</a></li>
+          <li><a href="#">Clube de Assinatura</a></li>
+          <li><a href="quiz.html">Quiz de Harmonização</a></li>
+          <li><a href="#">Para Empresas</a></li>
+          <li><a href="index.html#ofertas">Ofertas</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="footer-col-title">Atendimento</h3>
+        <ul class="footer-links">
+          <li><a href="#">Fale Conosco</a></li>
+          <li><a href="#">Rastrear Pedido</a></li>
+          <li><a href="privacidade.html">Política de Privacidade</a></li>
+          <li><a href="#">Termos de Uso</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal-warning">
+        <div class="warning-icon" aria-hidden="true">🔞</div>
+        <div class="warning-text">Venda e consumo de bebidas alcoólicas proibidos para menores de 18 anos.<span>Lei nº 8.069/90 — Estatuto da Criança e do Adolescente. Beba com moderação.</span></div>
+      </div>
+      <p class="footer-copy">© 2026 Vinho Prime Distribuidora de Bebidas LTDA. CNPJ: 00.000.000/0001-00</p>
+      <div class="payment-icons" aria-label="Formas de pagamento">
+        <span class="payment-icon payment-icon--pix">PIX</span>
+        <span class="payment-icon payment-icon--visa">VISA</span>
+        <span class="payment-icon payment-icon--mc"><span class="mc-circles"><span class="mc-circle-r"></span><span class="mc-circle-r"></span></span></span>
+        <span class="payment-icon">Boleto</span>
+        <span class="payment-icon">Elo</span>
+        <span class="payment-icon">Amex</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div id="whatsapp-float">
+  <span class="whatsapp-tooltip">Fale com a gente!</span>
+  <a href="https://wa.me" class="whatsapp-bubble" aria-label="Contato via WhatsApp" rel="noopener noreferrer">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.06L2 22l5.1-1.34C8.5 21.53 10.21 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+  </a>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="js/db.js"></script>
+<script src="js/app.js"></script>
+<script src="js/busca.js"></script>
+<script src="js/quiz.js"></script>
+</body>
+</html>
