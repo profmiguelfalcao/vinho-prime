@@ -2070,28 +2070,12 @@ h1, h2, h3, h4, h5 {
   .container { padding-inline: 1rem; }
 
   /* ---- Header mobile: ☰ | Logo | 🔍🛒 ---- */
-  .header-inner {
-    position: relative;
-    justify-content: center;
-    gap: 0;
-    padding: 0 1rem;
-  }
-  .logo-tagline { display: none; }
+  .header-inner { gap: 0.25rem; padding: 0 0.75rem; }
   .header-nav { display: none; }
-  .header-actions {
-    position: absolute;
-    right: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    margin-left: 0;
-    gap: 0;
-  }
-  .menu-toggle {
-    position: absolute;
-    left: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
-  }
+  .logo-tagline { display: none; }
+  .header-logo { flex: 1; justify-content: center; }
+  .header-actions { margin-left: 0; gap: 0; }
+  .menu-toggle { order: -1; flex-shrink: 0; }
   /* Esconder wishlist e conta no mobile */
   .action-btn[aria-label="Lista de desejos"],
   .action-btn[aria-label="Minha conta"] { display: none; }

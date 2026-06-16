@@ -267,8 +267,57 @@
         <span class="cart-badge" id="cart-count" style="display:none">0</span>
       </button>
     </div>
+    <button class="menu-toggle" id="menu-toggle" onclick="toggleMobileNav()" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
   </div>
 </header>
+
+<div id="mobile-nav" onclick="closeMobileNavOutside(event)">
+  <div class="mobile-nav-panel">
+    <div class="mobile-nav-header">
+      <div class="header-logo">
+        <div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2C8 2 5 5.5 5 9c0 3 1.5 5.5 4 7v4h6v-4c2.5-1.5 4-4 4-7 0-3.5-3-7-7-7zm0 2c2.8 0 5 2.7 5 5 0 2.2-1.1 4.1-3 5.3V18h-4v-3.7C8.1 13.1 7 11.2 7 9c0-2.3 2.2-5 5-5z" fill="var(--gold)"/></svg></div>
+        <span class="logo-name" style="color:var(--bordeaux)">Vinho Prime</span>
+      </div>
+      <button onclick="closeMobileNav()" aria-label="Fechar menu" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:var(--transition)" onmouseover="this.style.background='var(--cream)'" onmouseout="this.style.background=''">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <nav class="mobile-nav-links">
+      <a href="vinhos.html" class="mobile-nav-link">Vinhos</a>
+      <div class="mobile-nav-sub">
+        <a href="vinhos.html?subtipo=tinto">Tintos</a>
+        <a href="vinhos.html?subtipo=branco">Brancos</a>
+        <a href="vinhos.html?subtipo=rosé">Rosés</a>
+        <a href="vinhos.html?subtipo=espumante">Espumantes</a>
+        <a href="vinhos.html?subtipo=natural">Naturais</a>
+      </div>
+      <a href="destilados.html" class="mobile-nav-link">Destilados</a>
+      <div class="mobile-nav-sub">
+        <a href="destilados.html?subtipo=whisky">Whisky</a>
+        <a href="destilados.html?subtipo=gin">Gin</a>
+        <a href="destilados.html?subtipo=cognac">Cognac</a>
+        <a href="destilados.html?subtipo=rum">Rum</a>
+        <a href="destilados.html?subtipo=cachaça">Cachaça Artesanal</a>
+      </div>
+      <a href="vinhos.html" class="mobile-nav-link mobile-nav-link--highlight">Seleção do Sommelier</a>
+      <a href="index.html#ofertas" class="mobile-nav-link mobile-nav-link--offer">Ofertas 🔥</a>
+      <a href="#" class="mobile-nav-link">Box & Kits</a>
+      <a href="#" class="mobile-nav-link">Clube de Assinatura</a>
+      <a href="#" class="mobile-nav-link">Quiz de Harmonização</a>
+      <a href="quiz.html" class="mobile-nav-link mobile-nav-link--highlight">Quiz de Harmonização 🍷</a>
+      <a href="#" class="mobile-nav-link">Sobre</a>
+      <a href="#" class="mobile-nav-link">Para Empresas</a>
+      <a href="#" class="mobile-nav-link">Contato</a>
+    </nav>
+    <a href="#" class="mobile-nav-vip">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z" fill="currentColor"/></svg>
+      Entrar no Grupo VIP
+    </a>
+  </div>
+</div>
 
 <!-- Mini Carrinho -->
 <div id="cart-overlay" onclick="toggleCart()"></div>
