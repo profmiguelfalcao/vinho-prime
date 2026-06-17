@@ -3,27 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Produto premium — Vinho Prime, curadoria de vinhos e destilados.">
-  <title>Produto — Vinho Prime</title>
+  <meta name="description" content="Minha conta — Vinho Prime, curadoria de vinhos e destilados.">
+  <title>Minha Conta — Vinho Prime</title>
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/skeleton.css">
-  <link rel="stylesheet" href="css/produto.css">
+  <link rel="stylesheet" href="css/busca.css">
+  <link rel="stylesheet" href="css/checkout.css">
+  <link rel="stylesheet" href="css/auth.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/busca.css">
-  <!-- Open Graph / WhatsApp / redes sociais -->
-  <meta property="og:site_name" content="Vinho Prime">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Produto — Vinho Prime">
-  <meta property="og:description" content="Vinho e destilados premium com curadoria especializada. Compre online com entrega em todo o Brasil.">
-  <meta property="og:image" content="https://vinhoprime.com.br/img/og-image.jpg">
-  <meta property="og:url" content="https://vinhoprime.com.br/produto.html">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Produto — Vinho Prime">
-  <meta name="twitter:description" content="Vinho e destilados premium com curadoria especializada. Compre online com entrega em todo o Brasil.">
-  <meta name="twitter:image" content="https://vinhoprime.com.br/img/og-image.jpg">
-  <link rel="canonical" href="https://vinhoprime.com.br/produto.html">
+  <link rel="canonical" href="https://vinhoprime.com.br/perfil.html">
   <!-- Favicon -->
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="shortcut icon" href="favicon.svg">
@@ -40,19 +29,8 @@
     <p class="age-modal-desc">Este site comercializa bebidas alcoólicas. O acesso é permitido apenas para maiores de idade.</p>
     <div class="age-modal-btns">
       <button class="age-yes" onclick="confirmAge()">Sim, tenho 18+</button>
-      <button class="age-no" onclick="denyAge()">Não, sou menor</button>
+      <button class="age-no"  onclick="denyAge()">Não, sou menor</button>
     </div>
-  </div>
-</div>
-
-<!-- ============================================================
-     TOP BANNER
-     ============================================================ -->
-<div id="top-banner">
-  <div class="banner-messages">
-    <div class="banner-msg active">🚚 Frete grátis acima de R$ 299 em todo o Brasil</div>
-    <div class="banner-msg">🍷 Clube Prime com 15% de desconto todo mês</div>
-    <div class="banner-msg">💳 Parcele em até 12x sem juros no cartão</div>
   </div>
 </div>
 
@@ -68,7 +46,7 @@
       </div>
       <div class="logo-text-wrap">
         <span class="logo-name">Vinho Prime</span>
-        <span class="logo-tagline">Curadoria & Destilados</span>
+        <span class="logo-tagline">Curadoria &amp; Destilados</span>
       </div>
     </a>
 
@@ -102,7 +80,7 @@
         </li>
         <li class="nav-item"><a href="index.html#sommelier" class="nav-link nav-link--highlight">Seleção do Sommelier</a></li>
         <li class="nav-item"><a href="index.html#ofertas" class="nav-link nav-link--offers">Ofertas 🔥</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">Box & Kits</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">Box &amp; Kits</a></li>
         <li class="nav-item"><a href="#" class="nav-link">Clube</a></li>
         <li class="nav-item"><a href="quiz.html" class="nav-link nav-link--highlight">Quiz 🍷</a></li>
       </ul>
@@ -167,7 +145,6 @@
       <a href="index.html#ofertas" class="mobile-nav-link mobile-nav-link--offer">Ofertas 🔥</a>
       <a href="#" class="mobile-nav-link">Box & Kits</a>
       <a href="#" class="mobile-nav-link">Clube de Assinatura</a>
-      <a href="#" class="mobile-nav-link">Quiz de Harmonização</a>
       <a href="quiz.html" class="mobile-nav-link mobile-nav-link--highlight">Quiz de Harmonização 🍷</a>
       <a href="#" class="mobile-nav-link">Sobre</a>
       <a href="#" class="mobile-nav-link">Para Empresas</a>
@@ -215,61 +192,58 @@
 </aside>
 
 <!-- ============================================================
-     BREADCRUMB
-     ============================================================ -->
-<nav class="breadcrumb" aria-label="Caminho">
-  <div class="container breadcrumb-inner" id="cat-breadcrumb">
-    <a href="index.html">Home</a>
-    <span class="breadcrumb-sep">›</span>
-    <span class="breadcrumb-current sk-card" style="width:200px;height:14px;border-radius:4px;display:inline-block"></span>
-  </div>
-</nav>
-
-<!-- ============================================================
      CONTEÚDO PRINCIPAL
      ============================================================ -->
 <main>
   <div class="container">
-    <div class="produto-layout">
+    <h1 class="checkout-titulo" style="margin-top:2rem">Minha Conta</h1>
 
-      <!-- ---- Galeria ---- -->
-      <div class="produto-galeria" id="produto-galeria">
-        <div class="produto-imagem-principal">
-          <div class="produto-imagem-placeholder">
-            <div class="sk-card" style="width:100%;height:100%;position:absolute;inset:0"></div>
+    <div class="perfil-wrap">
+
+      <!-- ---- Sidebar ---- -->
+      <aside class="perfil-sidebar">
+        <div class="perfil-avatar" id="perfil-avatar">?</div>
+        <p class="perfil-nome" id="perfil-nome">—</p>
+        <p class="perfil-email" id="perfil-email-display">—</p>
+        <button class="perfil-sair" onclick="Auth.sair()">Sair da conta</button>
+      </aside>
+
+      <!-- ---- Conteúdo ---- -->
+      <div>
+        <section class="perfil-secao">
+          <h2 class="perfil-secao-titulo">Dados pessoais</h2>
+          <form id="form-perfil" onsubmit="aoSalvarPerfil(event)">
+            <div class="form-grid">
+              <div class="form-campo col-full">
+                <label class="form-label" for="perfil-nome-input">Nome completo</label>
+                <input class="form-input" type="text" id="perfil-nome-input" placeholder="João da Silva">
+              </div>
+              <div class="form-campo">
+                <label class="form-label" for="perfil-email-input">E-mail</label>
+                <input class="form-input" type="email" id="perfil-email-input" disabled>
+              </div>
+              <div class="form-campo">
+                <label class="form-label" for="perfil-telefone">Telefone</label>
+                <input class="form-input" type="tel" id="perfil-telefone" placeholder="(11) 99999-9999">
+              </div>
+            </div>
+            <button class="auth-btn-entrar" type="submit" style="width:auto;padding:0 1.5rem;margin-top:1rem">Salvar alterações</button>
+            <span class="perfil-salvar-msg" id="perfil-salvar-msg">✓ Dados atualizados com sucesso.</span>
+          </form>
+        </section>
+
+        <section class="perfil-secao">
+          <h2 class="perfil-secao-titulo">Histórico de pedidos</h2>
+          <div id="pedidos-lista">
+            <div class="pedido-vazio">
+              <div class="pedido-vazio-icone">📦</div>
+              <p>Carregando pedidos...</p>
+            </div>
           </div>
-        </div>
-      </div>
-
-      <!-- ---- Informações ---- -->
-      <div class="produto-info" id="produto-info">
-        <!-- Skeleton enquanto carrega -->
-        <div style="display:flex;flex-direction:column;gap:.875rem">
-          <div class="sk-card" style="height:14px;width:40%;border-radius:4px"></div>
-          <div class="sk-card" style="height:32px;width:90%;border-radius:6px"></div>
-          <div class="sk-card" style="height:18px;width:60%;border-radius:4px"></div>
-          <div class="sk-card" style="height:110px;border-radius:8px"></div>
-          <div class="sk-card" style="height:48px;border-radius:8px"></div>
-          <div class="sk-card" style="height:160px;border-radius:8px"></div>
-        </div>
+        </section>
       </div>
 
     </div>
-
-    <!-- ---- Abas de conteúdo ---- -->
-    <div class="produto-abas" id="produto-abas"></div>
-
-    <!-- ---- Relacionados ---- -->
-    <div class="relacionados" id="relacionados-secao">
-      <h2 class="relacionados-titulo">Você também pode gostar</h2>
-      <div class="grid-4" id="relacionados-grid">
-        <div class="sk-card" style="height:320px"></div>
-        <div class="sk-card" style="height:320px"></div>
-        <div class="sk-card" style="height:320px"></div>
-        <div class="sk-card" style="height:320px"></div>
-      </div>
-    </div>
-
   </div>
 </main>
 
@@ -322,7 +296,6 @@
   </div>
 </footer>
 
-
 <!-- ============================================================
      BUSCA GLOBAL
      ============================================================ -->
@@ -347,11 +320,10 @@
 
 <script src="js/nav.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-    <script src="js/db.js"></script>
+<script src="js/db.js"></script>
 <script src="js/auth.js"></script>
 <script src="js/app.js"></script>
 <script src="js/busca.js"></script>
-<script src="js/produto.js"></script>
 <script>
 /* ---- Verificação de maioridade ---- */
 const ageModal = document.getElementById('age-modal');
@@ -359,16 +331,11 @@ if (!localStorage.getItem('vp_age_ok')) ageModal.classList.add('active');
 function confirmAge() { localStorage.setItem('vp_age_ok','1'); ageModal.classList.remove('active'); }
 function denyAge() { document.body.innerHTML='<div style="display:flex;align-items:center;justify-content:center;height:100vh;background:#3D0C0C;color:#F8F4EE;font-family:Georgia,serif;text-align:center"><div><p style="font-size:2rem">🔞</p><h1>Acesso restrito</h1><p>Apenas maiores de 18 anos.</p></div></div>'; }
 
-/* ---- Banner rotativo ---- */
-const msgs = document.querySelectorAll('.banner-msg');
-let bi = 0;
-setInterval(() => { msgs[bi].classList.remove('active'); bi = (bi+1)%msgs.length; msgs[bi].classList.add('active'); }, 3500);
-
 /* ---- Header sticky ---- */
 const header = document.getElementById('header');
 window.addEventListener('scroll', () => header.classList.toggle('scrolled', scrollY > 20), {passive:true});
 
-/* ---- Carrinho ---- */
+/* ---- Carrinho (drawer) ---- */
 function toggleCart() {
   const overlay = document.getElementById('cart-overlay');
   const drawer  = document.getElementById('cart-drawer');
@@ -377,11 +344,71 @@ function toggleCart() {
   document.body.style.overflow = open ? 'hidden' : '';
   if (open) atualizarDrawer();
 }
-
 function atualizarDrawer() {
   VinhoPrime.carrinho.atualizarDrawer();
 }
-</script>
 
+/* ---- Perfil ---- */
+const fmtMoeda = v => Number(v || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+const fmtData  = iso => new Date(iso).toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric' });
+
+async function init() {
+  const user = await Auth.getUser();
+  if (!user) { window.location.href = 'login.html'; return; }
+
+  const perfil = await Auth.obterPerfil();
+  const nome = perfil?.nome || '';
+  const inicial = (nome || user.email || '?').trim().charAt(0).toUpperCase();
+
+  document.getElementById('perfil-avatar').textContent = inicial;
+  document.getElementById('perfil-nome').textContent = nome || 'Sem nome cadastrado';
+  document.getElementById('perfil-email-display').textContent = user.email;
+  document.getElementById('perfil-nome-input').value = nome;
+  document.getElementById('perfil-email-input').value = user.email;
+  document.getElementById('perfil-telefone').value = perfil?.telefone || '';
+
+  _renderizarPedidos(await Auth.listarPedidos());
+}
+
+async function aoSalvarPerfil(ev) {
+  ev.preventDefault();
+  const msg = document.getElementById('perfil-salvar-msg');
+  msg.classList.remove('visivel');
+
+  const nome = document.getElementById('perfil-nome-input').value.trim();
+  const telefone = document.getElementById('perfil-telefone').value.trim();
+
+  try {
+    await Auth.atualizarPerfil({ nome, telefone });
+    document.getElementById('perfil-nome').textContent = nome || 'Sem nome cadastrado';
+    document.getElementById('perfil-avatar').textContent = (nome || '?').trim().charAt(0).toUpperCase();
+    msg.classList.add('visivel');
+  } catch (e) {
+    alert('Erro ao salvar: ' + e.message);
+  }
+}
+
+function _renderizarPedidos(pedidos) {
+  const el = document.getElementById('pedidos-lista');
+  if (!pedidos || pedidos.length === 0) {
+    el.innerHTML = '<div class="pedido-vazio"><div class="pedido-vazio-icone">📦</div><p>Você ainda não fez nenhum pedido.</p></div>';
+    return;
+  }
+  el.innerHTML = pedidos.map(p => {
+    const qtdItens = (p.itens || []).reduce((acc, i) => acc + (i.quantidade || 1), 0);
+    return `
+      <div class="pedido-item">
+        <div class="pedido-item-topo">
+          <span class="pedido-numero">${p.numero_pedido}</span>
+          <span class="pedido-status">${p.status}</span>
+        </div>
+        <p class="pedido-resumo">${fmtData(p.criado_em)} · ${qtdItens} ${qtdItens === 1 ? 'item' : 'itens'}</p>
+        <p class="pedido-total">${fmtMoeda(p.total)}</p>
+      </div>`;
+  }).join('');
+}
+
+init();
+</script>
 </body>
 </html>

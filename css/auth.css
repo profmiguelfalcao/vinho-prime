@@ -1,0 +1,237 @@
+/* ============================================================
+   Vinho Prime — Login / Cadastro / Perfil
+   ============================================================ */
+
+/* ---- Card de login/cadastro ---- */
+.auth-wrap {
+  display: flex;
+  justify-content: center;
+  padding: 3rem 1rem 5rem;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  background: #fff;
+  border: 1px solid rgba(92,81,70,.12);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 2rem;
+}
+
+.auth-titulo {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--bordeaux);
+  text-align: center;
+  margin-bottom: .35rem;
+}
+.auth-subtitulo {
+  text-align: center;
+  color: var(--text-sec);
+  font-size: .875rem;
+  margin-bottom: 1.5rem;
+}
+
+.auth-tabs {
+  display: flex;
+  background: var(--cream);
+  border-radius: var(--radius-sm);
+  padding: 4px;
+  margin-bottom: 1.5rem;
+}
+.auth-tab {
+  flex: 1;
+  text-align: center;
+  padding: .55rem 0;
+  font-size: .875rem;
+  font-weight: 600;
+  color: var(--text-sec);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: var(--transition);
+  border: none;
+  background: none;
+  font-family: var(--font-body);
+}
+.auth-tab.ativo {
+  background: #fff;
+  color: var(--bordeaux);
+  box-shadow: var(--shadow-sm);
+}
+
+.auth-form { display: none; flex-direction: column; gap: .875rem; }
+.auth-form.ativo { display: flex; }
+
+.auth-btn-entrar {
+  height: 46px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: var(--bordeaux);
+  color: #fff;
+  font-weight: 600;
+  font-size: .9375rem;
+  cursor: pointer;
+  transition: var(--transition);
+  margin-top: .25rem;
+}
+.auth-btn-entrar:hover  { background: var(--bordeaux-mid); }
+.auth-btn-entrar:disabled { opacity: .6; cursor: not-allowed; }
+
+.auth-divisor {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  margin: 1.25rem 0;
+  color: var(--text-light);
+  font-size: .75rem;
+}
+.auth-divisor::before,
+.auth-divisor::after { content: ''; flex: 1; height: 1px; background: rgba(92,81,70,.15); }
+
+.auth-btn-google {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .625rem;
+  height: 46px;
+  border: 1.5px solid rgba(92,81,70,.2);
+  border-radius: var(--radius-sm);
+  background: #fff;
+  color: var(--text);
+  font-weight: 500;
+  font-size: .9375rem;
+  cursor: pointer;
+  transition: var(--transition);
+  width: 100%;
+}
+.auth-btn-google:hover { background: var(--cream); }
+.auth-btn-google svg { width: 18px; height: 18px; }
+
+.auth-esqueci {
+  text-align: right;
+  font-size: .8125rem;
+  margin-top: -.5rem;
+}
+.auth-esqueci a { color: var(--bordeaux); text-decoration: none; cursor: pointer; }
+.auth-esqueci a:hover { text-decoration: underline; }
+
+.auth-msg {
+  font-size: .8125rem;
+  padding: .65rem .875rem;
+  border-radius: var(--radius-sm);
+  display: none;
+}
+.auth-msg.erro    { display: block; background: rgba(160,32,32,.08); color: var(--error); }
+.auth-msg.sucesso { display: block; background: rgba(74,124,89,.1);  color: var(--success); }
+
+/* ============================================================
+   Perfil
+   ============================================================ */
+.perfil-wrap {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 2rem;
+  padding-bottom: 4rem;
+}
+
+.perfil-sidebar {
+  background: #fff;
+  border: 1px solid rgba(92,81,70,.12);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem 1.5rem;
+  text-align: center;
+  align-self: start;
+}
+.perfil-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--bordeaux);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  margin: 0 auto 1rem;
+}
+.perfil-nome  { font-weight: 600; color: var(--text); margin-bottom: .15rem; }
+.perfil-email { font-size: .8125rem; color: var(--text-sec); margin-bottom: 1.25rem; word-break: break-all; }
+.perfil-sair {
+  width: 100%;
+  height: 42px;
+  border: 1.5px solid var(--error);
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--error);
+  font-weight: 600;
+  font-size: .875rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.perfil-sair:hover { background: rgba(160,32,32,.06); }
+
+.perfil-secao {
+  background: #fff;
+  border: 1px solid rgba(92,81,70,.12);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.perfil-secao-titulo {
+  font-family: var(--font-display);
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: var(--bordeaux);
+  margin-bottom: 1.25rem;
+}
+
+.perfil-salvar-msg {
+  font-size: .8125rem;
+  color: var(--success);
+  display: none;
+  margin-top: .5rem;
+}
+.perfil-salvar-msg.visivel { display: block; }
+
+/* ---- Histórico de pedidos ---- */
+.pedido-item {
+  border: 1px solid rgba(92,81,70,.12);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.125rem;
+  margin-bottom: .875rem;
+}
+.pedido-item-topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: .5rem;
+  flex-wrap: wrap;
+  gap: .35rem;
+}
+.pedido-numero { font-weight: 700; color: var(--bordeaux); font-size: .9375rem; }
+.pedido-data   { font-size: .75rem; color: var(--text-light); }
+.pedido-status {
+  font-size: .75rem;
+  font-weight: 600;
+  padding: .2rem .6rem;
+  border-radius: 999px;
+  background: var(--cream);
+  color: var(--text-sec);
+  text-transform: capitalize;
+}
+.pedido-resumo { font-size: .8125rem; color: var(--text-sec); margin-bottom: .35rem; }
+.pedido-total  { font-weight: 700; color: var(--text); }
+
+.pedido-vazio {
+  text-align: center;
+  padding: 2.5rem 1rem;
+  color: var(--text-sec);
+}
+.pedido-vazio-icone { font-size: 2.5rem; margin-bottom: .75rem; }
+
+@media (max-width: 768px) {
+  .perfil-wrap { grid-template-columns: 1fr; }
+}

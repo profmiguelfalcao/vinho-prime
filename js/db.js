@@ -159,5 +159,6 @@ const DB = (function () {
     atualizar,
     deletar,
     isSupabaseAtivo: () => ativo,
+    client,
   };
 })();

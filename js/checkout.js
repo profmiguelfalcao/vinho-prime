@@ -49,6 +49,24 @@ const Checkout = (() => {
     _renderizarResumo();
     _configurarParcelas();
     _atualizarTotais();
+    _preencherDadosDoPerfil();
+  }
+
+  /* ============================================================
+     PRÉ-PREENCHIMENTO COM DADOS DO PERFIL (se logado)
+     ============================================================ */
+  async function _preencherDadosDoPerfil() {
+    if (typeof Auth === 'undefined') return;
+    const perfil = await Auth.obterPerfil();
+    if (!perfil) return;
+
+    const nomeEl  = document.getElementById('nome');
+    const emailEl = document.getElementById('email');
+    const whatsEl = document.getElementById('whatsapp');
+
+    if (nomeEl  && perfil.nome)     nomeEl.value  = perfil.nome;
+    if (emailEl && perfil.email)    emailEl.value = perfil.email;
+    if (whatsEl && perfil.telefone) whatsEl.value = perfil.telefone;
   }
 
   /* ============================================================
@@ -345,6 +363,22 @@ const Checkout = (() => {
     ].filter(l => l !== null).join('\n');
 
     const url = `https://wa.me/${CONFIG.whatsappNumero}?text=${encodeURIComponent(msg)}`;
+
+    if (typeof Auth !== 'undefined') {
+      Auth.salvarPedido({
+        numero_pedido:   numPedido,
+        itens:           _itens,
+        subtotal,
+        frete,
+        desconto:        descPix,
+        total,
+        forma_pagamento: _pagamento,
+        endereco: {
+          cep: val('cep'), endereco: val('endereco'), numero: val('numero'),
+          complemento, bairro: val('bairro'), cidade: val('cidade'), estado: val('estado'),
+        },
+      }).catch(e => console.warn('[Checkout] erro ao salvar pedido:', e.message));
+    }
 
     document.getElementById('checkout-conf-num').textContent = numPedido;
     document.getElementById('checkout-layout').style.display    = 'none';
